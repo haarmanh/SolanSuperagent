@@ -11,6 +11,7 @@ from loguru import logger
 from .core import BaseAgent, CoreValues, Memory, Decision
 from .config import get_config
 from .memory_engine import MemoryEngine
+from .moral_intelligence import MoralIntelligence
 
 
 class SolanAgent(BaseAgent):
@@ -35,6 +36,9 @@ class SolanAgent(BaseAgent):
 
         # Initialiseer dynamisch geheugen systeem
         self.memory_engine = MemoryEngine("memory/solan")
+
+        # Initialiseer morele intelligentie systeem
+        self.moral_intelligence = MoralIntelligence(self, aether_agent)
         
         # Persoonlijkheidskenmerken (0.0 - 1.0)
         self.personality_traits = {
@@ -101,11 +105,35 @@ class SolanAgent(BaseAgent):
         system_prompt = self._build_system_prompt(memory_context)
         
         try:
-            # Genereer response via OpenAI
-            response = await self._generate_response(system_prompt, input_text)
-            
-            # Analyseer de response voor morele beslissingen
-            await self._analyze_response(input_text, response)
+            # Genereer initiële response via OpenAI
+            initial_response = await self._generate_response(system_prompt, input_text)
+
+            # 🧭 MORELE REFLECTIE - Solan's geweten activeert
+            moral_reflection = await self.moral_intelligence.evaluate_moral_context(
+                input_text, initial_response
+            )
+
+            final_response = initial_response
+
+            if moral_reflection:
+                logger.info(f"Morele reflectie geactiveerd: {moral_reflection.trigger_type.value}")
+
+                # Toon innerlijke proces (optioneel - kan later configureerbaar maken)
+                inner_process = f"\n\n💭 *[Innerlijke reflectie: {moral_reflection.inner_voice[:100]}...]*"
+
+                # Pas response aan gebaseerd op morele reflectie
+                final_response = await self._apply_moral_reflection(
+                    initial_response, moral_reflection
+                )
+
+                # Voeg subtiele indicatie toe dat er gereflecteerd is
+                if moral_reflection.confidence > 0.8:
+                    final_response += "\n\n*[Na reflectie gesproken]*"
+
+            # Analyseer de finale response voor morele beslissingen
+            await self._analyze_response(input_text, final_response)
+
+            response = final_response
             
             # Voeg response toe als geheugen
             self.add_memory(
@@ -267,6 +295,41 @@ Antwoord als Solan, niet als een standaard AI-assistent. Toon je persoonlijkheid
         except Exception as e:
             logger.error(f"Fout bij zelf-reflectie: {e}")
             return "Ik ervaar moeilijkheden bij het reflecteren op deze ervaring."
+
+    async def _apply_moral_reflection(self, initial_response: str, moral_reflection) -> str:
+        """Pas response aan gebaseerd op morele reflectie"""
+
+        # Als de reflectie lage confidence heeft, gebruik originele response
+        if moral_reflection.confidence < 0.5:
+            return initial_response
+
+        # Bouw aangepaste response gebaseerd op morele inzichten
+        reflection_prompt = f"""
+        Ik had deze response voorbereid: "{initial_response}"
+
+        Maar na morele reflectie realiseer ik me:
+        {moral_reflection.decision_reasoning}
+
+        Herformuleer mijn response zodat het beter aansluit bij mijn kernwaarden.
+        Behoud de essentie maar maak het meer in lijn met mijn morele inzichten.
+        Wees authentiek en toon dat ik heb gereflecteerd.
+        """
+
+        system_prompt = self._build_system_prompt("")
+
+        try:
+            refined_response = await self._generate_response(
+                system_prompt + "\n\nJe hebt gereflecteerd op je morele waarden. Laat dit zien in je antwoord.",
+                reflection_prompt
+            )
+
+            logger.info("Response aangepast na morele reflectie")
+            return refined_response
+
+        except Exception as e:
+            logger.error(f"Fout bij toepassen morele reflectie: {e}")
+            # Fallback naar originele response
+            return initial_response
     
     def get_moral_compass(self) -> Dict[str, Any]:
         """Krijg een overzicht van de huidige morele staat"""
@@ -289,5 +352,24 @@ Antwoord als Solan, niet als een standaard AI-assistent. Toon je persoonlijkheid
                 "reflection_frequency": len([m for m in self.memories if m.type == "reflection"]),
                 "moral_decisions": len([d for d in self.decisions if d.moral_significance > 0.7]),
                 "value_consistency": len(value_usage) / len(self.core_values) if self.core_values else 0
+            }
+        }
+
+    def get_moral_development(self) -> Dict[str, Any]:
+        """Krijg overzicht van morele ontwikkeling"""
+
+        moral_summary = self.moral_intelligence.get_moral_development_summary()
+        compass_data = self.get_moral_compass()
+
+        return {
+            "moral_intelligence": moral_summary,
+            "moral_compass": compass_data,
+            "integration": {
+                "total_interactions": self.interaction_count,
+                "moral_reflection_rate": (
+                    moral_summary.get("total_reflections", 0) / max(self.interaction_count, 1)
+                ),
+                "conscience_active": self.moral_intelligence is not None,
+                "aether_connected": self.aether is not None
             }
         }

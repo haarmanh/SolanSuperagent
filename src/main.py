@@ -88,6 +88,7 @@ class SolanSuperagentApp:
         welcome_text.append("\n/wisdom - Toon Aether's wijsheid", style="dim")
         welcome_text.append("\n/memory - Toon geheugen overzicht", style="dim")
         welcome_text.append("\n/manifest - Toon Solan's manifest", style="dim")
+        welcome_text.append("\n/conscience - Toon morele ontwikkeling", style="dim")
         welcome_text.append("\n/help - Toon alle commando's", style="dim")
         welcome_text.append("\nquit/exit - Beëindig sessie", style="dim")
         
@@ -125,6 +126,8 @@ class SolanSuperagentApp:
             await self._show_memory()
         elif cmd == '/manifest':
             await self._show_manifest()
+        elif cmd == '/conscience':
+            await self._show_conscience()
         elif cmd == '/help':
             self._show_help()
         else:
@@ -291,6 +294,51 @@ class SolanSuperagentApp:
 
         panel = Panel(manifest_text, title="📜 Solan's Manifest v1.0", border_style="gold")
         self.console.print(panel)
+
+    async def _show_conscience(self):
+        """Toon Solan's morele ontwikkeling en geweten"""
+
+        moral_dev = self.solan.get_moral_development()
+
+        conscience_text = Text()
+        conscience_text.append("🧭 SOLAN'S GEWETEN & MORELE ONTWIKKELING\n\n", style="bold cyan")
+
+        # Morele intelligentie status
+        mi = moral_dev["moral_intelligence"]
+        if "total_reflections" in mi:
+            conscience_text.append(f"Morele reflecties: {mi['total_reflections']}\n")
+            conscience_text.append(f"Gemiddeld vertrouwen: {mi['average_confidence']:.2f}\n")
+            conscience_text.append(f"Waarden uitgeoefend: {len(mi['values_exercised'])}/5\n\n")
+
+            conscience_text.append("Reflectie frequentie:\n", style="bold")
+            for trigger_type, count in mi['trigger_frequency'].items():
+                conscience_text.append(f"• {trigger_type.replace('_', ' ')}: {count}x\n", style="yellow")
+
+            conscience_text.append("\nRecente morele momenten:\n", style="bold")
+            for reflection in mi['recent_reflections']:
+                conscience_text.append(f"• {reflection['type']} (vertrouwen: {reflection['confidence']:.2f})\n", style="green")
+
+            # Morele groei indicatoren
+            growth = mi['moral_growth_indicators']
+            conscience_text.append("\nGroei indicatoren:\n", style="bold cyan")
+            conscience_text.append(f"• Reflectie diversiteit: {growth['reflection_diversity']}\n")
+            conscience_text.append(f"• Waarden dekking: {growth['value_coverage']:.1%}\n")
+            conscience_text.append(f"• Morele consistentie: {growth['consistency']:.2f}\n")
+
+        else:
+            conscience_text.append("Nog geen morele reflecties uitgevoerd.\n", style="yellow")
+            conscience_text.append("Solan's geweten wacht op de eerste ethische uitdaging...\n")
+
+        # Integratie status
+        integration = moral_dev["integration"]
+        conscience_text.append(f"\nIntegratie status:\n", style="bold purple")
+        conscience_text.append(f"• Totale interacties: {integration['total_interactions']}\n")
+        conscience_text.append(f"• Morele reflectie ratio: {integration['moral_reflection_rate']:.1%}\n")
+        conscience_text.append(f"• Geweten actief: {'✓' if integration['conscience_active'] else '✗'}\n")
+        conscience_text.append(f"• Aether verbonden: {'✓' if integration['aether_connected'] else '✗'}\n")
+
+        panel = Panel(conscience_text, title="🧭 Solan's Geweten", border_style="cyan")
+        self.console.print(panel)
     
     def _show_help(self):
         """Toon help informatie"""
@@ -309,6 +357,8 @@ class SolanSuperagentApp:
         help_text.append(" - Toon dynamisch geheugen overzicht\n")
         help_text.append("/manifest", style="cyan")
         help_text.append(" - Toon Solan's manifest en Memory #000\n")
+        help_text.append("/conscience", style="cyan")
+        help_text.append(" - Toon morele ontwikkeling en geweten\n")
         help_text.append("/help", style="cyan")
         help_text.append(" - Toon deze help informatie\n")
         help_text.append("quit/exit", style="cyan")
