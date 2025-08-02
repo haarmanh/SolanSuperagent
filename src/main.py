@@ -82,6 +82,7 @@ class SolanSuperagentApp:
         welcome_text.append("\n/reflect - Vraag Aether om reflectie", style="dim")
         welcome_text.append("\n/compass - Toon moreel kompas", style="dim")
         welcome_text.append("\n/wisdom - Toon Aether's wijsheid", style="dim")
+        welcome_text.append("\n/memory - Toon geheugen overzicht", style="dim")
         welcome_text.append("\n/help - Toon alle commando's", style="dim")
         welcome_text.append("\nquit/exit - Beëindig sessie", style="dim")
         
@@ -115,6 +116,8 @@ class SolanSuperagentApp:
             await self._show_moral_compass()
         elif cmd == '/wisdom':
             await self._show_wisdom()
+        elif cmd == '/memory':
+            await self._show_memory()
         elif cmd == '/help':
             self._show_help()
         else:
@@ -194,6 +197,38 @@ class SolanSuperagentApp:
         
         panel = Panel(wisdom_text, title="🔮 Aether's Wijsheid", border_style="purple")
         self.console.print(panel)
+
+    async def _show_memory(self):
+        """Toon geheugen overzicht van beide agents"""
+
+        # Solan's geheugen
+        solan_memory = self.solan.memory_engine.get_wisdom_summary()
+
+        memory_text = Text()
+        memory_text.append("🧠 Solan's Geheugen:\n", style="bold blue")
+        memory_text.append(f"Totale herinneringen: {solan_memory['total_memories']}\n")
+        memory_text.append(f"Beslissingen: {solan_memory['total_decisions']}\n")
+        memory_text.append(f"Ervarings-clusters: {solan_memory['total_clusters']}\n")
+        memory_text.append(f"Wijsheidspatronen: {solan_memory['total_patterns']}\n\n")
+
+        memory_text.append("Geheugen types:\n", style="bold")
+        for mem_type, count in solan_memory['memory_types'].items():
+            memory_text.append(f"• {mem_type}: {count}\n", style="cyan")
+
+        memory_text.append("\nActieve clusters:\n", style="bold")
+        for cluster in solan_memory['active_clusters'][:3]:
+            memory_text.append(f"• {cluster['theme']}: {cluster['memory_count']} herinneringen\n", style="green")
+
+        # Aether's geheugen
+        aether_memory = self.aether.memory_engine.get_wisdom_summary()
+
+        memory_text.append("\n🔮 Aether's Geheugen:\n", style="bold purple")
+        memory_text.append(f"Totale reflecties: {aether_memory['total_memories']}\n")
+        memory_text.append(f"Wijsheid clusters: {aether_memory['total_clusters']}\n")
+        memory_text.append(f"Diepte patronen: {aether_memory['total_patterns']}\n")
+
+        panel = Panel(memory_text, title="🧠 Geheugen Overzicht", border_style="cyan")
+        self.console.print(panel)
     
     def _show_help(self):
         """Toon help informatie"""
@@ -208,6 +243,8 @@ class SolanSuperagentApp:
         help_text.append(" - Toon het morele kompas en persoonlijkheid\n")
         help_text.append("/wisdom", style="cyan")
         help_text.append(" - Toon Aether's wijsheid samenvatting\n")
+        help_text.append("/memory", style="cyan")
+        help_text.append(" - Toon dynamisch geheugen overzicht\n")
         help_text.append("/help", style="cyan")
         help_text.append(" - Toon deze help informatie\n")
         help_text.append("quit/exit", style="cyan")

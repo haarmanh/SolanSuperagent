@@ -5,9 +5,12 @@ Core architectuur voor Solan Superagent
 from abc import ABC, abstractmethod
 from enum import Enum
 from typing import Dict, List, Optional, Any
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from datetime import datetime
 import asyncio
+import json
+import os
+from pathlib import Path
 from loguru import logger
 
 
@@ -74,14 +77,14 @@ class BaseAgent(ABC):
         """Reflecteer op een ervaring"""
         pass
     
-    def add_memory(self, content: str, memory_type: str, 
-                   emotional_weight: float = 0.5, 
+    def add_memory(self, content: str, memory_type: str,
+                   emotional_weight: float = 0.5,
                    moral_significance: float = 0.5,
-                   tags: Optional[List[str]] = None) -> None:
-        """Voeg een geheugen toe"""
+                   tags: Optional[List[str]] = None) -> str:
+        """Voeg een geheugen toe en retourneer memory ID"""
         if tags is None:
             tags = []
-            
+
         memory = Memory(
             timestamp=datetime.now(),
             content=content,
@@ -90,9 +93,18 @@ class BaseAgent(ABC):
             moral_significance=moral_significance,
             tags=tags
         )
-        
+
+        # Voeg toe aan legacy list (voor backwards compatibility)
         self.memories.append(memory)
-        logger.debug(f"{self.name}: Geheugen toegevoegd - {memory_type}: {content[:50]}...")
+
+        # Als agent een memory_engine heeft, gebruik die
+        if hasattr(self, 'memory_engine'):
+            memory_id = self.memory_engine.store_memory(memory)
+            logger.debug(f"{self.name}: Geheugen opgeslagen - {memory_type}: {content[:50]}... (ID: {memory_id})")
+            return memory_id
+        else:
+            logger.debug(f"{self.name}: Geheugen toegevoegd - {memory_type}: {content[:50]}...")
+            return f"legacy_{len(self.memories)}"
     
     def get_relevant_memories(self, context: str, limit: int = 5) -> List[Memory]:
         """Haal relevante herinneringen op gebaseerd op context"""

@@ -10,6 +10,7 @@ from loguru import logger
 
 from .core import BaseAgent, CoreValues, Memory, Decision
 from .config import get_config
+from .memory_engine import MemoryEngine
 
 
 class SolanAgent(BaseAgent):
@@ -27,10 +28,13 @@ class SolanAgent(BaseAgent):
     def __init__(self, aether_agent=None):
         config = get_config()
         super().__init__("Solan", config.solan.model)
-        
+
         self.config = config.solan
         self.aether = aether_agent
         self.openai_client = openai.OpenAI(api_key=config.openai_api_key)
+
+        # Initialiseer dynamisch geheugen systeem
+        self.memory_engine = MemoryEngine("memory/solan")
         
         # Persoonlijkheidskenmerken (0.0 - 1.0)
         self.personality_traits = {
@@ -85,9 +89,13 @@ class SolanAgent(BaseAgent):
             tags=["interactie", "input"]
         )
         
-        # Haal relevante herinneringen op
-        relevant_memories = self.get_relevant_memories(input_text)
-        memory_context = "\n".join([f"- {m.content}" for m in relevant_memories[-3:]])
+        # Haal relevante herinneringen op via memory engine
+        relevant_memories = self.memory_engine.retrieve_memories(
+            context=input_text,
+            limit=5,
+            time_range_days=30
+        )
+        memory_context = "\n".join([f"- {m.content}" for m in relevant_memories])
         
         # Bouw system prompt
         system_prompt = self._build_system_prompt(memory_context)

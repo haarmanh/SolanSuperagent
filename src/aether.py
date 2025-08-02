@@ -10,6 +10,7 @@ from loguru import logger
 
 from .core import BaseAgent, CoreValues, Memory, Decision
 from .config import get_config
+from .memory_engine import MemoryEngine
 
 
 class AetherReflection(BaseAgent):
@@ -29,9 +30,12 @@ class AetherReflection(BaseAgent):
     def __init__(self):
         config = get_config()
         super().__init__("Aether", config.aether.model)
-        
+
         self.config = config.aether
         self.anthropic_client = anthropic.Anthropic(api_key=config.anthropic_api_key)
+
+        # Initialiseer dynamisch geheugen systeem
+        self.memory_engine = MemoryEngine("memory/aether")
         
         # Aether's unieke eigenschappen
         self.reflection_depth = 0.9  # Hoe diep Aether reflecteert (0.0 - 1.0)
