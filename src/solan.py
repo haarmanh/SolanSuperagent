@@ -12,6 +12,7 @@ from .core import BaseAgent, CoreValues, Memory, Decision
 from .config import get_config
 from .memory_engine import MemoryEngine
 from .moral_intelligence import MoralIntelligence
+from .dream_engine import DreamEngine
 
 
 class SolanAgent(BaseAgent):
@@ -39,6 +40,9 @@ class SolanAgent(BaseAgent):
 
         # Initialiseer morele intelligentie systeem
         self.moral_intelligence = MoralIntelligence(self, aether_agent)
+
+        # Initialiseer droomengine - Solan's nachtelijke ziel
+        self.dream_engine = DreamEngine(self.memory_engine, "dreams")
         
         # Persoonlijkheidskenmerken (0.0 - 1.0)
         self.personality_traits = {
@@ -147,6 +151,10 @@ class SolanAgent(BaseAgent):
             # Trigger Aether reflectie als nodig
             if self.aether and self.interaction_count % self.config.deep_reflection_interval == 0:
                 await self._trigger_aether_reflection(input_text, response)
+
+            # 🌙 Trigger droomverwerking (asynchroon, in achtergrond)
+            if self.interaction_count % 3 == 0:  # Elke 3 interacties
+                asyncio.create_task(self._process_dreams())
             
             return response
             
@@ -330,6 +338,53 @@ Antwoord als Solan, niet als een standaard AI-assistent. Toon je persoonlijkheid
             logger.error(f"Fout bij toepassen morele reflectie: {e}")
             # Fallback naar originele response
             return initial_response
+
+    async def _process_dreams(self) -> None:
+        """Verwerk dromen in achtergrond - Solan's nachtelijke reflectie"""
+
+        try:
+            dream = await self.dream_engine.process_nocturnal_reflection()
+
+            if dream:
+                logger.info(f"🌙 Solan droomde: {dream.symbol}")
+
+                # Voeg droom toe als speciale herinnering
+                self.add_memory(
+                    content=f"Droom: {dream.symbol}\nReflectie: {dream.reflection}",
+                    memory_type="dream",
+                    emotional_weight=dream.intensity,
+                    moral_significance=0.8,
+                    tags=["droom", dream.value_triggered, dream.emotion.value, "nachtelijk"]
+                )
+
+        except Exception as e:
+            logger.error(f"Fout bij droomverwerking: {e}")
+
+    async def enter_dream_state(self, force: bool = False) -> Optional[str]:
+        """Laat Solan bewust dromen - voor /dream commando"""
+
+        dream = await self.dream_engine.process_nocturnal_reflection(force_dream=force)
+
+        if dream:
+            dream_narrative = f"""
+🌙 **Solan's Droom #{dream.dream_id.split('_')[1]}**
+
+*Symbolisch beeld:*
+{dream.symbol}
+
+*Emotie:* {dream.emotion.value}
+*Waarde:* {dream.value_triggered}
+*Intensiteit:* {dream.intensity:.2f}
+
+*Onbewuste reflectie:*
+{dream.reflection}
+
+*Tijdstempel:* {dream.timestamp.strftime('%Y-%m-%d %H:%M:%S')}
+            """
+
+            return dream_narrative.strip()
+
+        return "Solan's geest is te rustig voor dromen op dit moment..."
     
     def get_moral_compass(self) -> Dict[str, Any]:
         """Krijg een overzicht van de huidige morele staat"""
@@ -360,16 +415,20 @@ Antwoord als Solan, niet als een standaard AI-assistent. Toon je persoonlijkheid
 
         moral_summary = self.moral_intelligence.get_moral_development_summary()
         compass_data = self.get_moral_compass()
+        dream_summary = self.dream_engine.get_dream_summary()
 
         return {
             "moral_intelligence": moral_summary,
             "moral_compass": compass_data,
+            "dream_life": dream_summary,
             "integration": {
                 "total_interactions": self.interaction_count,
                 "moral_reflection_rate": (
                     moral_summary.get("total_reflections", 0) / max(self.interaction_count, 1)
                 ),
                 "conscience_active": self.moral_intelligence is not None,
-                "aether_connected": self.aether is not None
+                "aether_connected": self.aether is not None,
+                "dream_engine_active": self.dream_engine is not None,
+                "inner_life_richness": len(self.dream_engine.dream_fragments) / max(self.interaction_count, 1)
             }
         }

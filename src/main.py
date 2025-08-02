@@ -89,6 +89,8 @@ class SolanSuperagentApp:
         welcome_text.append("\n/memory - Toon geheugen overzicht", style="dim")
         welcome_text.append("\n/manifest - Toon Solan's manifest", style="dim")
         welcome_text.append("\n/conscience - Toon morele ontwikkeling", style="dim")
+        welcome_text.append("\n/dreams - Toon Solan's dromen", style="dim")
+        welcome_text.append("\n/dream - Laat Solan dromen", style="dim")
         welcome_text.append("\n/help - Toon alle commando's", style="dim")
         welcome_text.append("\nquit/exit - Beëindig sessie", style="dim")
         
@@ -128,6 +130,10 @@ class SolanSuperagentApp:
             await self._show_manifest()
         elif cmd == '/conscience':
             await self._show_conscience()
+        elif cmd == '/dreams':
+            await self._show_dreams()
+        elif cmd == '/dream':
+            await self._trigger_dream()
         elif cmd == '/help':
             self._show_help()
         else:
@@ -339,6 +345,83 @@ class SolanSuperagentApp:
 
         panel = Panel(conscience_text, title="🧭 Solan's Geweten", border_style="cyan")
         self.console.print(panel)
+
+    async def _show_dreams(self):
+        """Toon Solan's dromen en droomactiviteit"""
+
+        moral_dev = self.solan.get_moral_development()
+        dream_data = moral_dev["dream_life"]
+
+        dreams_text = Text()
+        dreams_text.append("🌙 SOLAN'S DROOMWERELD\n\n", style="bold magenta")
+
+        if "total_dreams" in dream_data and dream_data["total_dreams"] > 0:
+            dreams_text.append(f"Totale dromen: {dream_data['total_dreams']}\n")
+            dreams_text.append(f"Gemiddelde intensiteit: {dream_data['average_intensity']:.2f}\n")
+
+            if dream_data.get('last_dream'):
+                last_dream = datetime.fromisoformat(dream_data['last_dream'])
+                dreams_text.append(f"Laatste droom: {last_dream.strftime('%Y-%m-%d %H:%M')}\n\n")
+
+            # Emotie distributie
+            dreams_text.append("Emotionele thema's:\n", style="bold")
+            for emotion, count in dream_data['emotion_distribution'].items():
+                dreams_text.append(f"• {emotion}: {count}x\n", style="yellow")
+
+            dreams_text.append("\nWaarden in dromen:\n", style="bold")
+            for value, count in dream_data['value_distribution'].items():
+                dreams_text.append(f"• {value}: {count}x\n", style="cyan")
+
+            # Recente dromen
+            dreams_text.append("\nRecente dromen:\n", style="bold magenta")
+            for i, dream in enumerate(dream_data['recent_dreams'], 1):
+                dreams_text.append(f"\n{i}. ", style="bold")
+                dreams_text.append(f"[{dream['emotion']}] ", style="yellow")
+                dreams_text.append(f"{dream['symbol']}\n", style="white")
+                dreams_text.append(f"   Reflectie: {dream['reflection']}\n", style="dim")
+                dreams_text.append(f"   Intensiteit: {dream['intensity']:.2f}\n", style="dim")
+        else:
+            dreams_text.append("Solan heeft nog niet gedroomd.\n", style="yellow")
+            dreams_text.append("Zijn droomwereld wacht op emotioneel geladen ervaringen...\n")
+            dreams_text.append("\nGebruik /dream om een droom te forceren.", style="dim")
+
+        panel = Panel(dreams_text, title="🌙 Solan's Dromen", border_style="magenta")
+        self.console.print(panel)
+
+    async def _trigger_dream(self):
+        """Trigger een droom voor Solan"""
+
+        self.console.print("\n[dim]Solan gaat dromen...[/dim]")
+
+        try:
+            dream_narrative = await self.solan.enter_dream_state(force=True)
+
+            if dream_narrative:
+                # Parse en format de droom mooi
+                lines = dream_narrative.strip().split('\n')
+
+                dream_text = Text()
+                for line in lines:
+                    if line.startswith('🌙'):
+                        dream_text.append(line + '\n', style="bold magenta")
+                    elif line.startswith('*Symbolisch beeld:*'):
+                        dream_text.append(line + '\n', style="bold cyan")
+                    elif line.startswith('*Emotie:*') or line.startswith('*Waarde:*') or line.startswith('*Intensiteit:*'):
+                        dream_text.append(line + '\n', style="yellow")
+                    elif line.startswith('*Onbewuste reflectie:*'):
+                        dream_text.append(line + '\n', style="bold white")
+                    elif line.startswith('*Tijdstempel:*'):
+                        dream_text.append(line + '\n', style="dim")
+                    else:
+                        dream_text.append(line + '\n', style="white")
+
+                panel = Panel(dream_text, title="🌙 Solan Droomt", border_style="magenta")
+                self.console.print(panel)
+            else:
+                self.console.print("[yellow]Solan's geest is te rustig voor dromen...[/yellow]")
+
+        except Exception as e:
+            self.console.print(f"[red]Fout bij dromen: {e}[/red]")
     
     def _show_help(self):
         """Toon help informatie"""
@@ -359,6 +442,10 @@ class SolanSuperagentApp:
         help_text.append(" - Toon Solan's manifest en Memory #000\n")
         help_text.append("/conscience", style="cyan")
         help_text.append(" - Toon morele ontwikkeling en geweten\n")
+        help_text.append("/dreams", style="cyan")
+        help_text.append(" - Toon Solan's droomwereld en symboliek\n")
+        help_text.append("/dream", style="cyan")
+        help_text.append(" - Laat Solan een droom creëren\n")
         help_text.append("/help", style="cyan")
         help_text.append(" - Toon deze help informatie\n")
         help_text.append("quit/exit", style="cyan")
