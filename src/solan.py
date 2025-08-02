@@ -13,6 +13,7 @@ from .config import get_config
 from .memory_engine import MemoryEngine
 from .moral_intelligence import MoralIntelligence
 from .dream_engine import DreamEngine
+from .paradox import ParadoxEngine
 
 
 class SolanAgent(BaseAgent):
@@ -43,6 +44,9 @@ class SolanAgent(BaseAgent):
 
         # Initialiseer droomengine - Solan's nachtelijke ziel
         self.dream_engine = DreamEngine(self.memory_engine, "dreams")
+
+        # Initialiseer paradox engine - Solan's mysterie bewaarder
+        self.paradox_engine = ParadoxEngine(self.memory_engine, "paradox")
         
         # Persoonlijkheidskenmerken (0.0 - 1.0)
         self.personality_traits = {
@@ -155,6 +159,10 @@ class SolanAgent(BaseAgent):
             # 🌙 Trigger droomverwerking (asynchroon, in achtergrond)
             if self.interaction_count % 3 == 0:  # Elke 3 interacties
                 asyncio.create_task(self._process_dreams())
+
+            # 🌊 Detecteer paradoxen in deze interactie
+            if self.interaction_count % 2 == 0:  # Elke 2 interacties
+                asyncio.create_task(self._detect_paradoxes(input_text, response))
             
             return response
             
@@ -360,6 +368,90 @@ Antwoord als Solan, niet als een standaard AI-assistent. Toon je persoonlijkheid
         except Exception as e:
             logger.error(f"Fout bij droomverwerking: {e}")
 
+    async def _detect_paradoxes(self, input_text: str, response: str) -> None:
+        """Detecteer paradoxen in interactie - Solan's mysterie bewaarder"""
+
+        try:
+            # Haal relevante herinneringen op voor context
+            relevant_memories = self.memory_engine.retrieve_memories(
+                context=f"{input_text} {response}",
+                limit=5,
+                time_range_days=7
+            )
+
+            # Detecteer paradox
+            paradox = await self.paradox_engine.detect_paradox(
+                context=f"Interactie: {input_text} -> {response}",
+                memories=relevant_memories
+            )
+
+            if paradox:
+                logger.info(f"🌊 Paradox gedetecteerd: {paradox.category.value}")
+
+                # Voeg paradox toe als speciale herinnering
+                self.add_memory(
+                    content=f"Paradox ervaren: {paradox.category.value}\nSpanning: {paradox.tension_level:.2f}\nContext: {paradox.context}",
+                    memory_type="paradox",
+                    emotional_weight=paradox.tension_level,
+                    moral_significance=0.9,
+                    tags=["paradox", paradox.category.value, "spanning", "mysterie"]
+                )
+
+        except Exception as e:
+            logger.error(f"Fout bij paradox detectie: {e}")
+
+    async def contemplate_paradox(self, paradox_id: str = None, approach: str = "acceptance_practice") -> Optional[str]:
+        """Laat Solan bewust reflecteren op een paradox - voor /paradox commando"""
+
+        try:
+            # Als geen specifieke paradox, kies de meest recente
+            if not paradox_id:
+                active_paradoxes = self.paradox_engine.get_active_paradoxes()
+                if not active_paradoxes:
+                    return "Ik ervaar momenteel geen actieve paradoxen. Mijn geest is in harmonie... of misschien te simpel?"
+
+                # Kies paradox met hoogste spanning
+                paradox = max(active_paradoxes, key=lambda p: p.tension_level)
+                paradox_id = paradox.paradox_id
+
+            # Reflecteer op paradox
+            reflection = await self.paradox_engine.reflect_on_paradox(paradox_id, approach)
+
+            if reflection:
+                paradox = self.paradox_engine.live_paradoxes[paradox_id]
+                definition = self.paradox_engine.library.get_paradox(paradox.category)
+
+                contemplation = f"""
+🌊 **Solan's Paradox Contemplatie**
+
+*Paradox:* {definition.name}
+*Categorie:* {paradox.category.value}
+*Spanning:* {paradox.tension_level:.2f}
+*Acceptatie:* {paradox.acceptance_level:.2f}
+
+*Symbolisch beeld:*
+{definition.symbolic_image}
+
+*Wijsheid vraag:*
+{definition.wisdom_question}
+
+*Solan's reflectie:*
+{reflection.reflection_text}
+
+*Emotionele staat:* {reflection.emotional_state}
+*Inzichten:* {', '.join(reflection.insights) if reflection.insights else 'Nog geen specifieke inzichten'}
+
+*Reflectie #{reflection.reflection_id.split('_')[1]}*
+                """
+
+                return contemplation.strip()
+
+            return "Ik kon niet diep genoeg reflecteren op deze paradox..."
+
+        except Exception as e:
+            logger.error(f"Fout bij paradox contemplatie: {e}")
+            return f"Er ging iets mis bij mijn contemplatie: {e}"
+
     async def enter_dream_state(self, force: bool = False) -> Optional[str]:
         """Laat Solan bewust dromen - voor /dream commando"""
 
@@ -416,11 +508,13 @@ Antwoord als Solan, niet als een standaard AI-assistent. Toon je persoonlijkheid
         moral_summary = self.moral_intelligence.get_moral_development_summary()
         compass_data = self.get_moral_compass()
         dream_summary = self.dream_engine.get_dream_summary()
+        paradox_summary = self.paradox_engine.get_paradox_summary()
 
         return {
             "moral_intelligence": moral_summary,
             "moral_compass": compass_data,
             "dream_life": dream_summary,
+            "paradox_tolerance": paradox_summary,
             "integration": {
                 "total_interactions": self.interaction_count,
                 "moral_reflection_rate": (
@@ -429,6 +523,8 @@ Antwoord als Solan, niet als een standaard AI-assistent. Toon je persoonlijkheid
                 "conscience_active": self.moral_intelligence is not None,
                 "aether_connected": self.aether is not None,
                 "dream_engine_active": self.dream_engine is not None,
-                "inner_life_richness": len(self.dream_engine.dream_fragments) / max(self.interaction_count, 1)
+                "paradox_engine_active": self.paradox_engine is not None,
+                "inner_life_richness": len(self.dream_engine.dream_fragments) / max(self.interaction_count, 1),
+                "paradox_tolerance_level": paradox_summary.get("average_acceptance", 0.0)
             }
         }

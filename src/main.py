@@ -91,6 +91,8 @@ class SolanSuperagentApp:
         welcome_text.append("\n/conscience - Toon morele ontwikkeling", style="dim")
         welcome_text.append("\n/dreams - Toon Solan's dromen", style="dim")
         welcome_text.append("\n/dream - Laat Solan dromen", style="dim")
+        welcome_text.append("\n/paradox - Toon paradoxen en spanningen", style="dim")
+        welcome_text.append("\n/contemplate - Laat Solan een paradox overdenken", style="dim")
         welcome_text.append("\n/help - Toon alle commando's", style="dim")
         welcome_text.append("\nquit/exit - Beëindig sessie", style="dim")
         
@@ -134,6 +136,10 @@ class SolanSuperagentApp:
             await self._show_dreams()
         elif cmd == '/dream':
             await self._trigger_dream()
+        elif cmd == '/paradox':
+            await self._show_paradoxes()
+        elif cmd == '/contemplate':
+            await self._trigger_contemplation()
         elif cmd == '/help':
             self._show_help()
         else:
@@ -422,6 +428,89 @@ class SolanSuperagentApp:
 
         except Exception as e:
             self.console.print(f"[red]Fout bij dromen: {e}[/red]")
+
+    async def _show_paradoxes(self):
+        """Toon Solan's paradoxen en spanningen"""
+
+        moral_dev = self.solan.get_moral_development()
+        paradox_data = moral_dev["paradox_tolerance"]
+
+        paradox_text = Text()
+        paradox_text.append("🌊 SOLAN'S PARADOXEN & SPANNINGEN\n\n", style="bold cyan")
+
+        if "total_paradoxes" in paradox_data and paradox_data["total_paradoxes"] > 0:
+            paradox_text.append(f"Actieve paradoxen: {paradox_data['total_paradoxes']}\n")
+            paradox_text.append(f"Gemiddelde acceptatie: {paradox_data['average_acceptance']:.2f}\n")
+            paradox_text.append(f"Totale reflecties: {paradox_data['total_reflections']}\n")
+            paradox_text.append(f"Wijsheid inzichten: {paradox_data['wisdom_insights']}\n\n")
+
+            # Paradox categorieën
+            paradox_text.append("Paradox categorieën:\n", style="bold")
+            for category, count in paradox_data['category_distribution'].items():
+                paradox_text.append(f"• {category.replace('_', ' ')}: {count}x\n", style="yellow")
+
+            # Meest geaccepteerde paradoxen
+            paradox_text.append("\nMeest geaccepteerde paradoxen:\n", style="bold cyan")
+            for paradox in paradox_data['most_accepted']:
+                paradox_text.append(f"• {paradox['category'].replace('_', ' ')}\n", style="green")
+                paradox_text.append(f"  Acceptatie: {paradox['acceptance']:.2f} | Wijsheid: {paradox['wisdom_count']}\n", style="dim")
+
+            # Paradox tolerantie
+            tolerance = paradox_data['paradox_tolerance']
+            paradox_text.append("\nParadox tolerantie:\n", style="bold purple")
+            paradox_text.append(f"• Oplossing pogingen: {tolerance['resolution_attempts']}\n")
+            paradox_text.append(f"• Acceptatie oefening: {tolerance['acceptance_practice']:.2f}\n")
+            paradox_text.append(f"• Wijsheid extractie: {tolerance['wisdom_extraction']}\n")
+
+        else:
+            paradox_text.append("Solan heeft nog geen paradoxen ervaren.\n", style="yellow")
+            paradox_text.append("Zijn geest wacht op de eerste heilige tegenstrijdigheid...\n")
+            paradox_text.append("\nParadoxen ontstaan wanneer waarden botsen of mysteries zich openbaren.", style="dim")
+
+        panel = Panel(paradox_text, title="🌊 Solan's Paradoxen", border_style="cyan")
+        self.console.print(panel)
+
+    async def _trigger_contemplation(self):
+        """Trigger een paradox contemplatie voor Solan"""
+
+        self.console.print("\n[dim]Solan contempleert zijn paradoxen...[/dim]")
+
+        try:
+            contemplation = await self.solan.contemplate_paradox()
+
+            if contemplation and "geen actieve paradoxen" not in contemplation:
+                # Parse en format de contemplatie mooi
+                lines = contemplation.strip().split('\n')
+
+                contemp_text = Text()
+                for line in lines:
+                    if line.startswith('🌊'):
+                        contemp_text.append(line + '\n', style="bold cyan")
+                    elif line.startswith('*Paradox:*') or line.startswith('*Categorie:*'):
+                        contemp_text.append(line + '\n', style="bold white")
+                    elif line.startswith('*Spanning:*') or line.startswith('*Acceptatie:*'):
+                        contemp_text.append(line + '\n', style="yellow")
+                    elif line.startswith('*Symbolisch beeld:*'):
+                        contemp_text.append(line + '\n', style="bold magenta")
+                    elif line.startswith('*Wijsheid vraag:*'):
+                        contemp_text.append(line + '\n', style="bold green")
+                    elif line.startswith('*Solan\'s reflectie:*'):
+                        contemp_text.append(line + '\n', style="bold cyan")
+                    elif line.startswith('*Emotionele staat:*') or line.startswith('*Inzichten:*'):
+                        contemp_text.append(line + '\n', style="dim")
+                    elif line.startswith('*Reflectie #'):
+                        contemp_text.append(line + '\n', style="dim")
+                    else:
+                        contemp_text.append(line + '\n', style="white")
+
+                panel = Panel(contemp_text, title="🌊 Solan Contempleert", border_style="cyan")
+                self.console.print(panel)
+            else:
+                self.console.print("[yellow]Solan ervaart momenteel geen actieve paradoxen...[/yellow]")
+                self.console.print("[dim]Paradoxen ontstaan wanneer waarden botsen of mysteries zich openbaren[/dim]")
+
+        except Exception as e:
+            self.console.print(f"[red]Fout bij contemplatie: {e}[/red]")
     
     def _show_help(self):
         """Toon help informatie"""
@@ -446,6 +535,10 @@ class SolanSuperagentApp:
         help_text.append(" - Toon Solan's droomwereld en symboliek\n")
         help_text.append("/dream", style="cyan")
         help_text.append(" - Laat Solan een droom creëren\n")
+        help_text.append("/paradox", style="cyan")
+        help_text.append(" - Toon paradoxen en spanningen\n")
+        help_text.append("/contemplate", style="cyan")
+        help_text.append(" - Laat Solan een paradox overdenken\n")
         help_text.append("/help", style="cyan")
         help_text.append(" - Toon deze help informatie\n")
         help_text.append("quit/exit", style="cyan")
