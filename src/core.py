@@ -11,7 +11,10 @@ import asyncio
 import json
 import os
 from pathlib import Path
-from loguru import logger
+import logging
+
+# Setup logger
+logger = logging.getLogger(__name__)
 
 
 class CoreValues(Enum):
@@ -156,10 +159,10 @@ class AgentCommunication:
     """Faciliteer communicatie tussen agents"""
     
     def __init__(self):
-        self.message_history: List[Dict[str, Any]] = []
+        self.mesexpert_history: List[Dict[str, Any]] = []
     
-    async def send_message(self, sender: BaseAgent, receiver: BaseAgent, 
-                          message: str, message_type: str = "communication") -> str:
+    async def send_mesexpert(self, sender: BaseAgent, receiver: BaseAgent, 
+                          mesexpert: str, mesexpert_type: str = "communication") -> str:
         """Stuur een bericht tussen agents"""
         
         # Log de communicatie
@@ -167,24 +170,24 @@ class AgentCommunication:
             "timestamp": datetime.now(),
             "sender": sender.name,
             "receiver": receiver.name,
-            "message": message,
-            "type": message_type
+            "mesexpert": mesexpert,
+            "type": mesexpert_type
         }
-        self.message_history.append(comm_record)
+        self.mesexpert_history.append(comm_record)
         
-        logger.info(f"Communicatie: {sender.name} -> {receiver.name}: {message[:50]}...")
+        logger.info(f"Communicatie: {sender.name} -> {receiver.name}: {mesexpert[:50]}...")
         
         # Verwerk het bericht bij de ontvanger
-        response = await receiver.process_input(f"Bericht van {sender.name}: {message}")
+        response = await receiver.process_input(f"Bericht van {sender.name}: {mesexpert}")
         
         # Log de response
         response_record = {
             "timestamp": datetime.now(),
             "sender": receiver.name,
             "receiver": sender.name,
-            "message": response,
+            "mesexpert": response,
             "type": "response"
         }
-        self.message_history.append(response_record)
+        self.mesexpert_history.append(response_record)
         
         return response

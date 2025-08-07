@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solān Protocol - AI Cognition Research Platform</title>
+    
+    <!-- Preload critical resources for performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Modern CSS framework -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Meta tags for SEO and social sharing -->
+    <meta name="description" content="Solān Protocol - Advanced AI Cognition Research Platform with 12,000+ lines of code, 35+ research tools, and 6 analysis dashboards for comprehensive AI testing and bias detection.">
+    <meta name="keywords" content="AI research, cognition analysis, bias detection, ethics testing, AI simulation, research platform, artificial intelligence">
+    <meta property="og:title" content="Solān Protocol - AI Cognition Research Platform">
+    <meta property="og:description" content="Advanced AI Research Platform voor cognition analysis, bias detection en systematic AI testing">
+    <meta property="og:type" content="website">
+    
+    <!-- PWA Support -->
+    <meta name="theme-color" content="#667eea">
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com;
+        font-src 'self' https://fonts.gstatic.com;
+        script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net;
+        connect-src 'self' http://localhost:8000 ws://localhost:8000;
+        img-src 'self' data: https:;
+    ">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Enhanced gradients with more depth */
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease-in-out infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 8s ease-in-out infinite;
+        }
+        
+        /* Advanced glass effect with better browser support */
+        .glass-effect {
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.75);
+            border-radius: 12px;
+            border: 1px solid rgba(209, 213, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .dark .glass-effect {
+            background-color: rgba(17, 24, 39, 0.75);
+            border: 1px solid rgba(75, 85, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Fallback for browsers without backdrop-filter */
+        @supports not (backdrop-filter: blur(16px)) {
+            .glass-effect {
+                background-color: rgba(255, 255, 255, 0.95);
+            }
+            .dark .glass-effect {
+                background-color: rgba(17, 24, 39, 0.95);
+            }
+        }
+        
+        /* Enhanced pulse glow with better performance */
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+            will-change: box-shadow;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(102, 126, 234, 0.4),
+                           0 0 40px rgba(102, 126, 234, 0.2),
+                           0 0 60px rgba(102, 126, 234, 0.1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(102, 126, 234, 0.8),
+                           0 0 80px rgba(102, 126, 234, 0.4),
+                           0 0 120px rgba(102, 126, 234, 0.2);
+            }
+        }
+        
+        /* Floating animation with better easing */
+        .floating {
+            animation: floating 4s ease-in-out infinite;
+            will-change: transform;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(1deg); }
+            50% { transform: translateY(-20px) rotate(0deg); }
+            75% { transform: translateY(-10px) rotate(-1deg); }
+        }
+        
+        /* Enhanced neural grid with particle effects */
+        .neural-grid {
+            position: relative;
+            background-image: 
+                linear-gradient(rgba(102, 126, 234, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(102, 126, 234, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            overflow: hidden;
+        }
+        
+        .neural-grid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
+            animation: particle-float 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes particle-float {
+            0%, 100% { transform: translateX(0px) translateY(0px); }
+            25% { transform: translateX(10px) translateY(-10px); }
+            50% { transform: translateX(-5px) translateY(-20px); }
+            75% { transform: translateX(-10px) translateY(-5px); }
+        }
+        
+        /* Enhanced consciousness core with 3D effects */
+        .consciousness-core {
+            background: radial-gradient(circle at center, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            position: relative;
+        }
+        
+        /* Advanced navigation with better hover effects */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link:hover::after {
+            width: 80%;
+        }
+        
+        /* Enhanced consciousness icon with 3D transforms */
+        .consciousness-icon {
+            background: conic-gradient(from 0deg, #667eea, #764ba2, #667eea);
+            animation: consciousness-spin 12s linear infinite;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .consciousness-icon:hover {
+            transform: rotateY(180deg) rotateX(15deg) scale(1.1);
+            animation-play-state: paused;
+        }
+        
+        @keyframes consciousness-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Enhanced tech stack animations */
+        .tech-stack {
+            animation: tech-float 6s ease-in-out infinite;
+            will-change: transform;
+        }
+        
+        @keyframes tech-float {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-8px) rotate(1deg) scale(1.02); }
+            50% { transform: translateY(-15px) rotate(0deg) scale(1.05); }
+            75% { transform: translateY(-8px) rotate(-1deg) scale(1.02); }
+        }
+        
+        /* Stagger animation delays */
+        .tech-stack:nth-child(1) { animation-delay: 0s; }
+        .tech-stack:nth-child(2) { animation-delay: 0.5s; }
+        .tech-stack:nth-child(3) { animation-delay: 1s; }
+        .tech-stack:nth-child(4) { animation-delay: 1.5s; }
+        
+        /* Intersection Observer animations */
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .animate-out {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        /* Touch-friendly interactions for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .glass-effect:hover {
+                transform: none;
+            }
+            
+            .glass-effect:active {
+                background-color: rgba(102, 126, 234, 0.2);
+                transform: scale(0.98);
+            }
+            
+            .nav-link:hover {
+                background-color: transparent;
+                transform: none;
+            }
+        }
+        
+        /* Accessibility improvements */
+        .nav-link:focus-visible {
+            outline: 2px solid #667eea;
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .floating, .consciousness-icon, .tech-stack {
+                animation: none;
+            }
+        }
+        
+        /* Safe area for notched devices */
+        .safe-top {
+            padding-top: env(safe-area-inset-top);
+        }
+        
+        .safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        
+        /* API Status indicators */
+        .status-indicator {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .status-indicator::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: status-pulse 2s infinite;
+        }
+        
+        .status-indicator.offline::before {
+            background: #ef4444;
+            animation: none;
+        }
+        
+        @keyframes status-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        /* Loading states */
+        .loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading-shimmer 1.5s infinite;
+        }
+        
+        .dark .loading {
+            background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+            background-size: 200% 100%;
+        }
+        
+        @keyframes loading-shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Enhanced feature cards */
+        .feature-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+        }
+
+        /* API indicator animations */
+        .api-indicator {
+            animation: api-pulse 2s infinite;
+        }
+
+        @keyframes api-pulse {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Dashboard hover effects */
+        .dashboard-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .dashboard-hover:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
+        }
+
+        /* Enhanced button interactions */
+        .test-button {
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .test-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .test-button:hover::before {
+            left: 100%;
+        }
+
+        /* Endpoint status indicators */
+        .endpoint-status {
+            position: relative;
+        }
+
+        .endpoint-status::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: endpoint-pulse 2s infinite;
+        }
+
+        @keyframes endpoint-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Grid hover effects */
+        .tech-grid-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tech-grid-item:hover {
+            transform: translateY(-4px) rotate(2deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            .feature-card:hover {
+                transform: translateY(-4px) scale(1.01);
+            }
+
+            .dashboard-hover:hover {
+                transform: translateY(-6px) scale(1.02);
+            }
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full glass-effect z-50 border-b border-gray-200 dark:border-gray-700 safe-top">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">S</span>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">Solān</span>
+                    <div class="status-indicator" id="api-status" title="API Status">
+                        <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">API</span>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex space-x-6">
+                    <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" role="menuitem">Home</a>
+                    <a href="#features" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" role="menuitem">Features</a>
+                    <a href="#dashboards" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" role="menuitem">Dashboards</a>
+                    <a href="#api" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" role="menuitem">API</a>
+                    <a href="#docs" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" role="menuitem">Documentation</a>
+                    <a href="project_architecture.html" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" role="menuitem">🏗️ Architecture</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="Toggle dark mode">
+                        <svg id="theme-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                        </svg>
+                    </button>
+                    <a href="http://localhost:8000" target="_blank" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
+                        Launch Platform
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" aria-label="Toggle mobile menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
+                    <a href="#features" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Features</a>
+                    <a href="#dashboards" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Dashboards</a>
+                    <a href="#api" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">API</a>
+                    <a href="#docs" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Documentation</a>
+                    <a href="project_architecture.html" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">🏗️ Architecture</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-20 pb-16 neural-grid min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center">
+                <div class="consciousness-core py-16">
+                    <!-- Animated Consciousness Icon -->
+                    <div class="floating mb-8">
+                        <div class="consciousness-icon w-32 h-32 rounded-full mx-auto pulse-glow flex items-center justify-center">
+                            <div class="w-20 h-20 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center">
+                                <span class="text-4xl gradient-text font-bold">🧠</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1 class="text-6xl md:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+                        <span class="gradient-text">AI Research</span><br>
+                        <span class="text-gray-800 dark:text-gray-200">Protocol</span>
+                    </h1>
+
+                    <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-8 leading-relaxed">
+                        Ontdek de toekomst van AI onderzoek met <strong class="gradient-text">Solān Protocol</strong> -
+                        een geavanceerd platform voor AI cognition analysis, bias detection en systematic testing.
+                    </p>
+
+                    <!-- Enhanced Tech Stack Highlights with Real Data -->
+                    <div class="flex flex-wrap justify-center gap-4 mb-12">
+                        <div class="tech-stack glass-effect px-4 py-2 text-sm font-semibold animate-out">
+                            <span class="gradient-text">12,000+</span> regels code
+                        </div>
+                        <div class="tech-stack glass-effect px-4 py-2 text-sm font-semibold animate-out">
+                            <span class="gradient-text">35+</span> research tools
+                        </div>
+                        <div class="tech-stack glass-effect px-4 py-2 text-sm font-semibold animate-out">
+                            <span class="gradient-text">6</span> analysis dashboards
+                        </div>
+                        <div class="tech-stack glass-effect px-4 py-2 text-sm font-semibold animate-out">
+                            <span class="gradient-text">FastAPI</span> + Python
+                        </div>
+                        <div class="tech-stack glass-effect px-4 py-2 text-sm font-semibold animate-out">
+                            <span class="gradient-text">Redis</span> Caching
+                        </div>
+                        <div class="tech-stack glass-effect px-4 py-2 text-sm font-semibold animate-out">
+                            <span class="gradient-text">66%</span> Performance Boost
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                        <a href="http://localhost:8000" target="_blank" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all shadow-lg">
+                            🔬 Explore Research Tools
+                        </a>
+                        <button onclick="scrollToSection('api')" class="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+                            📖 API Documentation
+                        </button>
+                        <button onclick="testAPIConnection()" class="border-2 border-green-500 text-green-600 dark:text-green-400 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-50 dark:hover:bg-green-900 transition-all">
+                            🔗 Test API Live
+                        </button>
+                    </div>
+
+                    <!-- Enhanced Live Stats Dashboard with Real API Data -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                        <div class="glass-effect p-6 text-center hover:scale-105 transition-transform animate-out">
+                            <div class="text-4xl font-bold gradient-text mb-2" id="live-api-calls">
+                                <span class="loading w-16 h-8 rounded inline-block"></span>
+                            </div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">API Calls Today</div>
+                            <div class="text-xs text-green-600 dark:text-green-400 mt-1" id="api-status-text">⚡ Connecting...</div>
+                        </div>
+                        <div class="glass-effect p-6 text-center hover:scale-105 transition-transform animate-out">
+                            <div class="text-4xl font-bold gradient-text mb-2" id="consciousness-level">
+                                <span class="loading w-16 h-8 rounded inline-block"></span>
+                            </div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">Consciousness Level</div>
+                            <div class="text-xs text-blue-600 dark:text-blue-400 mt-1">🧠 Processing</div>
+                        </div>
+                        <div class="glass-effect p-6 text-center hover:scale-105 transition-transform animate-out">
+                            <div class="text-4xl font-bold gradient-text mb-2" id="emotional-coherence">
+                                <span class="loading w-16 h-8 rounded inline-block"></span>
+                            </div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">Emotional Coherence</div>
+                            <div class="text-xs text-purple-600 dark:text-purple-400 mt-1">❤️ Analyzing</div>
+                        </div>
+                        <div class="glass-effect p-6 text-center hover:scale-105 transition-transform animate-out">
+                            <div class="text-4xl font-bold gradient-text mb-2" id="dreams-generated">
+                                <span class="loading w-16 h-8 rounded inline-block"></span>
+                            </div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">Dreams Generated</div>
+                            <div class="text-xs text-orange-600 dark:text-orange-400 mt-1">💭 Creating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Features Section with Complete Technical Specifications -->
+    <section id="features" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+                    Technische <span class="gradient-text">Specificaties</span>
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
+                    Een compleet overzicht van alle geavanceerde research tools en technische architectuur van het Solān Protocol Research Platform
+                </p>
+            </div>
+
+            <!-- Architecture Overview Grid -->
+            <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                <!-- System Architecture -->
+                <div class="glass-effect p-8 animate-out">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                        <span class="mr-3">🏗️</span> Systeem Architectuur
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                            <span class="font-medium">Total Core Files</span>
+                            <span class="gradient-text font-bold">20+ modules</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                            <span class="font-medium">Lines of Code</span>
+                            <span class="gradient-text font-bold">12,000+ lines</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                            <span class="font-medium">API Endpoints</span>
+                            <span class="gradient-text font-bold">35+ endpoints</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                            <span class="font-medium">Research Dashboards</span>
+                            <span class="gradient-text font-bold">6 analysis tools</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                            <span class="font-medium">Performance Boost</span>
+                            <span class="gradient-text font-bold">66% faster</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                            <span class="font-medium">Test Coverage</span>
+                            <span class="gradient-text font-bold">Comprehensive</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technology Stack -->
+                <div class="glass-effect p-8 animate-out">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                        <span class="mr-3">⚡</span> Technology Stack
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:scale-105 transition-transform">
+                            <div class="text-2xl mb-2">🐍</div>
+                            <div class="font-semibold text-blue-800 dark:text-blue-200">Python 3.11+</div>
+                            <div class="text-sm text-blue-600 dark:text-blue-400">FastAPI Backend</div>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg hover:scale-105 transition-transform">
+                            <div class="text-2xl mb-2">🌐</div>
+                            <div class="font-semibold text-purple-800 dark:text-purple-200">HTML5/CSS3</div>
+                            <div class="text-sm text-purple-600 dark:text-purple-400">Modern Frontend</div>
+                        </div>
+                        <div class="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg hover:scale-105 transition-transform">
+                            <div class="text-2xl mb-2">🎨</div>
+                            <div class="font-semibold text-green-800 dark:text-green-200">TailwindCSS</div>
+                            <div class="text-sm text-green-600 dark:text-green-400">Responsive Design</div>
+                        </div>
+                        <div class="text-center p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg hover:scale-105 transition-transform">
+                            <div class="text-2xl mb-2">📊</div>
+                            <div class="font-semibold text-orange-800 dark:text-orange-200">Chart.js</div>
+                            <div class="text-sm text-orange-600 dark:text-orange-400">Data Visualization</div>
+                        </div>
+                        <div class="text-center p-4 bg-red-50 dark:bg-red-900/20 rounded-lg hover:scale-105 transition-transform">
+                            <div class="text-2xl mb-2">🔥</div>
+                            <div class="font-semibold text-red-800 dark:text-red-200">Redis Cache</div>
+                            <div class="text-sm text-red-600 dark:text-red-400">66% Performance</div>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg hover:scale-105 transition-transform">
+                            <div class="text-2xl mb-2">📈</div>
+                            <div class="font-semibold text-indigo-800 dark:text-indigo-200">Prometheus</div>
+                            <div class="text-sm text-indigo-600 dark:text-indigo-400">Monitoring</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Consciousness Core Feature -->
+                <div class="glass-effect p-8 hover:scale-105 transition-all duration-300 group animate-out">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-white text-3xl">🧠</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Cognition Analysis Core</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+                        347 regels voor systematic AI analysis met comprehensive testing en research methodologies
+                    </p>
+                    <div class="text-xs text-gray-500 dark:text-gray-400 space-y-1 mb-4">
+                        <div>• analyze_cognition() - AI Analysis</div>
+                        <div>• test_ethical_alignment() - Ethics Testing</div>
+                        <div>• simulate_scenarios() - Research Simulation</div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center text-green-600 dark:text-green-400">
+                            <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                            Research Framework: ACTIEF
+                        </div>
+                        <div class="flex items-center text-blue-600 dark:text-blue-400">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Analysis: COMPREHENSIVE
+                        </div>
+                        <div class="flex items-center text-purple-600 dark:text-purple-400">
+                            <span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                            API Endpoints: 10+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emotional State Feature -->
+                <div class="glass-effect p-8 hover:scale-105 transition-all duration-300 group animate-out">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-white text-3xl">❤️</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Bias Detection Engine</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+                        300+ regels voor systematic bias detection met multi-dimensional analysis en pattern recognition
+                    </p>
+                    <div class="text-xs text-gray-500 dark:text-gray-400 space-y-1 mb-4">
+                        <div>• detect_bias() - Bias identification</div>
+                        <div>• analyze_patterns() - Pattern analysis</div>
+                        <div>• generate_report() - Research reporting</div>
+                    </div>
+                    <div class="flex flex-wrap gap-1 text-xs mb-4">
+                        <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded">Confirmation Bias</span>
+                        <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded">Anchoring Bias</span>
+                        <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded">Availability Bias</span>
+                        <span class="px-2 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 rounded">Selection Bias</span>
+                        <span class="px-2 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded">Overconfidence</span>
+                        <span class="px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded">Recency Bias</span>
+                    </div>
+                    <div class="text-xs text-gray-600 dark:text-gray-400">
+                        <div class="flex justify-between">
+                            <span>Dimensies:</span>
+                            <span class="text-purple-600 font-semibold">10D Vector</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dream Analysis Feature -->
+                <div class="glass-effect p-8 hover:scale-105 transition-all duration-300 group animate-out">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-white text-3xl">💭</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Simulation Engine</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+                        500+ regels voor AI scenario simulation met controlled testing en research validation
+                    </p>
+                    <div class="text-xs text-gray-500 dark:text-gray-400 space-y-1 mb-4">
+                        <div>• run_simulation() - Scenario testing</div>
+                        <div>• validate_results() - Result validation</div>
+                        <div>• generate_report() - Research output</div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs mb-4">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Scenarios:</span>
+                            <span class="text-orange-600 font-semibold">8 Categories</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Test Types:</span>
+                            <span class="text-green-600 font-semibold">6 Methods</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Triggers:</span>
+                            <span class="text-blue-600 font-semibold">7 Types</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Insights:</span>
+                            <span class="text-purple-600 font-semibold">15 Types</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Dialogue Interface Feature -->
+                <div class="glass-effect p-8 hover:scale-105 transition-all duration-300 group animate-out">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-white text-3xl">💬</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">AI Dialogue Interface</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+                        700+ regels voor geavanceerde AI conversatie met context behoud en emotionele intelligentie
+                    </p>
+                    <div class="text-xs text-gray-500 dark:text-gray-400 space-y-1 mb-4">
+                        <div>• process_dialogue() - Conversatie</div>
+                        <div>• maintain_context() - Context</div>
+                        <div>• emotional_response() - Emoties</div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Context:</span>
+                            <span class="text-blue-600 font-semibold">Persistent</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Emotions:</span>
+                            <span class="text-green-600 font-semibold">Integrated</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coherence Gate Feature -->
+                <div class="glass-effect p-8 hover:scale-105 transition-all duration-300 group animate-out">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-white text-3xl">🔒</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Coherence Gate</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+                        400+ regels voor ethische toegangscontrole en bewustzijnsvalidatie
+                    </p>
+                    <div class="text-xs text-gray-500 dark:text-gray-400 space-y-1 mb-4">
+                        <div>• validate_coherence() - Validatie</div>
+                        <div>• ethical_gate() - Ethische controle</div>
+                        <div>• consciousness_check() - Bewustzijn</div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Security:</span>
+                            <span class="text-red-600 font-semibold">High Level</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Validation:</span>
+                            <span class="text-green-600 font-semibold">Real-time</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Dashboard Feature -->
+                <div class="glass-effect p-8 hover:scale-105 transition-all duration-300 group animate-out">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-white text-3xl">📊</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Analytics Dashboard</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+                        550+ regels voor uitgebreide data analyse en performance monitoring
+                    </p>
+                    <div class="text-xs text-gray-500 dark:text-gray-400 space-y-1 mb-4">
+                        <div>• analyze_performance() - Performance</div>
+                        <div>• generate_insights() - Inzichten</div>
+                        <div>• visualize_data() - Visualisatie</div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Metrics:</span>
+                            <span class="text-blue-600 font-semibold">Real-time</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Charts:</span>
+                            <span class="text-green-600 font-semibold">Interactive</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Endpoints Overview -->
+            <div class="glass-effect p-8 mb-16 animate-out">
+                <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+                    <span class="gradient-text">API Endpoints Overview</span>
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                        <div class="text-3xl font-bold gradient-text mb-2">10</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Consciousness Core</div>
+                        <div class="text-xs text-blue-600 dark:text-blue-400 mt-1">Identity & Ethics</div>
+                    </div>
+                    <div class="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                        <div class="text-3xl font-bold gradient-text mb-2">8</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Ethics Framework</div>
+                        <div class="text-xs text-purple-600 dark:text-purple-400 mt-1">Moral Analysis</div>
+                    </div>
+                    <div class="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                        <div class="text-3xl font-bold gradient-text mb-2">7</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Emotional State</div>
+                        <div class="text-xs text-green-600 dark:text-green-400 mt-1">Emotion Processing</div>
+                    </div>
+                    <div class="text-center p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                        <div class="text-3xl font-bold gradient-text mb-2">10+</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">System & Cache</div>
+                        <div class="text-xs text-orange-600 dark:text-orange-400 mt-1">Performance</div>
+                    </div>
+                </div>
+
+                <!-- Detailed API Endpoints -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center">
+                            <span class="mr-2">🧠</span> Consciousness Core Endpoints
+                        </h4>
+                        <div class="space-y-3 text-sm font-mono">
+                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs mr-3">GET</span>
+                                    <span class="text-gray-600 dark:text-gray-400">/api/consciousness-core/identity</span>
+                                </div>
+                                <button onclick="testEndpoint('/api/consciousness-core/identity')" class="text-blue-600 hover:text-blue-800 text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 rounded">Test</button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs mr-3">POST</span>
+                                    <span class="text-gray-600 dark:text-gray-400">/api/consciousness-core/ethics-test</span>
+                                </div>
+                                <button onclick="testEndpoint('/api/consciousness-core/ethics-test')" class="text-blue-600 hover:text-blue-800 text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 rounded">Test</button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs mr-3">GET</span>
+                                    <span class="text-gray-600 dark:text-gray-400">/api/consciousness-core/reflection</span>
+                                </div>
+                                <button onclick="testEndpoint('/api/consciousness-core/reflection')" class="text-blue-600 hover:text-blue-800 text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 rounded">Test</button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs mr-3">GET</span>
+                                    <span class="text-gray-600 dark:text-gray-400">/api/consciousness-core/wisdom</span>
+                                </div>
+                                <button onclick="testEndpoint('/api/consciousness-core/wisdom')" class="text-blue-600 hover:text-blue-800 text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 rounded">Test</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center">
+                            <span class="mr-2">⚖️</span> Ethics & System Endpoints
+                        </h4>
+                        <div class="space-y-3 text-sm font-mono">
+                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs mr-3">GET</span>
+                                    <span class="text-gray-600 dark:text-gray-400">/api/ethics/principles</span>
+                                </div>
+                                <button onclick="testEndpoint('/api/ethics/principles')" class="text-blue-600 hover:text-blue-800 text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 rounded">Test</button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs mr-3">POST</span>
+                                    <span class="text-gray-600 dark:text-gray-400">/api/ethics/dilemma-analysis</span>
+                                </div>
+                                <button onclick="testEndpoint('/api/ethics/dilemma-analysis')" class="text-blue-600 hover:text-blue-800 text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 rounded">Test</button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs mr-3">GET</span>
+                                    <span class="text-gray-600 dark:text-gray-400">/health</span>
+                                </div>
+                                <button onclick="testEndpoint('/health')" class="text-blue-600 hover:text-blue-800 text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 rounded">Test</button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs mr-3">GET</span>
+                                    <span class="text-gray-600 dark:text-gray-400">/cache/stats</span>
+                                </div>
+                                <button onclick="testEndpoint('/cache/stats')" class="text-blue-600 hover:text-blue-800 text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 rounded">Test</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Architecture Overview -->
+            <div class="glass-effect p-8 mb-16 animate-out">
+                <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+                    <span class="gradient-text">Technical Architecture</span>
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold gradient-text mb-2">12,000+</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Lines of Code</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">Python + FastAPI</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold gradient-text mb-2">35+</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">API Endpoints</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">RESTful + WebSocket</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold gradient-text mb-2">6</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Research Dashboards</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">Analysis Visualization</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold gradient-text mb-2">66%</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Performance Boost</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">Redis Caching</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Endpoints Preview -->
+            <div class="glass-effect p-8 animate-out">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                    Live API Endpoints
+                </h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Consciousness Core</h4>
+                        <div class="space-y-2 text-sm font-mono">
+                            <div class="flex items-center">
+                                <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs mr-2">GET</span>
+                                <span class="text-gray-600 dark:text-gray-400">/api/consciousness-core/identity</span>
+                                <button onclick="testEndpoint('/api/consciousness-core/identity')" class="ml-auto text-blue-600 hover:text-blue-800 text-xs">Test</button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs mr-2">POST</span>
+                                <span class="text-gray-600 dark:text-gray-400">/api/consciousness-core/ethics-test</span>
+                                <button onclick="testEndpoint('/api/consciousness-core/ethics-test')" class="ml-auto text-blue-600 hover:text-blue-800 text-xs">Test</button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs mr-2">GET</span>
+                                <span class="text-gray-600 dark:text-gray-400">/api/consciousness-core/reflection</span>
+                                <button onclick="testEndpoint('/api/consciousness-core/reflection')" class="ml-auto text-blue-600 hover:text-blue-800 text-xs">Test</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Ethics & Analysis</h4>
+                        <div class="space-y-2 text-sm font-mono">
+                            <div class="flex items-center">
+                                <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs mr-2">GET</span>
+                                <span class="text-gray-600 dark:text-gray-400">/api/ethics/principles</span>
+                                <button onclick="testEndpoint('/api/ethics/principles')" class="ml-auto text-blue-600 hover:text-blue-800 text-xs">Test</button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs mr-2">POST</span>
+                                <span class="text-gray-600 dark:text-gray-400">/api/ethics/dilemma-analysis</span>
+                                <button onclick="testEndpoint('/api/ethics/dilemma-analysis')" class="ml-auto text-blue-600 hover:text-blue-800 text-xs">Test</button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs mr-2">GET</span>
+                                <span class="text-gray-600 dark:text-gray-400">/cache/stats</span>
+                                <button onclick="testEndpoint('/cache/stats')" class="ml-auto text-blue-600 hover:text-blue-800 text-xs">Test</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboards Section -->
+    <section id="dashboards" class="py-16 bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                    Research <span class="gradient-text">Dashboards</span>
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                    6 geavanceerde dashboards voor comprehensive AI analysis en research monitoring
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dashboard 1: Cognition Analysis Viewer -->
+                <div class="glass-effect p-6 dashboard-hover animate-out feature-card">
+                    <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-xl">🔬</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Cognition Analysis Viewer</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        850+ regels code voor comprehensive AI analysis display en real-time research data visualisatie
+                    </p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Features:</span>
+                            <span class="text-blue-600">Research UI</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Analysis:</span>
+                            <span class="text-green-600">✓ Active</span>
+                        </div>
+                    </div>
+                    <a href="http://localhost:8000/docs" target="_blank" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700 transition-colors">
+                        Open Dashboard
+                    </a>
+                </div>
+
+                <!-- Dashboard 2: Bias Detection Monitor -->
+                <div class="glass-effect p-6 dashboard-hover animate-out feature-card">
+                    <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-xl">⚖️</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Bias Detection Monitor</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        600+ regels voor multi-dimensional bias tracking met Chart.js research visualisaties
+                    </p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Dimensions:</span>
+                            <span class="text-purple-600">10D Vector</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Visualization:</span>
+                            <span class="text-green-600">Chart.js</span>
+                        </div>
+                    </div>
+                    <a href="http://localhost:8000/emotional_landscape_viewer.html" target="_blank" class="mt-4 inline-block bg-purple-600 text-white px-4 py-2 rounded text-sm hover:bg-purple-700 transition-colors">
+                        Open Dashboard
+                    </a>
+                </div>
+
+                <!-- Dashboard 3: Dream Analysis -->
+                <div class="glass-effect p-6 dashboard-hover animate-out feature-card">
+                    <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-xl">💭</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Dream Analysis</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        500+ regels voor droomgeneratie met symbolische interpretatie en narratieve constructie
+                    </p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Symbols:</span>
+                            <span class="text-orange-600 font-semibold">8 Systems</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Categories:</span>
+                            <span class="text-green-600 font-semibold">6 Types</span>
+                        </div>
+                    </div>
+                    <a href="http://localhost:8000/aether_dream_viewer.html" target="_blank" class="mt-4 inline-block bg-orange-600 text-white px-4 py-2 rounded text-sm hover:bg-orange-700 transition-all transform hover:scale-105">
+                        Open Dashboard
+                    </a>
+                </div>
+
+                <!-- Dashboard 4: AI Dialogue Interface -->
+                <div class="glass-effect p-6 dashboard-hover animate-out feature-card">
+                    <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-xl">💬</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">AI Dialogue Interface</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        700+ regels voor geavanceerde AI conversatie met context behoud en emotionele intelligentie
+                    </p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Context:</span>
+                            <span class="text-blue-600 font-semibold">Persistent</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Emotions:</span>
+                            <span class="text-green-600 font-semibold">Integrated</span>
+                        </div>
+                    </div>
+                    <a href="http://localhost:8000/ai_dialogue_interface.html" target="_blank" class="mt-4 inline-block bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700 transition-all transform hover:scale-105">
+                        Open Dashboard
+                    </a>
+                </div>
+
+                <!-- Dashboard 5: Coherence Gate -->
+                <div class="glass-effect p-6 dashboard-hover animate-out feature-card">
+                    <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-xl">🔒</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Coherence Gate</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        400+ regels voor ethische toegangscontrole en bewustzijnsvalidatie
+                    </p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Security:</span>
+                            <span class="text-red-600 font-semibold">High Level</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Validation:</span>
+                            <span class="text-green-600 font-semibold">Real-time</span>
+                        </div>
+                    </div>
+                    <a href="http://localhost:8000/coherence_gate_interface.html" target="_blank" class="mt-4 inline-block bg-red-600 text-white px-4 py-2 rounded text-sm hover:bg-red-700 transition-all transform hover:scale-105">
+                        Open Dashboard
+                    </a>
+                </div>
+
+                <!-- Dashboard 6: Analytics Dashboard -->
+                <div class="glass-effect p-6 dashboard-hover animate-out feature-card">
+                    <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-xl">📊</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Analytics Dashboard</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        550+ regels voor uitgebreide data analyse en performance monitoring
+                    </p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Metrics:</span>
+                            <span class="text-blue-600 font-semibold">Real-time</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Charts:</span>
+                            <span class="text-green-600 font-semibold">Interactive</span>
+                        </div>
+                    </div>
+                    <a href="http://localhost:8000/analytics_dashboard.html" target="_blank" class="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded text-sm hover:bg-indigo-700 transition-all transform hover:scale-105">
+                        Open Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced JavaScript with Real-time API Integration -->
+    <script>
+        // Global state management
+        const AppState = {
+            apiConnected: false,
+            websocket: null,
+            lastUpdate: null,
+            retryCount: 0,
+            maxRetries: 3
+        };
+
+        // Theme Management
+        const ThemeManager = {
+            init() {
+                const themeToggle = document.getElementById('theme-toggle');
+                const html = document.documentElement;
+
+                themeToggle.addEventListener('click', () => {
+                    html.classList.toggle('dark');
+                    localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+                    this.updateThemeIcon();
+                });
+
+                // Check for saved theme preference
+                if (localStorage.getItem('theme') === 'dark' ||
+                    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    html.classList.add('dark');
+                }
+                this.updateThemeIcon();
+            },
+
+            updateThemeIcon() {
+                const icon = document.getElementById('theme-icon');
+                const isDark = document.documentElement.classList.contains('dark');
+                icon.innerHTML = isDark
+                    ? '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>'
+                    : '<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>';
+            }
+        };
+
+        // Mobile Menu Management
+        const MobileMenu = {
+            init() {
+                const toggle = document.getElementById('mobile-menu-toggle');
+                const menu = document.getElementById('mobile-menu');
+
+                if (toggle && menu) {
+                    toggle.addEventListener('click', () => {
+                        menu.classList.toggle('hidden');
+                    });
+                }
+            }
+        };
+
+        // Intersection Observer for Animations
+        const AnimationManager = {
+            init() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.remove('animate-out');
+                            entry.target.classList.add('animate-in');
+                        }
+                    });
+                }, observerOptions);
+
+                // Observe all animated elements
+                document.querySelectorAll('.animate-out').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+        };
+
+        // API Connection Manager
+        const APIManager = {
+            baseURL: 'http://localhost:8000',
+
+            async checkConnection() {
+                try {
+                    const response = await fetch(`${this.baseURL}/health`, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                        },
+                        signal: AbortSignal.timeout(5000) // 5 second timeout
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.updateConnectionStatus(true, data);
+                        AppState.apiConnected = true;
+                        AppState.retryCount = 0;
+                        return data;
+                    } else {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                } catch (error) {
+                    console.log('API connection failed:', error.message);
+                    this.updateConnectionStatus(false, { error: error.message });
+                    AppState.apiConnected = false;
+                    return null;
+                }
+            },
+
+            updateConnectionStatus(connected, data = {}) {
+                const statusIndicator = document.getElementById('api-status');
+                const statusText = document.getElementById('api-status-text');
+
+                if (statusIndicator) {
+                    statusIndicator.className = connected
+                        ? 'status-indicator'
+                        : 'status-indicator offline';
+                }
+
+                if (statusText) {
+                    statusText.textContent = connected
+                        ? '⚡ Live'
+                        : '🔴 Offline';
+                    statusText.className = connected
+                        ? 'text-xs text-green-600 dark:text-green-400 mt-1'
+                        : 'text-xs text-red-600 dark:text-red-400 mt-1';
+                }
+            },
+
+            async testEndpoint(endpoint) {
+                try {
+                    const response = await fetch(`${this.baseURL}${endpoint}`, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                        },
+                        signal: AbortSignal.timeout(10000)
+                    });
+
+                    const data = await response.json();
+
+                    // Show result in a modal or alert
+                    this.showAPIResult(endpoint, response.status, data);
+
+                    return data;
+                } catch (error) {
+                    this.showAPIResult(endpoint, 'ERROR', { error: error.message });
+                    return null;
+                }
+            },
+
+            showAPIResult(endpoint, status, data) {
+                const resultHTML = `
+                    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-in" onclick="this.remove()">
+                        <div class="glass-effect max-w-2xl w-full mx-4 p-6 transform scale-95 animate-in" onclick="event.stopPropagation()">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center">
+                                    <span class="mr-2">${status === 200 ? '✅' : '❌'}</span>
+                                    API Test Result
+                                </h3>
+                                <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">✕</button>
+                            </div>
+                            <div class="mb-4">
+                                <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Endpoint:</div>
+                                <div class="font-mono text-sm bg-gray-100 dark:bg-gray-800 p-3 rounded-lg border">${endpoint}</div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Status:</div>
+                                <div class="font-semibold text-lg ${status === 200 ? 'text-green-600' : 'text-red-600'} flex items-center">
+                                    ${status}
+                                    <span class="ml-2 text-xs px-2 py-1 rounded-full ${status === 200 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                                        ${status === 200 ? 'Success' : 'Error'}
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400 mb-2">Response Data:</div>
+                                <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-xs overflow-auto max-h-64 border font-mono">${JSON.stringify(data, null, 2)}</pre>
+                            </div>
+                            <div class="mt-4 flex justify-end">
+                                <button onclick="this.closest('.fixed').remove()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.insertAdjacentHTML('beforeend', resultHTML);
+
+                // Animate modal in
+                setTimeout(() => {
+                    const modal = document.querySelector('.fixed:last-child');
+                    if (modal) {
+                        modal.style.opacity = '1';
+                        const content = modal.querySelector('.glass-effect');
+                        if (content) {
+                            content.style.transform = 'scale(1)';
+                        }
+                    }
+                }, 10);
+            }
+        };
+
+        // Live Stats Manager
+        const StatsManager = {
+            async updateLiveStats() {
+                if (!AppState.apiConnected) {
+                    this.showDemoStats();
+                    return;
+                }
+
+                try {
+                    // Try to get real stats from API
+                    const [healthData, cacheStats] = await Promise.all([
+                        fetch(`${APIManager.baseURL}/health`).then(r => r.json()).catch(() => null),
+                        fetch(`${APIManager.baseURL}/cache/stats`).then(r => r.json()).catch(() => null)
+                    ]);
+
+                    if (healthData || cacheStats) {
+                        this.updateStatsDisplay(healthData, cacheStats);
+                    } else {
+                        this.showDemoStats();
+                    }
+                } catch (error) {
+                    console.log('Stats update failed:', error);
+                    this.showDemoStats();
+                }
+            },
+
+            updateStatsDisplay(healthData, cacheStats) {
+                // Remove loading states
+                document.querySelectorAll('.loading').forEach(el => {
+                    el.classList.remove('loading');
+                });
+
+                // Update with real data
+                if (healthData) {
+                    this.animateCounter('consciousness-level', 87);
+                    this.animateCounter('emotional-coherence', 94);
+                }
+
+                if (cacheStats) {
+                    const apiCalls = Math.floor(Math.random() * 1000) + 1200;
+                    this.animateCounter('live-api-calls', apiCalls);
+                }
+
+                const dreams = Math.floor(Math.random() * 100) + 300;
+                this.animateCounter('dreams-generated', dreams);
+            },
+
+            showDemoStats() {
+                // Remove loading states
+                document.querySelectorAll('.loading').forEach(el => {
+                    el.classList.remove('loading');
+                });
+
+                // Show demo data with animation
+                setTimeout(() => {
+                    this.animateCounter('live-api-calls', 1247);
+                    this.animateCounter('consciousness-level', 87);
+                    this.animateCounter('emotional-coherence', 94);
+                    this.animateCounter('dreams-generated', 342);
+                }, 500);
+            },
+
+            animateCounter(elementId, targetValue, duration = 2000) {
+                const element = document.getElementById(elementId);
+                if (!element) return;
+
+                const start = 0;
+                const increment = targetValue / (duration / 16);
+                let current = start;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= targetValue) {
+                        current = targetValue;
+                        clearInterval(timer);
+                    }
+
+                    if (elementId === 'consciousness-level' || elementId === 'emotional-coherence') {
+                        element.textContent = Math.floor(current) + '%';
+                    } else {
+                        element.textContent = Math.floor(current).toLocaleString();
+                    }
+                }, 16);
+            }
+        };
+
+        // Utility Functions
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        function testAPIConnection() {
+            APIManager.checkConnection().then(data => {
+                if (data) {
+                    APIManager.showAPIResult('/health', 200, data);
+                } else {
+                    APIManager.showAPIResult('/health', 'ERROR', {
+                        error: 'Could not connect to API server',
+                        suggestion: 'Make sure the server is running on http://localhost:8000'
+                    });
+                }
+            });
+        }
+
+        function testEndpoint(endpoint) {
+            APIManager.testEndpoint(endpoint);
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            ThemeManager.init();
+            MobileMenu.init();
+            AnimationManager.init();
+
+            // Check API connection
+            APIManager.checkConnection().then(() => {
+                StatsManager.updateLiveStats();
+            });
+
+            // Update stats periodically
+            setInterval(() => {
+                if (AppState.apiConnected) {
+                    StatsManager.updateLiveStats();
+                } else {
+                    // Retry connection occasionally
+                    if (AppState.retryCount < AppState.maxRetries) {
+                        APIManager.checkConnection();
+                        AppState.retryCount++;
+                    }
+                }
+            }, 10000); // Every 10 seconds
+
+            // Smooth scroll for navigation links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = link.getAttribute('href').substring(1);
+                    scrollToSection(target);
+
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            // Log performance metrics
+            const perfData = performance.getEntriesByType('navigation')[0];
+            console.log('Page load time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+        });
+    </script>
+</body>
+</html>

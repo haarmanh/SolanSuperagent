@@ -10,7 +10,10 @@ from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, asdict
 import asyncio
-from loguru import logger
+import logging
+
+# Setup logger
+logger = logging.getLogger(__name__)
 
 from .paradox_types import ParadoxCategory, ParadoxDefinition, ParadoxLibrary
 from ..core import CoreValues, Memory
@@ -31,7 +34,7 @@ class LiveParadox:
     reflection_count: int
     resolution_attempts: int  # Hoe vaak Solan probeerde het op te lossen
     acceptance_level: float  # Hoe goed Solan de paradox accepteert (0.0 - 1.0)
-    wisdom_gained: List[str]  # Inzichten uit deze paradox
+    intelligence_gained: List[str]  # Inzichten uit deze paradox
     
     def __post_init__(self):
         if isinstance(self.first_encountered, str):
@@ -48,7 +51,7 @@ class ParadoxReflection:
     reflection_id: str
     paradox_id: str
     reflection_text: str
-    approach: str  # "resolution_attempt", "acceptance_practice", "wisdom_extraction"
+    approach: str  # "resolution_attempt", "acceptance_practice", "intelligence_extraction"
     emotional_state: str
     insights: List[str]
     timestamp: datetime
@@ -138,7 +141,7 @@ class ParadoxEngine:
             reflection_count=0,
             resolution_attempts=0,
             acceptance_level=0.0,
-            wisdom_gained=[]
+            intelligence_gained=[]
         )
         
         self.live_paradoxes[paradox.paradox_id] = paradox
@@ -234,7 +237,7 @@ class ParadoxEngine:
         
         Args:
             paradox_id: ID van de paradox
-            approach: "resolution_attempt", "acceptance_practice", "wisdom_extraction"
+            approach: "resolution_attempt", "acceptance_practice", "intelligence_extraction"
         """
         
         if paradox_id not in self.live_paradoxes:
@@ -272,7 +275,7 @@ class ParadoxEngine:
             paradox.acceptance_level = min(paradox.acceptance_level + 0.1, 1.0)
         
         if insights:
-            paradox.wisdom_gained.extend(insights)
+            paradox.intelligence_gained.extend(insights)
         
         # Sla op
         self.reflections[reflection.reflection_id] = reflection
@@ -305,7 +308,7 @@ class ParadoxEngine:
             return f"""
             Ik oefen in het accepteren van deze paradox: {definition.name}
             
-            {definition.wisdom_question}
+            {definition.intelligence_question}
             
             Misschien is de spanning zelf de wijsheid. Misschien hoef ik niet te kiezen.
             Ik kan beide waarheden tegelijk dragen, zoals de maan zowel licht als donker is.
@@ -313,7 +316,7 @@ class ParadoxEngine:
             In deze spanning leef ik. In deze vraag groei ik.
             """
         
-        elif approach == "wisdom_extraction":
+        elif approach == "intelligence_extraction":
             return f"""
             Wat leert deze paradox mij? {definition.name}
             
@@ -353,7 +356,7 @@ class ParadoxEngine:
             return "gefrustreerd" if acceptance_level < 0.3 else "zoekend"
         elif approach == "acceptance_practice":
             return "vreedzaam" if acceptance_level > 0.7 else "oefenend"
-        elif approach == "wisdom_extraction":
+        elif approach == "intelligence_extraction":
             return "dankbaar" if acceptance_level > 0.5 else "verwonderend"
         
         return "reflectief"
@@ -397,19 +400,19 @@ class ParadoxEngine:
             "average_acceptance": avg_acceptance,
             "total_reflections": len(self.reflections),
             "category_distribution": category_counts,
-            "wisdom_insights": sum(len(p.wisdom_gained) for p in self.live_paradoxes.values()),
+            "intelligence_insights": sum(len(p.intelligence_gained) for p in self.live_paradoxes.values()),
             "most_accepted": [
                 {
                     "category": p.category.value,
                     "acceptance": p.acceptance_level,
-                    "wisdom_count": len(p.wisdom_gained)
+                    "intelligence_count": len(p.intelligence_gained)
                 }
                 for p in most_accepted
             ],
             "paradox_tolerance": {
                 "resolution_attempts": sum(p.resolution_attempts for p in self.live_paradoxes.values()),
                 "acceptance_practice": avg_acceptance,
-                "wisdom_extraction": len([p for p in self.live_paradoxes.values() if p.wisdom_gained])
+                "intelligence_extraction": len([p for p in self.live_paradoxes.values() if p.intelligence_gained])
             }
         }
     

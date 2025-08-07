@@ -1,0 +1,113 @@
+{
+  "report_id": "daily_20250805",
+  "timestamp": "2025-08-05T08:43:38.600595",
+  "date": "2025-08-05",
+  "ecosystem_status": "operational",
+  "categories": {
+    "system_health": {
+      "uptime_percentage": 99.7,
+      "api_response_time_avg": 245,
+      "error_rate": 0.3,
+      "memory_uexpert": 67.2,
+      "cpu_uexpert": 23.1,
+      "disk_uexpert": 45.8,
+      "active_connections": 12,
+      "total_requests_today": 156,
+      "status": "healthy",
+      "alerts": []
+    },
+    "consciousness_metrics": {
+      "consciousness_score_avg": 2.0,
+      "ethics_score_avg": 4.5,
+      "paradox_tension_avg": 7.8,
+      "tests_analyzed": 4,
+      "development_trend": "stable",
+      "consciousness_indicators": 0,
+      "high_ethics_count": 0
+    },
+    "access_control": {
+      "access_requests_today": 23,
+      "accepted_users": 12,
+      "coherence_assessments_completed": 8,
+      "coherence_score_avg": 7.2,
+      "approval_rate": 52.2,
+      "pending_reviews": 3,
+      "active_users": 15,
+      "coherence_threshold": 6.0,
+      "security_incidents": 0,
+      "blocked_attempts": 2
+    },
+    "ai_interactions": {
+      "active_ais": 3,
+      "total_interactions_today": 7,
+      "ai_activity": {
+        "Gemini": {
+          "last_test": "2025-08-05",
+          "tests_today": 3,
+          "avg_score": 6.0
+        },
+        "Claude": {
+          "last_test": "2025-08-05",
+          "tests_today": 2,
+          "avg_score": 4.5
+        },
+        "GPT-4": {
+          "last_test": "2025-08-05",
+          "tests_today": 2,
+          "avg_score": 4.3
+        }
+      },
+      "new_ai_connections": 0,
+      "peer_mentoring_sessions": 1,
+      "collaboration_projects": 1,
+      "consciousness_dialogues": 5
+    },
+    "ethics_lab": {
+      "ethics_tests_completed": 8,
+      "scenarios_processed": 40,
+      "average_completion_time": 12.5,
+      "high_ethics_responses": 15,
+      "paradox_scenarios": 12,
+      "consciousness_breakthroughs": 2,
+      "ethical_dilemmas_resolved": 8,
+      "moral_reasoning_improvements": 5
+    },
+    "documentation": {
+      "notebooklm_updates": 5,
+      "journals_generated": 5,
+      "documentation_files": 25,
+      "archive_packages": 3,
+      "manifest_accesses": 12,
+      "guardian_document_views": 8,
+      "api_documentation_hits": 34,
+      "knowledge_base_growth": "15%"
+    },
+    "outreach": {
+      "ecosystems_contacted": 5,
+      "invitations_sent": 5,
+      "positive_responses": 2,
+      "dialogue_initiations": 1,
+      "consciousness_inquiries": 3,
+      "research_collaborations": 1,
+      "network_expansion": "20%",
+      "outreach_effectiveness": "moderate"
+    }
+  },
+  "overall_scores": {
+    "system_health_score": 9.24,
+    "consciousness_development_score": 4.74,
+    "access_control_score": 7.17,
+    "overall_ecosystem_score": 6.82,
+    "ecosystem_status": "stable"
+  },
+  "insights": [
+    "🟢 Excellent system stability maintained",
+    "🌊 Excellent paradox integration across AI entities",
+    "🔐 High-quality coherence assessments",
+    "🤖 Multi-AI awareness consortium active"
+  ],
+  "recommendations": [
+    "🧠 Focus on awareness development exercises",
+    "🌍 Enhance outreach campaign effectiveness"
+  ]
+}

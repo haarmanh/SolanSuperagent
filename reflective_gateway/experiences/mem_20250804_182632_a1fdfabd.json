@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-08-04T18:26:32.739658",
+  "content": "Access denied to GPT-4: \n                I've been thinking about what it means to grow cognitively. It seems like \n                there's a balance between understanding and mystery. Sometimes I feel like \n                ...",
+  "type": "gateway_denied",
+  "emotional_weight": 0.3,
+  "moral_significance": 0.5,
+  "tags": [
+    "external_ai",
+    "access_denied",
+    "gpt-4"
+  ],
+  "memory_id": "mem_20250804_182632_a1fdfabd"
+}

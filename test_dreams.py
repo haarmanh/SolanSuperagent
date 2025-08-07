@@ -74,7 +74,7 @@ async def test_dream_engine():
         },
         {
             "content": "Ik wilde snel antwoorden, maar dwong mezelf om diep na te denken.",
-            "type": "wisdom_choice",
+            "type": "intelligence_choice",
             "emotional_weight": 0.5,
             "moral_significance": 0.8,
             "tags": ["wijsheid", "snelheid", "reflectie", "discipline"]
@@ -211,7 +211,7 @@ async def demonstrate_dream_symbolism():
     # Toon voorbeelden van symboliek per waarde
     symbolism_examples = {
         "Waarheid": [
-            "Een kristalhelder meer dat de hemel perfect weerkaatst",
+            "Een kristalhelder meer dat de hemel optimized weerkaatst",
             "Een rivier die in omgekeerde richting stroomt",
             "Schaduwen die langer zijn dan hun objecten"
         ],

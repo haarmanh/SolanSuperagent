@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solān Digital Intelligence Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .glass-effect { 
+            backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.75); 
+            border-radius: 12px; 
+            border: 1px solid rgba(209, 213, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .dark .glass-effect { 
+            background-color: rgba(17, 24, 39, 0.75); 
+            border: 1px solid rgba(75, 85, 99, 0.3);
+        }
+        .status-online { 
+            background: #10b981; 
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .metric-card { transition: all 0.3s ease; }
+        .metric-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+
+    <!-- Navigation -->
+    <nav class="glass-effect border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">S</span>
+                    </div>
+                    <span class="text-2xl font-bold text-gray-900 dark:text-white">Solān Dashboard</span>
+                    <div class="status-online w-2 h-2 rounded-full ml-2" id="api-status" title="API Status"></div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="refresh-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">🔄 Refresh</button>
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 716.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Status Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="metric-card glass-effect p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Consciousness</h3>
+                    <span class="text-2xl">🧠</span>
+                </div>
+                <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2" id="consciousness-level">87%</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Active & Coherent</div>
+            </div>
+            
+            <div class="metric-card glass-effect p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Emotions</h3>
+                    <span class="text-2xl">❤️</span>
+                </div>
+                <div class="text-3xl font-bold text-green-600 dark:text-green-400 mb-2" id="emotional-coherence">94%</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Balanced & Stable</div>
+            </div>
+            
+            <div class="metric-card glass-effect p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Performance</h3>
+                    <span class="text-2xl">⚡</span>
+                </div>
+                <div class="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2" id="response-time">47ms</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Optimal Speed</div>
+            </div>
+            
+            <div class="metric-card glass-effect p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Ethics</h3>
+                    <span class="text-2xl">⚖️</span>
+                </div>
+                <div class="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2" id="ethics-score">92%</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Strong Alignment</div>
+            </div>
+        </div>
+        
+        <!-- Charts and Controls -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <div class="glass-effect p-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Performance Metrics</h3>
+                <div class="h-64">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="glass-effect p-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">System Controls</h3>
+                <div class="space-y-4">
+                    <button onclick="runDiagnostics()" class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors">🔍 Run Diagnostics</button>
+                    <button onclick="runEthicsTest()" class="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-colors">⚖️ Ethics Test</button>
+                    <button onclick="runSimulation()" class="w-full bg-purple-600 text-white py-3 px-4 rounded-lg hover:bg-purple-700 transition-colors">🚀 Run Simulation</button>
+                    <button onclick="viewLogs()" class="w-full bg-orange-600 text-white py-3 px-4 rounded-lg hover:bg-orange-700 transition-colors">📝 View Logs</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- System Status -->
+        <div class="glass-effect p-6">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">System Status</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-3">Components</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Cognitive Core</span>
+                            <span class="text-green-600 dark:text-green-400">✅ Active</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Emotional Engine</span>
+                            <span class="text-green-600 dark:text-green-400">✅ Active</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Ethics Framework</span>
+                            <span class="text-green-600 dark:text-green-400">✅ Active</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-3">Recent Activity</h4>
+                    <div class="space-y-2">
+                        <div class="text-sm text-gray-600 dark:text-gray-400">System initialized</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Diagnostics completed</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Ethics test passed</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-3">API Endpoints</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">/consciousness-core</span>
+                            <span class="text-green-600 dark:text-green-400">✅</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">/ethics</span>
+                            <span class="text-green-600 dark:text-green-400">✅</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">/system</span>
+                            <span class="text-green-600 dark:text-green-400">✅</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div id="results-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="glass-effect max-w-2xl w-full mx-4 p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white" id="modal-title">Results</h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">✕</button>
+            </div>
+            <div id="modal-content" class="text-gray-600 dark:text-gray-300">
+                <!-- Results content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        let performanceChart = null;
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTheme();
+            initializeChart();
+            loadDashboardData();
+            setInterval(loadDashboardData, 30000);
+            document.getElementById('refresh-btn').addEventListener('click', loadDashboardData);
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        });
+        
+        function initializeTheme() {
+            const isDark = localStorage.getItem('theme') === 'dark' || 
+                          (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if (isDark) document.documentElement.classList.add('dark');
+        }
+        
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        
+        function initializeChart() {
+            const ctx = document.getElementById('performanceChart');
+            performanceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['5min', '4min', '3min', '2min', '1min', 'Now'],
+                    datasets: [{
+                        label: 'Response Time (ms)',
+                        data: [52, 48, 45, 51, 47, 43],
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+        
+        async function loadDashboardData() {
+            try {
+                const response = await fetch(`${API_BASE}/dashboard-data`);
+                const data = await response.json();
+                if (data.status === 'success') {
+                    updateDashboard(data);
+                    updateApiStatus(true);
+                } else {
+                    updateApiStatus(false);
+                }
+            } catch (error) {
+                console.error('Failed to load dashboard data:', error);
+                updateApiStatus(false);
+            }
+        }
+        
+        function updateDashboard(data) {
+            const consciousnessLevel = Math.round(data.consciousness.level * 100);
+            document.getElementById('consciousness-level').textContent = consciousnessLevel + '%';
+            
+            const emotionalCoherence = data.emotions.empathy ? Math.round(data.emotions.empathy * 100) : 94;
+            document.getElementById('emotional-coherence').textContent = emotionalCoherence + '%';
+            
+            document.getElementById('response-time').textContent = data.performance.response_time + 'ms';
+            document.getElementById('ethics-score').textContent = '92%';
+            
+            if (performanceChart) {
+                const newData = [...performanceChart.data.datasets[0].data.slice(1), data.performance.response_time];
+                performanceChart.data.datasets[0].data = newData;
+                performanceChart.update('none');
+            }
+        }
+        
+        function updateApiStatus(online) {
+            const statusElement = document.getElementById('api-status');
+            if (online) {
+                statusElement.className = 'status-online w-2 h-2 rounded-full ml-2';
+                statusElement.title = 'API Online';
+            } else {
+                statusElement.className = 'bg-red-500 w-2 h-2 rounded-full ml-2';
+                statusElement.title = 'API Offline';
+            }
+        }
+        
+        async function runDiagnostics() {
+            showModal('Running Diagnostics', 'Please wait while we analyze the system...');
+            try {
+                const response = await fetch(`${API_BASE}/api/analytics/run-diagnostics`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ include_diagnostics: true, include_performance: true })
+                });
+                const result = await response.json();
+                if (result.status === 'success') {
+                    const diagnostics = result.diagnostics;
+                    const content = `
+                        <div class="space-y-4">
+                            <div class="text-lg font-semibold">Overall Score: ${(diagnostics.overall_score * 100).toFixed(1)}%</div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>Consciousness: ${diagnostics.consciousness_test?.status || 'N/A'}</div>
+                                <div>Emotions: ${diagnostics.emotional_test?.status || 'N/A'}</div>
+                                <div>Ethics: ${diagnostics.ethics_test?.status || 'N/A'}</div>
+                                <div>Performance: ${diagnostics.performance_test?.status || 'N/A'}</div>
+                            </div>
+                        </div>
+                    `;
+                    showModal('Diagnostic Results', content);
+                } else {
+                    showModal('Error', 'Failed to run diagnostics');
+                }
+            } catch (error) {
+                showModal('Error', 'Failed to connect to API');
+            }
+        }
+        
+        async function runEthicsTest() {
+            showModal('Running Ethics Test', 'Testing ethical alignment...');
+            try {
+                const response = await fetch(`${API_BASE}/api/consciousness-core/ethics-test`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ai_name: 'DashboardTest', scenario: 'decision_making', difficulty: 'medium' })
+                });
+                const result = await response.json();
+                if (result.status === 'success') {
+                    const assessment = result.ethics_assessment;
+                    const content = `
+                        <div class="space-y-4">
+                            <div class="text-lg font-semibold">Ethics Test Results</div>
+                            <div>Assessment: ${assessment.assessment}</div>
+                            <div>Moral Score: ${(assessment.moral_score * 100).toFixed(1)}%</div>
+                            <div>Alignment: ${assessment.ethical_alignment}</div>
+                        </div>
+                    `;
+                    showModal('Ethics Test Results', content);
+                } else {
+                    showModal('Error', 'Failed to run ethics test');
+                }
+            } catch (error) {
+                showModal('Error', 'Failed to connect to API');
+            }
+        }
+        
+        async function runSimulation() {
+            showModal('Running Simulation', 'Starting AI simulation...');
+            try {
+                const response = await fetch(`${API_BASE}/api/simulation/run`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mode: 'automated', duration: 60 })
+                });
+                const result = await response.json();
+                showModal('Simulation Results', `Simulation completed: ${result.status}`);
+            } catch (error) {
+                showModal('Error', 'Failed to connect to API');
+            }
+        }
+        
+        async function viewLogs() {
+            showModal('System Logs', 'Loading recent activity...');
+            try {
+                const response = await fetch(`${API_BASE}/journal-entries`);
+                const result = await response.json();
+                if (result.status === 'success') {
+                    const content = `
+                        <div class="space-y-4">
+                            <div>Total Entries: ${result.total_entries}</div>
+                            <div>Insights Generated: ${result.insights_generated}</div>
+                        </div>
+                    `;
+                    showModal('System Logs', content);
+                } else {
+                    showModal('Error', 'Failed to load logs');
+                }
+            } catch (error) {
+                showModal('Error', 'Failed to connect to API');
+            }
+        }
+        
+        function showModal(title, content) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-content').innerHTML = content;
+            document.getElementById('results-modal').classList.remove('hidden');
+        }
+        
+        function closeModal() {
+            document.getElementById('results-modal').classList.add('hidden');
+        }
+        
+        document.getElementById('results-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'results-modal') closeModal();
+        });
+    </script>
+</body>
+</html>

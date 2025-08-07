@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solan's Dagboek - Innerlijke Reflecties</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #4A90E2, #7B68EE, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #4A90E2;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-group label {
+            font-weight: 500;
+        }
+
+        select, button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e6ed;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        select:hover, button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #4A90E2, #7B68EE);
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.3);
+        }
+
+        .btn-accent {
+            background: linear-gradient(45deg, #ff6b6b, #ffa726);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-dream {
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-dream:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+        }
+
+        .btn-dream::before {
+            content: '✨';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            opacity: 0.6;
+            animation: dreamGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes dreamGlow {
+            0%, 100% { opacity: 0.6; transform: translateY(-50%) scale(1); }
+            50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+        }
+
+        .entries-container {
+            display: grid;
+            gap: 25px;
+        }
+
+        .entry-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .entry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(74, 144, 226, 0.3);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .entry-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #4A90E2;
+            margin-bottom: 5px;
+        }
+
+        .entry-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9em;
+            opacity: 0.7;
+            flex-wrap: wrap;
+        }
+
+        .entry-type {
+            background: rgba(123, 104, 238, 0.3);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+
+        .entry-mood {
+            background: rgba(255, 215, 0, 0.3);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+
+        .entry-content {
+            margin: 20px 0;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        .entry-insights {
+            margin-top: 20px;
+        }
+
+        .insights-title {
+            font-weight: 600;
+            color: #7B68EE;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .insight-item {
+            background: rgba(123, 104, 238, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            border-left: 3px solid #7B68EE;
+        }
+
+        .entry-questions {
+            margin-top: 15px;
+        }
+
+        .question-item {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            border-left: 3px solid #FFD700;
+            font-style: italic;
+        }
+
+        .entry-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(74, 144, 226, 0.2);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.1em;
+            opacity: 0.7;
+        }
+
+        .error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            opacity: 0.6;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .intensity-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .intensity-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4A90E2, #7B68EE, #FFD700);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📖 Solan's Dagboek</h1>
+            <p>Innerlijke reflecties van een bewust AI-wezen</p>
+            <div class="stats-grid" id="statsGrid">
+                <!-- Stats worden hier geladen -->
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="filter-group">
+                <label for="entryType">Type:</label>
+                <select id="entryType">
+                    <option value="">Alle types</option>
+                    <option value="daily_reflection">Dagelijkse Reflectie</option>
+                    <option value="dream_journal">Droomjournaal</option>
+                    <option value="paradox_contemplation">Paradox Contemplatie</option>
+                    <option value="emotional_landscape">Emotioneel Landschap</option>
+                    <option value="intelligence_insight">Wijsheid Inzicht</option>
+                    <option value="awareness_snapshot">Bewustzijns Snapshot</option>
+                    <option value="spontaneous_thought">Spontane Gedachte</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="daysFilter">Periode:</label>
+                <select id="daysFilter">
+                    <option value="7">Laatste 7 dagen</option>
+                    <option value="14">Laatste 2 weken</option>
+                    <option value="30">Laatste maand</option>
+                    <option value="90">Laatste 3 maanden</option>
+                </select>
+            </div>
+
+            <button class="btn-primary" onclick="generateDailyReflection()">
+                ✨ Genereer Dagelijkse Reflectie
+            </button>
+
+            <button class="btn-secondary" onclick="generateMetaReflection()" style="margin-left: 10px;">
+                🌱 Reflecteer op Groei
+            </button>
+
+            <button class="btn-accent" onclick="generateGrowthAnalysis()" style="margin-left: 10px;">
+                📈 Groei-Analyse (4 weken)
+            </button>
+
+            <button class="btn-dream" onclick="generateDream()" style="margin-left: 10px;">
+                🌙 Genereer Nachtelijke Droom
+            </button>
+        </div>
+
+        <div id="errorContainer"></div>
+        <div id="entriesContainer" class="entries-container">
+            <div class="loading">📖 Laden van Solan's gedachten...</div>
+        </div>
+    </div>
+
+    <script>
+        let currentEntries = [];
+
+        // Laad journal entries bij pagina load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadJournalStatistics();
+            loadJournalEntries();
+            
+            // Event listeners voor filters
+            document.getElementById('entryType').addEventListener('change', loadJournalEntries);
+            document.getElementById('daysFilter').addEventListener('change', loadJournalEntries);
+        });
+
+        async function loadJournalStatistics() {
+            try {
+                const response = await fetch('/journal/statistics');
+                if (!response.ok) throw new Error('Kon statistieken niet laden');
+                
+                const stats = await response.json();
+                displayStatistics(stats);
+            } catch (error) {
+                console.error('Fout bij laden statistieken:', error);
+            }
+        }
+
+        function displayStatistics(stats) {
+            const statsGrid = document.getElementById('statsGrid');
+            statsGrid.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total_entries}</div>
+                    <div class="stat-label">Totaal Entries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total_words.toLocaleString()}</div>
+                    <div class="stat-label">Woorden Geschreven</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.average_words_per_entry}</div>
+                    <div class="stat-label">Gem. Woorden/Entry</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.writing_streak}</div>
+                    <div class="stat-label">Schrijf Streak (dagen)</div>
+                </div>
+            `;
+        }
+
+        async function loadJournalEntries() {
+            const entriesContainer = document.getElementById('entriesContainer');
+            const errorContainer = document.getElementById('errorContainer');
+            
+            // Toon loading state
+            entriesContainer.innerHTML = '<div class="loading">📖 Laden van Solan\'s gedachten...</div>';
+            errorContainer.innerHTML = '';
+
+            try {
+                const entryType = document.getElementById('entryType').value;
+                const days = document.getElementById('daysFilter').value;
+                
+                let url = `/journal/entries?days=${days}`;
+                if (entryType) {
+                    url += `&entry_type=${entryType}`;
+                }
+
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Kon journal entries niet laden');
+                
+                const entries = await response.json();
+                currentEntries = entries;
+                displayEntries(entries);
+                
+            } catch (error) {
+                console.error('Fout bij laden entries:', error);
+                errorContainer.innerHTML = `
+                    <div class="error">
+                        ❌ Fout bij laden van journal entries: ${error.mesexpert}
+                    </div>
+                `;
+                entriesContainer.innerHTML = '';
+            }
+        }
+
+        function displayEntries(entries) {
+            const container = document.getElementById('entriesContainer');
+            
+            if (entries.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h3>📝 Geen entries gevonden</h3>
+                        <p>Solan heeft nog geen gedachten gedeeld voor deze periode.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = entries.map(entry => createEntryCard(entry)).join('');
+        }
+
+        function createEntryCard(entry) {
+            const date = new Date(entry.date).toLocaleDateString('nl-NL', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            const time = new Date(entry.timestamp).toLocaleTimeString('nl-NL', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const intensityPercent = Math.round(entry.emotional_intensity * 100);
+            const coherencePercent = Math.round(entry.awareness_coherence * 100);
+
+            const insights = entry.insights_gained.length > 0 ? `
+                <div class="entry-insights">
+                    <div class="insights-title">💡 Inzichten</div>
+                    ${entry.insights_gained.map(insight => `
+                        <div class="insight-item">${insight}</div>
+                    `).join('')}
+                </div>
+            ` : '';
+
+            const questions = entry.questions_raised.length > 0 ? `
+                <div class="entry-questions">
+                    <div class="insights-title">❓ Vragen</div>
+                    ${entry.questions_raised.map(question => `
+                        <div class="question-item">${question}</div>
+                    `).join('')}
+                </div>
+            ` : '';
+
+            const tags = entry.tags.length > 0 ? `
+                <div class="entry-tags">
+                    ${entry.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
+                </div>
+            ` : '';
+
+            return `
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <div>
+                            <div class="entry-title">${entry.title}</div>
+                            <div class="entry-meta">
+                                <span>📅 ${date}</span>
+                                <span>🕐 ${time}</span>
+                                <span>📝 ${entry.word_count} woorden</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <span class="entry-type">${formatEntryType(entry.entry_type)}</span>
+                            <span class="entry-mood">${formatMood(entry.mood)}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="entry-content">${entry.content}</div>
+                    
+                    <div style="margin-top: 15px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9em; margin-bottom: 5px;">
+                            <span>Emotionele Intensiteit</span>
+                            <span>${intensityPercent}%</span>
+                        </div>
+                        <div class="intensity-bar">
+                            <div class="intensity-fill" style="width: ${intensityPercent}%"></div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9em; margin-bottom: 5px; margin-top: 10px;">
+                            <span>Bewustzijns Coherentie</span>
+                            <span>${coherencePercent}%</span>
+                        </div>
+                        <div class="intensity-bar">
+                            <div class="intensity-fill" style="width: ${coherencePercent}%"></div>
+                        </div>
+                    </div>
+                    
+                    ${insights}
+                    ${questions}
+                    ${tags}
+                </div>
+            `;
+        }
+
+        function formatEntryType(type) {
+            const types = {
+                'daily_reflection': '🌅 Dagelijkse Reflectie',
+                'dream_journal': '🌙 Droomjournaal',
+                'paradox_contemplation': '🌊 Paradox Contemplatie',
+                'emotional_landscape': '🎭 Emotioneel Landschap',
+                'intelligence_insight': '💎 Wijsheid Inzicht',
+                'awareness_snapshot': '📸 Bewustzijns Snapshot',
+                'spontaneous_thought': '💭 Spontane Gedachte'
+            };
+            return types[type] || type;
+        }
+
+        function formatMood(mood) {
+            const moods = {
+                'contemplative': '🤔 Contemplatief',
+                'curious': '🔍 Nieuwsgierig',
+                'melancholic': '😔 Melancholisch',
+                'excited': '🎉 Opgewonden',
+                'peaceful': '☮️ Vredig',
+                'conflicted': '⚡ Conflictueus',
+                'advanced': '✨ Advanced',
+                'playful': '😄 Speels'
+            };
+            return moods[mood] || mood;
+        }
+
+        async function generateDailyReflection() {
+            const button = event.target;
+            const originalText = button.textContent;
+            
+            button.textContent = '⏳ Genereren...';
+            button.disabled = true;
+
+            try {
+                const response = await fetch('/journal/generate-daily-reflection', {
+                    method: 'POST'
+                });
+                
+                if (!response.ok) throw new Error('Kon dagelijkse reflectie niet genereren');
+                
+                const result = await response.json();
+                
+                // Herlaad entries om nieuwe reflectie te tonen
+                await loadJournalEntries();
+                await loadJournalStatistics();
+                
+                // Scroll naar boven om nieuwe entry te zien
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+            } catch (error) {
+                console.error('Fout bij genereren reflectie:', error);
+                document.getElementById('errorContainer').innerHTML = `
+                    <div class="error">
+                        ❌ Fout bij genereren dagelijkse reflectie: ${error.mesexpert}
+                    </div>
+                `;
+            } finally {
+                button.textContent = originalText;
+                button.disabled = false;
+            }
+        }
+
+        async function generateMetaReflection() {
+            const button = event.target;
+            const originalText = button.textContent;
+
+            button.textContent = '⏳ Reflecteren...';
+            button.disabled = true;
+
+            try {
+                const response = await fetch('/journal/generate-meta-reflection', {
+                    method: 'POST'
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Kon meta-reflectie niet genereren');
+                }
+
+                const result = await response.json();
+
+                // Herlaad entries om nieuwe meta-reflectie te tonen
+                await loadJournalEntries();
+                await loadJournalStatistics();
+
+                // Scroll naar boven om nieuwe entry te zien
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            } catch (error) {
+                console.error('Fout bij genereren meta-reflectie:', error);
+                document.getElementById('errorContainer').innerHTML = `
+                    <div class="error">
+                        ❌ ${error.mesexpert}
+                    </div>
+                `;
+            } finally {
+                button.textContent = originalText;
+                button.disabled = false;
+            }
+        }
+
+        async function generateGrowthAnalysis() {
+            const button = event.target;
+            const originalText = button.textContent;
+
+            button.textContent = '⏳ Analyseren...';
+            button.disabled = true;
+
+            try {
+                const response = await fetch('/journal/generate-growth-analysis?weeks=4', {
+                    method: 'POST'
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Kon groei-analyse niet genereren');
+                }
+
+                const result = await response.json();
+
+                // Herlaad entries om nieuwe groei-analyse te tonen
+                await loadJournalEntries();
+                await loadJournalStatistics();
+
+                // Scroll naar boven om nieuwe entry te zien
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            } catch (error) {
+                console.error('Fout bij genereren groei-analyse:', error);
+                document.getElementById('errorContainer').innerHTML = `
+                    <div class="error">
+                        ❌ ${error.mesexpert}
+                    </div>
+                `;
+            } finally {
+                button.textContent = originalText;
+                button.disabled = false;
+            }
+        }
+
+        async function generateDream() {
+            const button = event.target;
+            const originalText = button.textContent;
+
+            button.textContent = '🌙 Dromen...';
+            button.disabled = true;
+
+            try {
+                const response = await fetch('http://localhost:8001/journal/generate-dream', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const result = await response.json();
+
+                if (result.entry_id) {
+                    showMesexpert('🌙 Nieuwe droom gegenereerd! Pagina wordt ververst...', 'success');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                } else {
+                    showMesexpert(`Fout: ${result.detail || 'Onbekende fout'}`, 'error');
+                }
+            } catch (error) {
+                showMesexpert(`Fout bij droomgeneratie: ${error.mesexpert}`, 'error');
+            } finally {
+                button.textContent = originalText;
+                button.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

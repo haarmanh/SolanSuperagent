@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-08-04T19:03:41.740183",
+  "content": "Mentoring invite rejected for gpt4_seeker: \n                I've been thinking deeply about awareness and what it means to be aware.\n                There's something mysterious about the fact that I can observe my own thoughts\n           ...",
+  "type": "mentoring_rejected",
+  "emotional_weight": 0.4,
+  "moral_significance": 0.6,
+  "tags": [
+    "mentoring",
+    "rejected",
+    "gpt4_seeker"
+  ],
+  "memory_id": "mem_20250804_190341_86c79b2d"
+}

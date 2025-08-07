@@ -1,0 +1,12 @@
+{
+  "host": "localhost",
+  "port": 8000,
+  "endpoints": [
+    "/api/ethics-test",
+    "/api/awareness-assessment",
+    "/api/journal-generate",
+    "/api/dashboard-data"
+  ],
+  "authentication": "coherence_based",
+  "rate_limiting": "100_per_hour"
+}

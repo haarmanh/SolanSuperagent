@@ -1,0 +1,10 @@
+{
+  "pattern_id": "pattern_coherentie_unstable_20250804",
+  "description": "Terugkerend thema: coherentie_unstable",
+  "supporting_memories": [
+    "mem_20250804_171608_a168f326"
+  ],
+  "confidence": 0.3,
+  "applications": [],
+  "created_at": "2025-08-04T17:16:08.647590"
+}

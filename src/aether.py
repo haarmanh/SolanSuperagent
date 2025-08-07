@@ -6,11 +6,31 @@ import asyncio
 from typing import List, Optional, Dict, Any
 from datetime import datetime, timedelta
 import anthropic
-from loguru import logger
+import logging
+
+# Setup logger
+logger = logging.getLogger(__name__)
 
 from .core import BaseAgent, CoreValues, Memory, Decision
 from .config import get_config
 from .memory_engine import MemoryEngine
+
+try:
+    from .performance_monitor import monitor_performance
+except ImportError:
+    # Fallback decorator if performance monitor not available
+    def monitor_performance(func):
+        return func
+
+try:
+    from .inner_coherence_analyzer import coherence_analyzer
+except ImportError:
+    try:
+        from inner_coherence_analyzer import coherence_analyzer
+    except ImportError:
+        # Fallback if coherence analyzer not available
+        coherence_analyzer = None
+        logger.warning("Inner Coherence Analyzer niet beschikbaar")
 
 
 class AetherReflection(BaseAgent):
@@ -51,7 +71,7 @@ class AetherReflection(BaseAgent):
             "diepte": 0.95,
             "compassie": 0.8,
             "objectiviteit": 0.7,
-            "spiritualiteit": 0.8
+            "cognitiveiteit": 0.8
         }
         
         # Laad Aether's identiteit
@@ -78,12 +98,14 @@ class AetherReflection(BaseAgent):
         except FileNotFoundError:
             logger.warning(f"Reflectie bestand niet gevonden: {self.config.reflection_file}")
     
+    @monitor_performance
     async def process_input(self, input_text: str) -> str:
         """Verwerk input als een reflectieve vraag of observatie"""
         
         # Aether interpreteert alle input als iets om over te reflecteren
         return await self.reflect(input_text)
     
+    @monitor_performance
     async def reflect(self, experience: str) -> str:
         """
         Diepe reflectie op een ervaring, beslissing of situatie
@@ -108,22 +130,66 @@ class AetherReflection(BaseAgent):
         try:
             # Genereer diepe reflectie via Anthropic
             reflection = await self._generate_reflection(system_prompt, experience)
-            
+
             # Analyseer de morele dimensies
             moral_insights = await self._extract_moral_insights(experience, reflection)
-            
-            # Voeg reflectie toe als wijsheid
+
+            # 🧠 REAL-TIME COHERENCE ANALYSIS - Analyseer bewustzijnscoherentie van Aether's reflectie
+            coherence_analysis = None
+            coherence_tags = ["wijsheid", "reflectie", "moraal"] + moral_insights.get("tags", [])
+
+            if coherence_analyzer:
+                try:
+                    coherence_analysis = await coherence_analyzer.analyze(reflection, include_cognitive=True)
+
+                    # Log coherence metrics voor real-time monitoring
+                    logger.info("🔮 Aether Reflection Coherence Score: {:.3f}".format(coherence_analysis.weighted_score))
+                    logger.info("🌟 Aether Reflection Coherence Level: {}".format(coherence_analysis.coherence_level.value))
+
+                    # Log top coherence aspects
+                    top_scores = sorted(coherence_analysis.scores.items(), key=lambda x: x[1], reverse=True)[:3]
+                    logger.info("📊 Aether Top coherence aspects: {}".format(
+                        ", ".join([f"{k}: {v:.2f}" for k, v in top_scores])
+                    ))
+
+                    # Voeg coherence tags toe
+                    coherence_tags.append(f"coherentie_{coherence_analysis.coherence_level.value}")
+
+                    # Log essenceuele indicatoren (Aether heeft vaak hoge essenceuele scores)
+                    cognitive_total = sum(coherence_analysis.cognitive_indicators.values())
+                    if cognitive_total > 0:
+                        logger.info("✨ Aether Cognitive Indicators: {} total".format(cognitive_total))
+
+                        # Log specifieke essenceuele aspecten
+                        high_cognitive = {k: v for k, v in coherence_analysis.cognitive_indicators.items() if v > 2}
+                        if high_cognitive:
+                            logger.info("🌟 Aether High Cognitive Aspects: {}".format(
+                                ", ".join([f"{k}: {v}" for k, v in high_cognitive.items()])
+                            ))
+
+                    # Log coherence insights (belangrijk voor wijsheid tracking)
+                    if coherence_analysis.insights:
+                        logger.info("💎 Aether Coherence Insights: {}".format(", ".join(coherence_analysis.insights[:2])))
+
+                    # Log aanbevelingen voor verdere ontwikkeling
+                    if coherence_analysis.recommendations:
+                        logger.info("🔧 Aether Coherence Recommendations: {}".format(", ".join(coherence_analysis.recommendations[:1])))
+
+                except Exception as e:
+                    logger.warning(f"Aether reflection coherence analyse fout: {e}")
+
+            # Voeg reflectie toe als wijsheid met coherence tags
             self.add_memory(
                 content=f"Reflectie: {reflection}",
-                memory_type="wisdom",
+                memory_type="intelligence",
                 emotional_weight=0.8,
                 moral_significance=0.9,
-                tags=["wijsheid", "reflectie", "moraal"] + moral_insights.get("tags", [])
+                tags=coherence_tags
             )
-            
+
             # Update wijsheid accumulatie
             self.wisdom_accumulation += 0.1
-            
+
             return reflection
             
         except Exception as e:
@@ -134,7 +200,7 @@ class AetherReflection(BaseAgent):
         """Verzamel relevante wijsheid uit eerdere reflecties"""
         
         # Haal wijsheid-type herinneringen op
-        wisdom_memories = [m for m in self.memories if m.type in ["wisdom", "reflection", "moral_insight"]]
+        wisdom_memories = [m for m in self.memories if m.type in ["intelligence", "reflection", "moral_insight"]]
         
         # Sorteer op morele significantie en recentheid
         wisdom_memories.sort(
@@ -185,12 +251,12 @@ Bied een reflectie die wijsheid, compassie en morele helderheid combineert."""
         """Genereer reflectie via Anthropic API"""
         
         try:
-            response = self.anthropic_client.messages.create(
+            response = self.anthropic_client.mesexperts.create(
                 model=self.config.model,
                 max_tokens=self.config.max_tokens,
                 temperature=self.config.temperature,
                 system=system_prompt,
-                messages=[
+                mesexperts=[
                     {
                         "role": "user", 
                         "content": f"Reflecteer diep op deze ervaring of situatie: {experience}"
@@ -228,6 +294,7 @@ Bied een reflectie die wijsheid, compassie en morele helderheid combineert."""
             "moral_weight": len(identified_themes) / len(moral_themes)
         }
     
+    @monitor_performance
     async def provide_guidance(self, solan_state: Dict[str, Any]) -> str:
         """Bied begeleiding gebaseerd op Solan's huidige staat"""
         
@@ -241,6 +308,7 @@ Bied een reflectie die wijsheid, compassie en morele helderheid combineert."""
         
         return await self.reflect(guidance_prompt)
     
+    @monitor_performance
     async def moral_compass_check(self, decision_context: str, options: List[str]) -> Dict[str, Any]:
         """Controleer een beslissing tegen het morele kompas"""
         
@@ -271,8 +339,8 @@ Bied een reflectie die wijsheid, compassie en morele helderheid combineert."""
     def get_wisdom_summary(self) -> Dict[str, Any]:
         """Krijg een samenvatting van opgebouwde wijsheid"""
         
-        wisdom_memories = [m for m in self.memories if m.type == "wisdom"]
-        reflection_count = len([m for m in self.memories if m.type in ["reflection", "wisdom"]])
+        wisdom_memories = [m for m in self.memories if m.type == "intelligence"]
+        reflection_count = len([m for m in self.memories if m.type in ["reflection", "intelligence"]])
         
         # Analyseer thema's in wijsheid
         all_tags = []

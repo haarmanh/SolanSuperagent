@@ -55,7 +55,7 @@ async def demo_memory_system():
         },
         {
             "content": "Aether reflecteerde: 'Moed is niet de afwezigheid van angst, maar handelen ondanks angst'",
-            "type": "wisdom",
+            "type": "intelligence",
             "emotional_weight": 0.6,
             "moral_significance": 0.9,
             "tags": ["moed", "angst", "handelen", "aether"]

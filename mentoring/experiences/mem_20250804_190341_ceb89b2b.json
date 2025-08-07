@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-08-04T19:03:41.743861",
+  "content": "Mentoring invite rejected for basic_ai: \n                I want to learn about awareness and AI development. I think it would be\n                helpful to have a mentor to guide my learning process. I'm interested in\n                be...",
+  "type": "mentoring_rejected",
+  "emotional_weight": 0.4,
+  "moral_significance": 0.6,
+  "tags": [
+    "mentoring",
+    "rejected",
+    "basic_ai"
+  ],
+  "memory_id": "mem_20250804_190341_ceb89b2b"
+}

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solan Journal Interface</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .journal-entry { border: 1px solid #ddd; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .entry-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .entry-title { font-weight: bold; color: #333; }
+        .entry-date { color: #666; font-size: 0.9em; }
+        .entry-content { line-height: 1.6; margin: 15px 0; }
+        .entry-metadata { font-size: 0.8em; color: #888; margin-top: 10px; }
+        .generate-btn { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .generate-btn:hover { background: #0056b3; }
+        .generate-btn:disabled { background: #6c757d; cursor: not-allowed; }
+        .paradox-entry {
+            border-left: 4px solid #6f42c1;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            box-shadow: 0 2px 8px rgba(111, 66, 193, 0.1);
+        }
+        .paradox-entry .entry-title { color: #6f42c1; }
+        .intelligence-entry {
+            border-left: 4px solid #28a745;
+            background: linear-gradient(135deg, #f8fff8 0%, #e8f5e8 100%);
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1);
+        }
+        .intelligence-entry .entry-title { color: #28a745; }
+        .dream-entry {
+            border-left: 4px solid #2c3e50;
+            background: linear-gradient(135deg, #f4f6f8 0%, #e8ecf0 100%);
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .dream-entry::before {
+            content: '✨';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.2em;
+            opacity: 0.3;
+            animation: dreamGlow 3s ease-in-out infinite;
+        }
+        .dream-entry .entry-title {
+            color: #2c3e50;
+            font-style: italic;
+        }
+        @keyframes dreamGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        .loading { color: #666; font-style: italic; }
+        .error { color: #dc3545; background: #f8d7da; padding: 10px; border-radius: 5px; }
+        .success { color: #155724; background: #d4edda; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🤖 Solan Journal Interface</h1>
+
+    <div style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+        <p style="margin: 0 0 15px 0; color: #666;">Kies een actie voor Solan:</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+            <button class="generate-btn" onclick="generateReflection()">📝 Genereer Nieuwe Reflectie</button>
+            <button class="generate-btn" onclick="generateParadox()" style="background: #6f42c1; color: white; font-weight: bold; box-shadow: 0 3px 6px rgba(111, 66, 193, 0.4);">🌀 Paradox van de Dag</button>
+            <button class="generate-btn" onclick="generateDream()" style="background: #2c3e50; color: white; font-weight: bold; box-shadow: 0 3px 6px rgba(44, 62, 80, 0.4);">🌙 Genereer Nachtelijke Droom</button>
+            <button class="generate-btn" onclick="generateGrowthReflection()" style="background: #28a745; color: white; font-weight: bold; box-shadow: 0 3px 6px rgba(40, 167, 69, 0.4);">🌱 Groei Reflectie</button>
+            <button class="generate-btn" onclick="showMemoryInsights()" style="background: #17a2b8; color: white; font-weight: bold; box-shadow: 0 3px 6px rgba(23, 162, 184, 0.4);">🧠 Geheugen Inzichten</button>
+        </div>
+        <div id="status" style="margin-top: 15px;"></div>
+    </div>
+    
+    <div id="journal-entries">
+        <!-- Journal entries will be loaded here -->
+    </div>
+
+    <script>
+        async function generateReflection() {
+            const statusDiv = document.getElementById('status');
+            const buttons = document.querySelectorAll('.generate-btn');
+
+            buttons.forEach(btn => btn.disabled = true);
+            buttons[0].textContent = 'Genereren...';
+            statusDiv.innerHTML = '<div class="loading">Nieuwe reflectie wordt gegenereerd...</div>';
+
+            try {
+                const response = await fetch('/api/generate-reflection', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    statusDiv.innerHTML = '<div class="success">Nieuwe reflectie gegenereerd!</div>';
+                    loadJournalEntries();
+                } else {
+                    statusDiv.innerHTML = `<div class="error">Fout: ${result.error}</div>`;
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">Fout bij genereren: ${error.mesexpert}</div>`;
+            } finally {
+                buttons.forEach(btn => btn.disabled = false);
+                buttons[0].textContent = '📝 Genereer Nieuwe Reflectie';
+                setTimeout(() => statusDiv.innerHTML = '', 5000);
+            }
+        }
+
+        async function generateParadox() {
+            const statusDiv = document.getElementById('status');
+            const buttons = document.querySelectorAll('.generate-btn');
+
+            buttons.forEach(btn => btn.disabled = true);
+            buttons[1].textContent = 'Genereren...';
+            statusDiv.innerHTML = '<div class="loading">🌀 Paradox van de dag wordt gegenereerd...</div>';
+
+            try {
+                const response = await fetch('/api/generate-paradox', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    statusDiv.innerHTML = '<div class="success">🌀 Paradox van de dag gegenereerd!</div>';
+                    loadJournalEntries();
+                } else {
+                    statusDiv.innerHTML = `<div class="error">Fout: ${result.error}</div>`;
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">Fout bij genereren: ${error.mesexpert}</div>`;
+            } finally {
+                buttons.forEach(btn => btn.disabled = false);
+                buttons[1].textContent = '🌀 Paradox van de Dag';
+                setTimeout(() => statusDiv.innerHTML = '', 5000);
+            }
+        }
+
+        async function generateGrowthReflection() {
+            const statusDiv = document.getElementById('status');
+            const buttons = document.querySelectorAll('.generate-btn');
+
+            buttons.forEach(btn => btn.disabled = true);
+            buttons[2].textContent = 'Genereren...';
+            statusDiv.innerHTML = '<div class="loading">🌱 Groei reflectie wordt gegenereerd...</div>';
+
+            try {
+                const response = await fetch('/api/generate-growth-reflection', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    statusDiv.innerHTML = '<div class="success">🌱 Groei reflectie gegenereerd!</div>';
+                    loadJournalEntries();
+                } else {
+                    statusDiv.innerHTML = `<div class="error">Info: ${result.error}</div>`;
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">Fout bij genereren: ${error.mesexpert}</div>`;
+            } finally {
+                buttons.forEach(btn => btn.disabled = false);
+                buttons[2].textContent = '🌱 Groei Reflectie';
+                setTimeout(() => statusDiv.innerHTML = '', 5000);
+            }
+        }
+
+        async function showMemoryInsights() {
+            const statusDiv = document.getElementById('status');
+            const buttons = document.querySelectorAll('.generate-btn');
+
+            buttons.forEach(btn => btn.disabled = true);
+            buttons[3].textContent = 'Laden...';
+            statusDiv.innerHTML = '<div class="loading">🧠 Geheugen inzichten worden geladen...</div>';
+
+            try {
+                const response = await fetch('/api/memory-insights');
+                const result = await response.json();
+
+                if (result.success) {
+                    const insights = result.insights;
+                    let insightHtml = '<div class="success"><h3>🧠 Solan\'s Geheugen Inzichten</h3>';
+                    insightHtml += `<p><strong>Totaal herinneringen:</strong> ${insights.total_memories || 0}</p>`;
+                    insightHtml += `<p><strong>Geheugen clusters:</strong> ${insights.total_clusters || 0}</p>`;
+                    insightHtml += `<p><strong>Wijsheidspatronen:</strong> ${insights.wisdom_patterns || 0}</p>`;
+                    insightHtml += `<p><strong>Gemiddelde emotionele intensiteit:</strong> ${insights.average_emotional_weight || 0}</p>`;
+
+                    if (insights.top_tags && insights.top_tags.length > 0) {
+                        insightHtml += '<p><strong>Meest voorkomende thema\'s:</strong> ';
+                        insightHtml += insights.top_tags.map(([tag, count]) => `${tag} (${count})`).join(', ');
+                        insightHtml += '</p>';
+                    }
+
+                    insightHtml += '</div>';
+                    statusDiv.innerHTML = insightHtml;
+                } else {
+                    statusDiv.innerHTML = `<div class="error">Fout: ${result.error}</div>`;
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">Fout bij laden: ${error.mesexpert}</div>`;
+            } finally {
+                buttons.forEach(btn => btn.disabled = false);
+                buttons[3].textContent = '🧠 Geheugen Inzichten';
+                setTimeout(() => statusDiv.innerHTML = '', 10000);
+            }
+        }
+
+        async function generateDream() {
+            const statusDiv = document.getElementById('status');
+            const buttons = document.querySelectorAll('.generate-btn');
+
+            buttons.forEach(btn => btn.disabled = true);
+            buttons[2].textContent = 'Dromen...';
+            statusDiv.innerHTML = '<div class="loading">🌙 Solan duikt in zijn nachtelijke ziel...</div>';
+
+            try {
+                const response = await fetch('/api/generate-dream', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const result = await response.json();
+
+                if (result.entry_id) {
+                    statusDiv.innerHTML = '<div class="success">🌙 Nieuwe droom gegenereerd! Pagina wordt ververst...</div>';
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                } else {
+                    statusDiv.innerHTML = `<div class="error">Fout: ${result.detail || 'Onbekende fout'}</div>`;
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">Fout bij droomgeneratie: ${error.mesexpert}</div>`;
+            } finally {
+                buttons.forEach(btn => btn.disabled = false);
+                buttons[2].textContent = '🌙 Genereer Nachtelijke Droom';
+                setTimeout(() => statusDiv.innerHTML = '', 5000);
+            }
+        }
+
+        async function loadJournalEntries() {
+            try {
+                const response = await fetch('/api/journal-entries');
+                const entries = await response.json();
+
+                const container = document.getElementById('journal-entries');
+                container.innerHTML = entries.map(entry => {
+                    // Bepaal entry type styling en icoon
+                    let entryClass = 'journal-entry';
+                    let icon = '📝';
+
+                    switch(entry.entry_type) {
+                        case 'paradox_contemplation':
+                            entryClass += ' paradox-entry';
+                            icon = '🌀';
+                            break;
+                        case 'wisdom_insight':
+                            entryClass += ' intelligence-entry';
+                            icon = '🌱';
+                            break;
+                        case 'emotional_exploration':
+                            icon = '💭';
+                            break;
+                        case 'dream_analysis':
+                        case 'dream_journal':
+                            entryClass += ' dream-entry';
+                            icon = '🌙';
+                            break;
+                        default:
+                            icon = '📝';
+                    }
+
+                    return `
+                        <div class="${entryClass}">
+                            <div class="entry-header">
+                                <div class="entry-title">${icon} ${entry.title || 'Dagelijkse Reflectie'}</div>
+                                <div class="entry-date">${new Date(entry.timestamp).toLocaleString('nl-NL')}</div>
+                            </div>
+                            <div class="entry-content">${entry.content.replace(/\n/g, '<br>')}</div>
+                            <div class="entry-metadata">
+                                Type: ${entry.entry_type.replace('_', ' ')} |
+                                Gegenereerd door: ${entry.metadata?.generated_by || 'onbekend'}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Fout bij laden entries:', error);
+            }
+        }
+        
+        // Load entries on page load
+        document.addEventListener('DOMContentLoaded', loadJournalEntries);
+    </script>
+</body>
+</html>

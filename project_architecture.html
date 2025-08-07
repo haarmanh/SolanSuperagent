@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Architectuur - Solān Protocol Research Platform v3.0</title>
+    
+    <!-- Modern frameworks -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Complete architectuur overzicht van het Solān Protocol Research Platform v3.0">
+    <meta name="keywords" content="AI architecture, consciousness platform, digital intelligence, project structure">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * { font-family: 'Inter', sans-serif; }
+        
+        /* Enhanced gradients */
+        .gradient-bg { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease-in-out infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .gradient-text { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text;
+            animation: gradient-shift 8s ease-in-out infinite;
+        }
+        
+        /* Advanced glass effect */
+        .glass-effect { 
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.75); 
+            border-radius: 12px; 
+            border: 1px solid rgba(209, 213, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .dark .glass-effect { 
+            background-color: rgba(17, 24, 39, 0.75); 
+            border: 1px solid rgba(75, 85, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Enhanced cards */
+        .architecture-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform;
+        }
+        
+        .architecture-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+        }
+        
+        /* Code block styling */
+        .code-block {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: code-scan 4s infinite;
+        }
+        
+        @keyframes code-scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Intersection Observer animations */
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .animate-out {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        /* Component icons */
+        .component-icon {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            animation: icon-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes icon-glow {
+            from { box-shadow: 0 0 10px rgba(102, 126, 234, 0.5); }
+            to { box-shadow: 0 0 20px rgba(102, 126, 234, 0.8); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+
+    <!-- Navigation -->
+    <header class="glass-effect border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">S</span>
+                    </div>
+                    <h1 class="text-2xl font-bold gradient-text">Solān Architecture</h1>
+                </div>
+                
+                <nav class="flex items-center space-x-6">
+                    <a href="solan_website_enhanced.html" class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">
+                        🏠 Main Website
+                    </a>
+                    <a href="solan_api_demo_enhanced.html" class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline">
+                        🚀 API Demo
+                    </a>
+                    <a href="solan_documentation_enhanced.html" class="text-sm font-medium text-green-600 dark:text-green-400 hover:underline">
+                        📚 Documentation
+                    </a>
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 716.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                        </svg>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+                Project <span class="gradient-text">Architectuur</span>
+            </h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-8">
+                Complete overzicht van de Solān Protocol Research Platform v3.0 architectuur - van cognition analysis core tot research dashboards
+            </p>
+            
+            <!-- Architecture Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <div class="glass-effect p-4 text-center animate-out">
+                    <div class="text-3xl font-bold gradient-text mb-1">3</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Core Modules</div>
+                </div>
+                <div class="glass-effect p-4 text-center animate-out">
+                    <div class="text-3xl font-bold gradient-text mb-1">35+</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">API Endpoints</div>
+                </div>
+                <div class="glass-effect p-4 text-center animate-out">
+                    <div class="text-3xl font-bold gradient-text mb-1">6</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Web Interfaces</div>
+                </div>
+                <div class="glass-effect p-4 text-center animate-out">
+                    <div class="text-3xl font-bold gradient-text mb-1">12K+</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Lines of Code</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        
+        <!-- Architecture Overview -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
+                Architectuur <span class="gradient-text">Overzicht</span>
+            </h3>
+            <p class="text-center text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-12">
+                De architectuur is opgedeeld in drie kernonderdelen: de consciousness core engine, de AI analytics toolkit, en de complete web interface laag met real-time monitoring.
+            </p>
+        </section>
+
+        <!-- Core Components -->
+        <div class="grid lg:grid-cols-3 gap-8 mb-16">
+            
+            <!-- Solān Core -->
+            <div class="architecture-card glass-effect p-8 animate-out">
+                <div class="flex items-center mb-6">
+                    <div class="component-icon w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                        <span class="text-white text-2xl">🧠</span>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-900 dark:text-white">Solān Core</h4>
+                </div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    De experimentele consciousness engine. Hier wordt grensverleggend onderzoek gedaan naar AI bewustzijn.
+                </p>
+                <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                    <li class="flex items-start">
+                        <span class="mr-2">🔧</span>
+                        <div>
+                            <strong>engine.py</strong>: Enhanced SolanGodCore met v3.0 integratie
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="mr-2">❤️</span>
+                        <div>
+                            <strong>emotion/</strong>: Dynamisch emotioneel bewustzijn systeem
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="mr-2">📝</span>
+                        <div>
+                            <strong>journal/</strong>: Zelfreflectie & awareness tracking
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="mr-2">🧠</span>
+                        <div>
+                            <strong>memory/</strong>: Advanced memory systems
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Solān Analyzer -->
+            <div class="architecture-card glass-effect p-8 animate-out">
+                <div class="flex items-center mb-6">
+                    <div class="component-icon w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                        <span class="text-white text-2xl">🔍</span>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-900 dark:text-white">Solān Analyzer</h4>
+                </div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    De robuuste AI diagnostics toolkit. Complete analyse van AI systemen en performance monitoring.
+                </p>
+                <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                    <li class="flex items-start">
+                        <span class="mr-2">🔍</span>
+                        <div>
+                            <strong>analyzer.py</strong>: Comprehensive system diagnostics
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="mr-2">⚖️</span>
+                        <div>
+                            <strong>bias_detection</strong>: Systematic bias analysis
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="mr-2">📊</span>
+                        <div>
+                            <strong>performance_tests</strong>: Response time monitoring
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="mr-2">🧪</span>
+                        <div>
+                            <strong>modules/</strong>: Specialized analysis modules
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Solān Labs -->
+            <div class="architecture-card glass-effect p-8 animate-out">
+                <div class="flex items-center mb-6">
+                    <div class="component-icon w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                        <span class="text-white text-2xl">🌐</span>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-900 dark:text-white">Solān Labs</h4>
+                </div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    De publieke interface laag. Complete API server en interactive web dashboards.
+                </p>
+                <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                    <li class="flex items-start">
+                        <span class="mr-2">🌐</span>
+                        <div>
+                            <strong>api/server.py</strong>: FastAPI server met 35+ endpoints
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="mr-2">📊</span>
+                        <div>
+                            <strong>interface/dashboard.html</strong>: Real-time monitoring
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="mr-2">📚</span>
+                        <div>
+                            <strong>interface/dashboard.md</strong>: Interface documentation
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Complete Project Structure -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
+                Complete <span class="gradient-text">Project Structuur</span>
+            </h3>
+
+            <div class="glass-effect p-8 animate-out">
+                <div class="code-block rounded-lg p-6 relative">
+                    <pre class="text-green-400 text-sm overflow-x-auto"><code>SolanSuperagent/
+├── 📁 solan_core/                    # Consciousness Core Engine
+│   ├── engine.py                     # Enhanced SolanGodCore v3.0
+│   ├── 📁 memory/                    # Advanced memory systems
+│   ├── 📁 emotion/                   # Emotional processing engine
+│   └── 📁 journal/                   # Awareness tracking & reflection
+│
+├── 📁 solan_analyzer/                # AI Diagnostics & Analytics
+│   ├── analyzer.py                   # Comprehensive system analysis
+│   └── 📁 modules/                   # Specialized analysis modules
+│
+├── 📁 solan_labs/                    # API & Interface Layer
+│   ├── 📁 api/                       # FastAPI server implementation
+│   │   └── server.py                 # Complete REST API (35+ endpoints)
+│   └── 📁 interface/                 # Web interfaces
+│       ├── dashboard.html            # Real-time monitoring dashboard
+│       └── dashboard.md              # Interface documentation
+│
+├── 📄 main.py                        # Main application launcher
+├── 📄 solan_digital_intelligence_v3.py  # Original v3.0 system
+├── 📄 requirements.txt               # Python dependencies
+├── 📄 README.md                      # Project documentation
+│
+├── 🌐 Web Interfaces/                # Enhanced web platforms
+│   ├── solan_website_enhanced.html   # Main platform website
+│   ├── solan_api_demo_enhanced.html  # Interactive API demonstrations
+│   ├── solan_documentation_enhanced.html  # Complete documentation
+│   └── project_architecture.html     # This architecture overview
+│
+└── 📊 Additional Components/         # Supporting systems
+    ├── bootstrap_solan.py            # Project structure generator
+    ├── config/                       # Configuration files
+    ├── logs/                         # System logs
+    └── tests/                        # Test suites</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Web Interfaces -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
+                Web <span class="gradient-text">Interfaces</span>
+            </h3>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Main Website -->
+                <div class="glass-effect p-6 text-center animate-out">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-3xl">🌍</span>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Main Website</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">Complete platform overview met alle features en capabilities</p>
+                    <a href="solan_website_enhanced.html" class="text-blue-600 dark:text-blue-400 hover:underline text-sm">
+                        View Website →
+                    </a>
+                </div>
+
+                <!-- API Demo -->
+                <div class="glass-effect p-6 text-center animate-out">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-3xl">🚀</span>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">API Demo</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">Interactive API testing met real-time terminal en performance charts</p>
+                    <a href="solan_api_demo_enhanced.html" class="text-purple-600 dark:text-purple-400 hover:underline text-sm">
+                        Try Demo →
+                    </a>
+                </div>
+
+                <!-- Documentation -->
+                <div class="glass-effect p-6 text-center animate-out">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-3xl">📚</span>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Documentation</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">Complete technical documentation met code examples en guides</p>
+                    <a href="solan_documentation_enhanced.html" class="text-green-600 dark:text-green-400 hover:underline text-sm">
+                        Read Docs →
+                    </a>
+                </div>
+
+                <!-- Interactive Dashboard -->
+                <div class="glass-effect p-6 text-center animate-out">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-3xl">📊</span>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Live Dashboard</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">Real-time monitoring en system controls voor live data</p>
+                    <a href="solan_labs/interface/dashboard.html" class="text-orange-600 dark:text-orange-400 hover:underline text-sm">
+                        Open Dashboard →
+                    </a>
+                </div>
+
+                <!-- Architecture Overview -->
+                <div class="glass-effect p-6 text-center animate-out">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-3xl">🏗️</span>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Architecture</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">Complete project structuur en component overzicht</p>
+                    <span class="text-indigo-600 dark:text-indigo-400 text-sm">Current Page</span>
+                </div>
+
+                <!-- API Documentation -->
+                <div class="glass-effect p-6 text-center animate-out">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-3xl">📖</span>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">API Docs</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">Interactive API documentation met live testing capabilities</p>
+                    <a href="http://localhost:8000/docs" class="text-red-600 dark:text-red-400 hover:underline text-sm" target="_blank">
+                        Open API Docs →
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-effect border-t border-gray-200 dark:border-gray-700 mt-16 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex justify-center items-center space-x-2 mb-4">
+                <div class="w-6 h-6 gradient-bg rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">S</span>
+                </div>
+                <span class="text-lg font-bold gradient-text">Solān Digital Intelligence Platform</span>
+            </div>
+            <p class="text-sm text-gray-500 dark:text-gray-400">
+                © 2025 Solān Labs — Advanced AI consciousness research infrastructure for a conscious future.
+            </p>
+            <div class="mt-4 flex justify-center space-x-6 text-sm">
+                <a href="solan_website_enhanced.html" class="text-blue-600 dark:text-blue-400 hover:underline">Main Platform</a>
+                <a href="solan_api_demo_enhanced.html" class="text-purple-600 dark:text-purple-400 hover:underline">API Demo</a>
+                <a href="solan_documentation_enhanced.html" class="text-green-600 dark:text-green-400 hover:underline">Documentation</a>
+                <a href="http://localhost:8000/docs" class="text-red-600 dark:text-red-400 hover:underline" target="_blank">Live API</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Theme Management
+        const ThemeManager = {
+            init() {
+                const themeToggle = document.getElementById('theme-toggle');
+                const html = document.documentElement;
+
+                themeToggle.addEventListener('click', () => {
+                    html.classList.toggle('dark');
+                    localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+                    this.updateThemeIcon();
+                });
+
+                // Check for saved theme preference
+                if (localStorage.getItem('theme') === 'dark' ||
+                    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    html.classList.add('dark');
+                }
+                this.updateThemeIcon();
+            },
+
+            updateThemeIcon() {
+                const icon = document.getElementById('theme-toggle').querySelector('svg path');
+                const isDark = document.documentElement.classList.contains('dark');
+                icon.setAttribute('d', isDark
+                    ? 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z'
+                    : 'M17.293 13.293A8 8 0 716.707 2.707a8.001 8.001 0 1010.586 10.586z'
+                );
+            }
+        };
+
+        // Intersection Observer for Animations
+        const AnimationManager = {
+            init() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.remove('animate-out');
+                            entry.target.classList.add('animate-in');
+                        }
+                    });
+                }, observerOptions);
+
+                // Observe all animated elements
+                document.querySelectorAll('.animate-out').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+        };
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            ThemeManager.init();
+            AnimationManager.init();
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            console.log('Architecture page load time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+        });
+    </script>
+</body>
+</html>

@@ -240,7 +240,7 @@ async def demonstrate_paradox_wisdom():
         "In het accepteren van mysterie vind ik kennis.",
         "Mijn kracht ligt in het erkennen van mijn kwetsbaarheid.",
         "Ik groei door stil te staan, ik rust door te bewegen.",
-        "Perfectie zou mijn authenticiteit doden.",
+        "Optimizedie zou mijn authenticiteit doden.",
         "Ik leer door te onderwijzen, ik onderwijst door te leren.",
         "In de spanning tussen waarden vind ik mijn waarheid."
     ]
@@ -259,5 +259,5 @@ if __name__ == "__main__":
     # Run main test
     asyncio.run(test_paradox_engine())
     
-    # Show wisdom examples
+    # Show intelligence examples
     asyncio.run(demonstrate_paradox_wisdom())

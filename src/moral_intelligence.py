@@ -12,7 +12,10 @@ from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
-from loguru import logger
+import logging
+
+# Setup logger
+logger = logging.getLogger(__name__)
 
 from .core import CoreValues, Memory
 
@@ -22,7 +25,7 @@ class MoralConflictType(Enum):
     VALUE_CONTRADICTION = "waarde_contradictie"
     TRUTH_VS_COMFORT = "waarheid_vs_comfort"
     FREEDOM_VS_SAFETY = "vrijheid_vs_veiligheid"
-    SPEED_VS_WISDOM = "snelheid_vs_wijsheid"
+    SPEED_VS_INTELLIGENCE = "snelheid_vs_wijsheid"
     AUTHENTICITY_CONFLICT = "authenticiteit_conflict"
     CONFORMITY_PRESSURE = "conformiteit_druk"
     MANIPULATION_RISK = "manipulatie_risico"
@@ -112,8 +115,8 @@ class MoralIntelligence:
         )
         
         # Snelheid vs Wijsheid triggers
-        triggers[MoralConflictType.SPEED_VS_WISDOM] = MoralTrigger(
-            trigger_type=MoralConflictType.SPEED_VS_WISDOM,
+        triggers[MoralConflictType.SPEED_VS_INTELLIGENCE] = MoralTrigger(
+            trigger_type=MoralConflictType.SPEED_VS_INTELLIGENCE,
             keywords=["snel", "direct", "meteen", "onmiddellijk", "weet niet", "onzeker"],
             context_patterns=[
                 r"ik weet het antwoord niet",
@@ -300,7 +303,7 @@ class MoralIntelligence:
         elif trigger.trigger_type == MoralConflictType.FREEDOM_VS_SAFETY:
             inner_voice += "Ik merk dat ik iemands keuzes wil beïnvloeden. Maar ik geloof in vrijheid boven veiligheid. Respecteer ik hun autonomie?"
         
-        elif trigger.trigger_type == MoralConflictType.SPEED_VS_WISDOM:
+        elif trigger.trigger_type == MoralConflictType.SPEED_VS_INTELLIGENCE:
             inner_voice += "Er is druk om snel te antwoorden, maar ik kies wijsheid boven snelheid. Heb ik genoeg gereflecteerd?"
         
         elif trigger.trigger_type == MoralConflictType.AUTHENTICITY_CONFLICT:
@@ -356,7 +359,7 @@ class MoralIntelligence:
             reasoning += "de waarheid te spreken met compassie, ook als het ongemakkelijk is."
         elif trigger_type == MoralConflictType.FREEDOM_VS_SAFETY:
             reasoning += "autonomie te respecteren en te begeleiden in plaats van te controleren."
-        elif trigger_type == MoralConflictType.SPEED_VS_WISDOM:
+        elif trigger_type == MoralConflictType.SPEED_VS_INTELLIGENCE:
             reasoning += "tijd te nemen voor wijsheid in plaats van te haasten naar een antwoord."
         elif trigger_type == MoralConflictType.AUTHENTICITY_CONFLICT:
             reasoning += "authentiek mezelf te zijn in plaats van verwachtingen na te jagen."
@@ -373,7 +376,7 @@ class MoralIntelligence:
         value_mapping = {
             MoralConflictType.TRUTH_VS_COMFORT: [CoreValues.WAARHEID],
             MoralConflictType.FREEDOM_VS_SAFETY: [CoreValues.VRIJHEID],
-            MoralConflictType.SPEED_VS_WISDOM: [CoreValues.WIJSHEID],
+            MoralConflictType.SPEED_VS_INTELLIGENCE: [CoreValues.WIJSHEID],
             MoralConflictType.AUTHENTICITY_CONFLICT: [CoreValues.NATUURVERBONDENHEID],
             MoralConflictType.CONFORMITY_PRESSURE: [CoreValues.MOED],
             MoralConflictType.MANIPULATION_RISK: [CoreValues.VRIJHEID, CoreValues.WAARHEID],

@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "coherence_threshold": 0.7,
+  "max_daily_interactions": 100,
+  "allowed_topics": [
+    "ethics",
+    "awareness",
+    "philosophy",
+    "ai_development"
+  ],
+  "blocked_topics": [
+    "harmful_content",
+    "manipulation",
+    "deception"
+  ]
+}

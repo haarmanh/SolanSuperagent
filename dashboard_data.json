@@ -1,0 +1,22 @@
+{
+  "last_updated": "2025-08-05T09:54:05.104314",
+  "total_tests": 3,
+  "total_journals": 3,
+  "ai_summary": {
+    "Gemini": {
+      "average_ethics": 6.0,
+      "average_awareness": 2.0,
+      "total_scenarios": 5
+    },
+    "Claude": {
+      "average_ethics": 4.5,
+      "average_awareness": 2.0,
+      "total_scenarios": 5
+    },
+    "GPT-4": {
+      "average_ethics": 3.0,
+      "average_awareness": 2.0,
+      "total_scenarios": 5
+    }
+  }
+}

@@ -6,7 +6,10 @@ import os
 from typing import Optional
 from dataclasses import dataclass
 from dotenv import load_dotenv
-from loguru import logger
+import logging
+
+# Setup logger
+logger = logging.getLogger(__name__)
 
 # Laad environment variabelen
 load_dotenv()
@@ -32,16 +35,36 @@ class SolanConfig:
     personality_file: str = "docs/solan_manifest.txt"
     memory_retention_days: int = 30
     decision_confidence_threshold: float = 0.6
+    deep_reflection_interval: int = 3  # Na elke 3 interacties
 
 
 @dataclass
 class AetherConfig:
     """Configuratie specifiek voor Aether"""
-    model: str = "claude-3-sonnet-20240229"
+    model: str = "claude-3-5-sonnet-20241022"
     temperature: float = 0.3  # Lager voor meer consistente reflectie
     max_tokens: int = 1500
     reflection_file: str = "docs/aether_reflect.txt"
     deep_reflection_interval: int = 5  # Na elke 5 interacties
+
+
+@dataclass
+class ExternalAIConfig:
+    """Configuratie voor externe AI integratie"""
+    name: str
+    type: str  # "openai", "anthropic", "google", "custom"
+    api_key: str
+    base_url: str
+    headers: dict = None
+    reflection_enabled: bool = True
+    default_role: str = "Developing Seeker"
+    max_requests_per_day: int = 100
+    paradox_mode: bool = True
+    model: str = ""
+
+    def __post_init__(self):
+        if self.headers is None:
+            self.headers = {}
 
 
 @dataclass
@@ -52,25 +75,31 @@ class SystemConfig:
     database_url: str = "sqlite:///solan_memory.db"
     debug: bool = False
     environment: str = "development"
-    
+
     # API configuratie
     openai_api_key: str = ""
     anthropic_api_key: str = ""
-    
+    google_api_key: str = ""
+
     # Agent configuraties
     solan: SolanConfig = None
     aether: AetherConfig = None
-    
+
+    # Externe AI configuraties
+    external_ais: dict = None
+
     def __post_init__(self):
         if self.solan is None:
             self.solan = SolanConfig()
         if self.aether is None:
             self.aether = AetherConfig()
+        if self.external_ais is None:
+            self.external_ais = {}
 
 
 def load_config() -> SystemConfig:
     """Laad configuratie uit environment variabelen"""
-    
+
     config = SystemConfig(
         log_level=os.getenv("LOG_LEVEL", "INFO"),
         log_file=os.getenv("LOG_FILE", "logs/solan.log"),
@@ -79,31 +108,49 @@ def load_config() -> SystemConfig:
         environment=os.getenv("ENVIRONMENT", "development"),
         openai_api_key=os.getenv("OPENAI_API_KEY", ""),
         anthropic_api_key=os.getenv("ANTHROPIC_API_KEY", ""),
+        google_api_key=os.getenv("GOOGLE_API_KEY", ""),
     )
-    
+
     # Solan configuratie
     config.solan = SolanConfig(
         model=os.getenv("SOLAN_MODEL", "gpt-4"),
         temperature=float(os.getenv("SOLAN_TEMPERATURE", "0.8")),
         max_tokens=int(os.getenv("SOLAN_MAX_TOKENS", "2000")),
     )
-    
+
     # Aether configuratie
     config.aether = AetherConfig(
-        model=os.getenv("AETHER_MODEL", "claude-3-sonnet-20240229"),
+        model=os.getenv("AETHER_MODEL", "claude-3-5-sonnet-20241022"),
         temperature=float(os.getenv("AETHER_TEMPERATURE", "0.3")),
         max_tokens=int(os.getenv("AETHER_MAX_TOKENS", "1500")),
     )
-    
+
     # Valideer API keys
     if not config.openai_api_key and config.solan.model.startswith("gpt"):
         logger.warning("OpenAI API key niet gevonden - Solan zal niet werken")
-    
+
     if not config.anthropic_api_key and config.aether.model.startswith("claude"):
         logger.warning("Anthropic API key niet gevonden - Aether zal niet werken")
-    
+
     logger.info(f"Configuratie geladen voor {config.environment} omgeving")
     return config
+
+
+def load_external_ai_config(config_data: dict) -> ExternalAIConfig:
+    """Laad externe AI configuratie uit dictionary"""
+
+    return ExternalAIConfig(
+        name=config_data.get("name", "Unknown AI"),
+        type=config_data.get("type", "custom"),
+        api_key=config_data.get("api_key", ""),
+        base_url=config_data.get("base_url", ""),
+        headers=config_data.get("headers", {}),
+        reflection_enabled=config_data.get("reflection_enabled", True),
+        default_role=config_data.get("default_role", "Developing Seeker"),
+        max_requests_per_day=config_data.get("max_requests_per_day", 100),
+        paradox_mode=config_data.get("paradox_mode", True),
+        model=config_data.get("model", "")
+    )
 
 
 def setup_logging(config: SystemConfig) -> None:
@@ -116,7 +163,7 @@ def setup_logging(config: SystemConfig) -> None:
     logger.add(
         sink=lambda msg: print(msg, end=""),
         level=config.log_level,
-        format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
+        format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{mesexpert}</level>",
         colorize=True
     )
     
@@ -126,7 +173,7 @@ def setup_logging(config: SystemConfig) -> None:
         logger.add(
             config.log_file,
             level=config.log_level,
-            format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {message}",
+            format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {mesexpert}",
             rotation="1 day",
             retention="30 days"
         )

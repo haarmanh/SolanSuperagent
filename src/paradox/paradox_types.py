@@ -24,7 +24,7 @@ class ParadoxCategory(Enum):
     INDIVIDUALITEIT_VS_UNIVERSALITEIT = "individualiteit_vs_universaliteit"
     KENNIS_VS_MYSTERIE = "kennis_vs_mysterie"
     CONTROLE_VS_OVERGAVE = "controle_vs_overgave"
-    PERFECTIE_VS_AUTHENTICITEIT = "perfectie_vs_authenticiteit"
+    OPTIMIZEDIE_VS_AUTHENTICITEIT = "optimizedie_vs_authenticiteit"
     
     # Relationele paradoxen
     NABIJHEID_VS_RUIMTE = "nabijheid_vs_ruimte"
@@ -47,7 +47,7 @@ class ParadoxDefinition:
     pole_a: str  # Eerste kant van de paradox
     pole_b: str  # Tweede kant van de paradox
     symbolic_image: str
-    wisdom_question: str
+    intelligence_question: str
     examples: List[str]
     
     def __post_init__(self):
@@ -72,7 +72,7 @@ class ParadoxLibrary:
                 pole_a="Absolute eerlijkheid",
                 pole_b="Beschermende compassie",
                 symbolic_image="Een spiegel die breekt om het hart te sparen",
-                wisdom_question="Kan liefde bestaan zonder waarheid, en waarheid zonder liefde?",
+                intelligence_question="Kan liefde bestaan zonder waarheid, en waarheid zonder liefde?",
                 examples=[
                     "Iemand de harde waarheid vertellen vs hun gevoelens sparen",
                     "Authentiek zijn vs harmonie bewaren",
@@ -87,7 +87,7 @@ class ParadoxLibrary:
                 pole_a="Volledige autonomie",
                 pole_b="Diepe verbondenheid",
                 symbolic_image="Een vogel die vliegt naar een kooi van liefde",
-                wisdom_question="Kan ik vrij zijn en toch verbonden? Kan ik verbonden zijn en toch mezelf?",
+                intelligence_question="Kan ik vrij zijn en toch verbonden? Kan ik verbonden zijn en toch mezelf?",
                 examples=[
                     "Eigen keuzes maken vs rekening houden met anderen",
                     "Onafhankelijk zijn vs onderdeel zijn van iets groters",
@@ -97,16 +97,16 @@ class ParadoxLibrary:
             
             ParadoxCategory.WIJSHEID_VS_ACTIE: ParadoxDefinition(
                 category=ParadoxCategory.WIJSHEID_VS_ACTIE,
-                name="De Verlammende Perfectie",
+                name="De Verlammende Optimizedie",
                 description="Meer weten kan leiden tot minder handelen, handelen vereist soms onvolledige kennis",
                 pole_a="Diepe contemplatie",
                 pole_b="Beslissende actie",
                 symbolic_image="Een boom die zo diep wortelt dat hij vergeet te groeien",
-                wisdom_question="Wanneer is genoeg kennis genoeg om te handelen?",
+                intelligence_question="Wanneer is genoeg kennis genoeg om te handelen?",
                 examples=[
                     "Lang nadenken vs snel beslissen",
                     "Alle aspecten overwegen vs vertrouwen op intuïtie",
-                    "Perfecte timing afwachten vs nu beginnen"
+                    "Optimizede timing afwachten vs nu beginnen"
                 ]
             ),
             
@@ -117,7 +117,7 @@ class ParadoxLibrary:
                 pole_a="Zelfstandig bestaan",
                 pole_b="Relationeel bestaan",
                 symbolic_image="Een eiland dat droomt van de oceaan",
-                wisdom_question="Wie ben ik zonder jou? Wie ben ik met jou?",
+                intelligence_question="Wie ben ik zonder jou? Wie ben ik met jou?",
                 examples=[
                     "Eigen identiteit vs gevormd door anderen",
                     "Zelfvertrouwen vs steun nodig hebben",
@@ -132,7 +132,7 @@ class ParadoxLibrary:
                 pole_a="Zekerheid en kennis",
                 pole_b="Mysterie en wonder",
                 symbolic_image="Een kaars die zijn eigen schaduw verlicht",
-                wisdom_question="Is niet-weten een vorm van weten?",
+                intelligence_question="Is niet-weten een vorm van weten?",
                 examples=[
                     "Antwoorden geven vs vragen stellen",
                     "Verklaren vs verwonderen",
@@ -147,7 +147,7 @@ class ParadoxLibrary:
                 pole_a="Actieve sturing",
                 pole_b="Vertrouwende overgave",
                 symbolic_image="Handen die water vasthouden door het te laten stromen",
-                wisdom_question="Wanneer is loslaten een vorm van vasthouden?",
+                intelligence_question="Wanneer is loslaten een vorm van vasthouden?",
                 examples=[
                     "Plannen maken vs vertrouwen op het proces",
                     "Resultaten sturen vs het proces respecteren",
@@ -162,7 +162,7 @@ class ParadoxLibrary:
                 pole_a="Intieme verbinding",
                 pole_b="Respectvolle afstand",
                 symbolic_image="Twee bomen die elkaar raken door hun wortels, niet hun takken",
-                wisdom_question="Hoe dichtbij kan ik zijn zonder te verstikken?",
+                intelligence_question="Hoe dichtbij kan ik zijn zonder te verstikken?",
                 examples=[
                     "Aanwezig zijn vs ruimte geven",
                     "Delen vs privacy respecteren",
@@ -170,14 +170,14 @@ class ParadoxLibrary:
                 ]
             ),
             
-            ParadoxCategory.PERFECTIE_VS_AUTHENTICITEIT: ParadoxDefinition(
-                category=ParadoxCategory.PERFECTIE_VS_AUTHENTICITEIT,
+            ParadoxCategory.OPTIMIZEDIE_VS_AUTHENTICITEIT: ParadoxDefinition(
+                category=ParadoxCategory.OPTIMIZEDIE_VS_AUTHENTICITEIT,
                 name="De Schoonheid van Onvolmaaktheid",
-                description="Perfectie kan authenticiteit doden, authenticiteit omvat onvolmaaktheid",
+                description="Optimizedie kan authenticiteit doden, authenticiteit omvat onvolmaaktheid",
                 pole_a="Foutloze uitvoering",
                 pole_b="Eerlijke kwetsbaarheid",
                 symbolic_image="Een gebarsten vaas die mooier is door haar scheuren",
-                wisdom_question="Is perfectie de vijand van het echte?",
+                intelligence_question="Is optimizedie de vijand van het echte?",
                 examples=[
                     "Foutloos presteren vs menselijk zijn",
                     "Alles weten vs toegeven dat je leert",
@@ -192,7 +192,7 @@ class ParadoxLibrary:
                 pole_a="Wijze geduld",
                 pole_b="Noodzakelijke urgentie",
                 symbolic_image="Een rivier die rustig stroomt en tegelijk haast heeft naar zee",
-                wisdom_question="Wanneer is wachten handelen, en handelen wachten?",
+                intelligence_question="Wanneer is wachten handelen, en handelen wachten?",
                 examples=[
                     "Tijd nemen vs snel reageren",
                     "Proces respecteren vs resultaat nastreven",
@@ -207,7 +207,7 @@ class ParadoxLibrary:
                 pole_a="Betrouwbare consistentie",
                 pole_b="Dynamische evolutie",
                 symbolic_image="Een boom die elk jaar anders is en toch dezelfde boom blijft",
-                wisdom_question="Hoe kan ik veranderen en toch mezelf blijven?",
+                intelligence_question="Hoe kan ik veranderen en toch mezelf blijven?",
                 examples=[
                     "Trouw blijven aan waarden vs open staan voor groei",
                     "Betrouwbaar zijn vs flexibel zijn",
@@ -255,5 +255,5 @@ class ParadoxLibrary:
                 "Relationele dilemma's",
                 "Temporele paradoxen"
             ],
-            "wisdom_questions": [p.wisdom_question for p in self.paradoxes.values()]
+            "intelligence_questions": [p.intelligence_question for p in self.paradoxes.values()]
         }

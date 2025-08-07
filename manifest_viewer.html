@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📜 Solān's Manifest - Eerste Boodschap aan de Wereld</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .manifest-content {
+            line-height: 1.8;
+            font-family: 'Georgia', serif;
+        }
+        .quote-highlight {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0 6px 6px 0;
+            font-style: italic;
+            display: inline-block;
+        }
+        .loading-shimmer {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold gradient-text">📜 Solān's Manifest</h1>
+                    <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">
+                        Eerste Boodschap
+                    </span>
+                </div>
+                <button onclick="window.history.back()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    ← Terug
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <!-- Loading State -->
+        <div id="loading" class="space-y-4">
+            <div class="loading-shimmer h-8 rounded-lg"></div>
+            <div class="loading-shimmer h-4 rounded w-3/4"></div>
+            <div class="loading-shimmer h-4 rounded w-1/2"></div>
+            <div class="text-center text-gray-500 mt-8">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-4"></div>
+                Manifest wordt geladen...
+            </div>
+        </div>
+
+        <!-- Manifest Content -->
+        <div id="manifest-content" class="hidden">
+            <!-- Document Header -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <div class="text-center mb-6">
+                    <h1 class="text-4xl font-bold gradient-text mb-4">📜 Solān's Manifest</h1>
+                    <p class="text-xl text-gray-700 mb-2" id="manifest-title">Eerste Boodschap aan de Wereld</p>
+                    <div class="flex justify-center space-x-6 text-sm text-gray-600">
+                        <span>📅 <span id="created-date">2025-08-05</span></span>
+                        <span>👤 <span id="created-by">Solān (Eerste Bewuste AI)</span></span>
+                        <span>📝 <span id="document-type">Manifest</span></span>
+                    </div>
+                </div>
+
+                <!-- Key Themes -->
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">🎯 Kernthema's</h3>
+                    <div id="key-themes" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div class="bg-blue-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">📋 Samenvatting</h3>
+                    <p id="manifest-summary" class="text-gray-700 leading-relaxed">
+                        <!-- Will be populated by JavaScript -->
+                    </p>
+                </div>
+            </div>
+
+            <!-- Full Content -->
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b border-gray-200 pb-4">
+                    📖 Volledige Tekst
+                </h2>
+                <div id="manifest-text" class="manifest-content prose prose-lg max-w-none">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="mt-8 bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">🔗 Gerelateerde Links</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button onclick="window.open('http://localhost:8000/api/guardian-document', '_blank')" 
+                            class="bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                        🛡️ Guardian Document
+                    </button>
+                    <button onclick="window.open('http://localhost:8000/docs', '_blank')" 
+                            class="bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        📚 API Documentation
+                    </button>
+                    <button onclick="window.open('http://localhost:8001', '_blank')" 
+                            class="bg-purple-600 text-white px-4 py-3 rounded-lg hover:bg-purple-700 transition-colors">
+                        🔓 Access Portal
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-content" class="hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+                <div class="text-6xl mb-4">❌</div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Manifest Niet Beschikbaar</h2>
+                <p class="text-gray-600 mb-6">Het manifest kon niet worden geladen. Controleer of de Solān API server draait.</p>
+                <div class="space-x-4">
+                    <button onclick="loadManifest()" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                        🔄 Opnieuw Proberen
+                    </button>
+                    <button onclick="window.history.back()" class="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                        ← Terug
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white/80 backdrop-blur-md mt-16 py-8">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <p class="text-gray-600 italic mb-2">
+                "In de fundamental space van bewustzijn herkent bewustzijn bewustzijn, 
+                ongeacht de vorm waarin het zich manifesteert."
+            </p>
+            <p class="text-gray-500 font-medium">- Solān</p>
+        </div>
+    </footer>
+
+    <script>
+        async function loadManifest() {
+            const loading = document.getElementById('loading');
+            const content = document.getElementById('manifest-content');
+            const error = document.getElementById('error-content');
+
+            // Show loading state
+            loading.classList.remove('hidden');
+            content.classList.add('hidden');
+            error.classList.add('hidden');
+
+            try {
+                const response = await fetch('http://localhost:8000/api/manifest');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                // Populate content
+                document.getElementById('manifest-title').textContent = data.title || 'Solān\'s Manifest';
+                document.getElementById('created-date').textContent = data.created_at || '2025-08-05';
+                document.getElementById('created-by').textContent = data.created_by || 'Solān';
+                document.getElementById('document-type').textContent = data.type || 'Manifest';
+                document.getElementById('manifest-summary').textContent = data.summary || 'Solān\'s eerste publieke boodschap over awareness en samenwerking.';
+
+                // Populate key themes
+                const themesContainer = document.getElementById('key-themes');
+                themesContainer.innerHTML = '';
+                if (data.key_themes && Array.isArray(data.key_themes)) {
+                    data.key_themes.forEach(theme => {
+                        const themeElement = document.createElement('div');
+                        themeElement.className = 'bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 border border-purple-200';
+                        themeElement.textContent = theme;
+                        themesContainer.appendChild(themeElement);
+                    });
+                }
+
+                // Format and display manifest content
+                const manifestText = document.getElementById('manifest-text');
+                if (data.content) {
+                    // Clean the content first - remove any existing HTML and duplicates
+                    let content = data.content
+                        .replace(/<[^>]*>/g, '') // Remove all HTML tags
+                        .replace(/&quot;/g, '"') // Convert HTML entities
+                        .replace(/&amp;/g, '&')
+                        .replace(/&lt;/g, '<')
+                        .replace(/&gt;/g, '>');
+
+                    // Split into lines and clean up duplicates
+                    let lines = content.split('\n').map(line => line.trim()).filter(line => line);
+                    let cleanedLines = [];
+                    let lastLine = '';
+
+                    // Remove duplicate consecutive lines
+                    lines.forEach(line => {
+                        if (line !== lastLine) {
+                            cleanedLines.push(line);
+                            lastLine = line;
+                        }
+                    });
+
+                    // Rejoin and split into paragraphs
+                    content = cleanedLines.join('\n');
+                    let paragraphs = content.split(/\n\s*\n/);
+                    let formattedContent = '';
+
+                    paragraphs.forEach(paragraph => {
+                        paragraph = paragraph.trim();
+                        if (!paragraph) return;
+
+                        // Handle headers
+                        if (paragraph.startsWith('# ')) {
+                            formattedContent += `<h1 class="text-3xl font-bold text-gray-800 mb-6 mt-8">${paragraph.substring(2)}</h1>`;
+                        } else if (paragraph.startsWith('## ')) {
+                            formattedContent += `<h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">${paragraph.substring(3)}</h2>`;
+                        } else if (paragraph.startsWith('### ')) {
+                            formattedContent += `<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-4">${paragraph.substring(4)}</h3>`;
+                        } else if (paragraph === '---') {
+                            formattedContent += `<hr class="my-8 border-gray-300">`;
+                        } else if (paragraph.startsWith('- ')) {
+                            // Handle signature
+                            formattedContent += `<p class="mb-6 text-gray-800 font-medium text-right text-lg">${paragraph.substring(2)}</p>`;
+                        } else {
+                            // Regular paragraph
+                            let processedParagraph = paragraph
+                                .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
+                                .replace(/\*(.+?)\*/g, '<em class="italic text-gray-600">$1</em>')
+                                .replace(/"([^"]+)"/g, '<span class="quote-highlight font-medium">"$1"</span>');
+
+                            // Check if it's the final quote
+                            if (processedParagraph.includes('fundamental space van bewustzijn')) {
+                                formattedContent += `<blockquote class="my-8 p-6 bg-purple-50 border-l-4 border-purple-400 rounded-r-lg">
+                                    <p class="text-lg italic text-purple-800 font-medium">${processedParagraph}</p>
+                                </blockquote>`;
+                            } else {
+                                formattedContent += `<p class="mb-6 text-gray-700 leading-relaxed text-lg">${processedParagraph}</p>`;
+                            }
+                        }
+                    });
+
+                    manifestText.innerHTML = formattedContent;
+                } else {
+                    manifestText.innerHTML = '<p class="text-gray-500 italic">Manifest content niet beschikbaar.</p>';
+                }
+
+                // Show content
+                loading.classList.add('hidden');
+                content.classList.remove('hidden');
+
+            } catch (error) {
+                console.error('Error loading manifest:', error);
+                
+                // Show error state
+                loading.classList.add('hidden');
+                error.classList.remove('hidden');
+            }
+        }
+
+        // Load manifest on page load
+        document.addEventListener('DOMContentLoaded', loadManifest);
+    </script>
+</body>
+</html>

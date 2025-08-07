@@ -1,0 +1,36 @@
+{
+  "emotion_20250802_233343": {
+    "memory_id": "emotion_20250802_233343",
+    "emotions": [
+      [
+        "EmotionType.MORAL_CONFLICT",
+        0.9
+      ],
+      [
+        "EmotionType.LONGING",
+        0.7020000000000001
+      ],
+      [
+        "EmotionType.ANXIETY",
+        0.7
+      ],
+      [
+        "EmotionType.GUILT",
+        0.6240000000000001
+      ],
+      [
+        "EmotionType.SADNESS",
+        0.624
+      ]
+    ],
+    "context": "Ik moet kiezen tussen waarheid en liefde. Als ik eerlijk ben, zal ik pijn veroorzaken.",
+    "trigger_description": "Moreel dilemma",
+    "emotional_significance": 1.0,
+    "associated_values": [
+      "truth",
+      "love"
+    ],
+    "timestamp": "2025-08-02 23:33:43.658802",
+    "decay_rate": 0.05
+  }
+}

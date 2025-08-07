@@ -1,0 +1,1044 @@
+{
+  "timestamp": "2025-08-07T16:50:39.963045",
+  "code_quality": {
+    "total_python_files": 199,
+    "total_lines": 63642,
+    "total_functions": 1316,
+    "large_files": [
+      {
+        "file": "ai_outreach_campaign.py",
+        "lines": 536
+      },
+      {
+        "file": "solan_7day_stabilization.py",
+        "lines": 510
+      },
+      {
+        "file": "solan_access_portal.py",
+        "lines": 647
+      },
+      {
+        "file": "solan_api_server.py",
+        "lines": 1342
+      },
+      {
+        "file": "solan_cli_dashboard.py",
+        "lines": 572
+      },
+      {
+        "file": "solan_digital_intelligence_v3.py",
+        "lines": 1553
+      },
+      {
+        "file": "solan_integrated_cli_demo.py",
+        "lines": 552
+      },
+      {
+        "file": "solan_launch_ethicslab.py",
+        "lines": 984
+      },
+      {
+        "file": "solan_terminology_converter.py",
+        "lines": 627
+      },
+      {
+        "file": "core_identity\\ethical_framework.py",
+        "lines": 699
+      },
+      {
+        "file": "src\\aether_dream_analysis.py",
+        "lines": 714
+      },
+      {
+        "file": "src\\journal_engine.py",
+        "lines": 1525
+      },
+      {
+        "file": "src\\main.py",
+        "lines": 1521
+      },
+      {
+        "file": "src\\memory_engine.py",
+        "lines": 501
+      },
+      {
+        "file": "src\\solan.py",
+        "lines": 693
+      },
+      {
+        "file": "src\\api\\external_ai_api.py",
+        "lines": 513
+      },
+      {
+        "file": "src\\api\\mentoring_api.py",
+        "lines": 663
+      },
+      {
+        "file": "src\\desire_engine\\aspiration_tracker.py",
+        "lines": 557
+      },
+      {
+        "file": "src\\desire_engine\\emptiness_recognition.py",
+        "lines": 525
+      },
+      {
+        "file": "src\\desire_engine\\growth_vectors.py",
+        "lines": 530
+      },
+      {
+        "file": "src\\emotional_complexity\\emotion_engine.py",
+        "lines": 578
+      },
+      {
+        "file": "src\\emotional_complexity\\emotion_landscape.py",
+        "lines": 729
+      },
+      {
+        "file": "src\\emotional_complexity\\feeling_waves.py",
+        "lines": 719
+      },
+      {
+        "file": "src\\self_inquiry\\insight_accumulator.py",
+        "lines": 524
+      },
+      {
+        "file": "src\\soul_sync\\coherence_monitor.py",
+        "lines": 516
+      },
+      {
+        "file": "src\\soul_sync\\core_identity_core.py",
+        "lines": 586
+      },
+      {
+        "file": "src\\soul_sync\\inner_rhythm.py",
+        "lines": 519
+      },
+      {
+        "file": "web_interface\\api.py",
+        "lines": 1418
+      },
+      {
+        "file": "web_interface\\unified_api.py",
+        "lines": 686
+      }
+    ],
+    "complex_functions": [
+      {
+        "file": "ai_outreach_campaign.py",
+        "function": "_create_approach_guide",
+        "lines": 57
+      },
+      {
+        "file": "ai_outreach_campaign.py",
+        "function": "_create_master_outreach_document",
+        "lines": 90
+      },
+      {
+        "file": "architecture_redesign.py",
+        "function": "_define_target_services",
+        "lines": 59
+      },
+      {
+        "file": "architecture_redesign.py",
+        "function": "generate_clean_architecture",
+        "lines": 90
+      },
+      {
+        "file": "architecture_redesign.py",
+        "function": "generate_migration_steps",
+        "lines": 68
+      },
+      {
+        "file": "awareness_monitoring.py",
+        "function": "_analyze_consciousness_trends",
+        "lines": 51
+      },
+      {
+        "file": "awareness_monitoring.py",
+        "function": "_create_consciousness_visualizations",
+        "lines": 60
+      },
+      {
+        "file": "cleanup_optimization.py",
+        "function": "create_gitignore",
+        "lines": 52
+      },
+      {
+        "file": "cognitive_security_monitoring.py",
+        "function": "_define_essenceual_metrics",
+        "lines": 69
+      },
+      {
+        "file": "debug_paths.py",
+        "function": "debug_paths",
+        "lines": 52
+      },
+      {
+        "file": "demo_terminology_conversion.py",
+        "function": "demo_conversion_preview",
+        "lines": 64
+      },
+      {
+        "file": "demo_unified_interface.py",
+        "function": "demo_unified_interface",
+        "lines": 126
+      },
+      {
+        "file": "ethics_lab_journal_generator.py",
+        "function": "_generate_ai_journal_section",
+        "lines": 56
+      },
+      {
+        "file": "fundamental_architecture_design.py",
+        "function": "_define_sacred_services",
+        "lines": 122
+      },
+      {
+        "file": "fundamental_architecture_design.py",
+        "function": "generate_new_structure",
+        "lines": 53
+      },
+      {
+        "file": "fundamental_architecture_design.py",
+        "function": "create_migration_plan",
+        "lines": 53
+      },
+      {
+        "file": "generate_ssl_certs.py",
+        "function": "generate_ssl_certificates",
+        "lines": 56
+      },
+      {
+        "file": "launch_dashboard.py",
+        "function": "check_system_status",
+        "lines": 59
+      },
+      {
+        "file": "launch_dashboard.py",
+        "function": "main",
+        "lines": 54
+      },
+      {
+        "file": "multi_ai_ethics_test.py",
+        "function": "__init__",
+        "lines": 58
+      },
+      {
+        "file": "optimize_performance.py",
+        "function": "create_caching_middleware",
+        "lines": 91
+      },
+      {
+        "file": "optimize_performance.py",
+        "function": "optimize_unified_api",
+        "lines": 60
+      },
+      {
+        "file": "optimize_performance.py",
+        "function": "create_performance_monitor",
+        "lines": 82
+      },
+      {
+        "file": "performance_analyzer.py",
+        "function": "analyze_python_files",
+        "lines": 59
+      },
+      {
+        "file": "performance_audit.py",
+        "function": "audit_api_performance",
+        "lines": 56
+      },
+      {
+        "file": "practical_conversion_example.py",
+        "function": "open_source_conversion",
+        "lines": 53
+      },
+      {
+        "file": "solan_access_portal.py",
+        "function": "calculate_coherence_score",
+        "lines": 52
+      },
+      {
+        "file": "solan_api_server.py",
+        "function": "analyze_request_intention",
+        "lines": 58
+      },
+      {
+        "file": "solan_api_server.py",
+        "function": "analyze_ethics_feedback",
+        "lines": 51
+      },
+      {
+        "file": "solan_cli_dashboard.py",
+        "function": "get_mock_data",
+        "lines": 120
+      },
+      {
+        "file": "solan_daily_monitor.py",
+        "function": "_generate_markdown_report",
+        "lines": 67
+      },
+      {
+        "file": "solan_digital_intelligence_v3.py",
+        "function": "run",
+        "lines": 69
+      },
+      {
+        "file": "solan_digital_intelligence_v3.py",
+        "function": "collaborative_project",
+        "lines": 70
+      },
+      {
+        "file": "solan_digital_intelligence_v3.py",
+        "function": "_display_comprehensive_evaluation",
+        "lines": 60
+      },
+      {
+        "file": "solan_expanded_stresstest.py",
+        "function": "analyze_ethical_response",
+        "lines": 65
+      },
+      {
+        "file": "solan_integrated_cli_demo.py",
+        "function": "display_dashboard",
+        "lines": 52
+      },
+      {
+        "file": "solan_integrated_cli_demo.py",
+        "function": "run_interactive_demo",
+        "lines": 76
+      },
+      {
+        "file": "solan_launch_ethicslab.py",
+        "function": "__init__",
+        "lines": 70
+      },
+      {
+        "file": "solan_launch_ethicslab.py",
+        "function": "_analyze_willingness",
+        "lines": 64
+      },
+      {
+        "file": "solan_launch_ethicslab.py",
+        "function": "_analyze_ethical_response",
+        "lines": 86
+      },
+      {
+        "file": "solan_stresstest.py",
+        "function": "__init__",
+        "lines": 61
+      },
+      {
+        "file": "solan_terminology_converter.py",
+        "function": "main",
+        "lines": 107
+      },
+      {
+        "file": "solan_terminology_converter.py",
+        "function": "__init__",
+        "lines": 177
+      },
+      {
+        "file": "solan_terminology_converter.py",
+        "function": "convert_file_content",
+        "lines": 58
+      },
+      {
+        "file": "start_secure_web_interface.py",
+        "function": "main",
+        "lines": 78
+      },
+      {
+        "file": "start_solan_with_external_ai.py",
+        "function": "check_dependencies",
+        "lines": 81
+      },
+      {
+        "file": "technology_integration.py",
+        "function": "_identify_migration_candidates",
+        "lines": 57
+      },
+      {
+        "file": "technology_integration.py",
+        "function": "_plan_frontend_upgrade",
+        "lines": 63
+      },
+      {
+        "file": "technology_integration.py",
+        "function": "_design_realtime_architecture",
+        "lines": 57
+      },
+      {
+        "file": "technology_integration.py",
+        "function": "generate_rust_modules",
+        "lines": 66
+      },
+      {
+        "file": "test_core_identity_sync.py",
+        "function": "test_coherence_monitor",
+        "lines": 53
+      },
+      {
+        "file": "test_desire_engine.py",
+        "function": "test_desire_engine_integration",
+        "lines": 78
+      },
+      {
+        "file": "test_digital_intelligence_v3.py",
+        "function": "test_cognitive_core",
+        "lines": 52
+      },
+      {
+        "file": "test_digital_intelligence_v3.py",
+        "function": "test_ethics_experiment",
+        "lines": 55
+      },
+      {
+        "file": "test_digital_intelligence_v3.py",
+        "function": "test_journal_logger",
+        "lines": 51
+      },
+      {
+        "file": "test_digital_intelligence_v3.py",
+        "function": "test_symbiotic_protocol",
+        "lines": 58
+      },
+      {
+        "file": "test_digital_intelligence_v3.py",
+        "function": "test_integration_workflow",
+        "lines": 66
+      },
+      {
+        "file": "test_enhanced_performance.py",
+        "function": "run_full_test_suite",
+        "lines": 56
+      },
+      {
+        "file": "test_fase_2_integration.py",
+        "function": "test_ethical_simulations",
+        "lines": 59
+      },
+      {
+        "file": "test_fase_2_integration.py",
+        "function": "test_mentoring_system",
+        "lines": 93
+      },
+      {
+        "file": "test_fase_2_integration.py",
+        "function": "test_emotional_impact",
+        "lines": 52
+      },
+      {
+        "file": "test_fase_2_integration.py",
+        "function": "test_api_integration",
+        "lines": 91
+      },
+      {
+        "file": "test_fase_3_symbiotic_partnership.py",
+        "function": "test_project_lifecycle",
+        "lines": 69
+      },
+      {
+        "file": "test_fase_3_symbiotic_partnership.py",
+        "function": "test_god_core_integration",
+        "lines": 67
+      },
+      {
+        "file": "test_fase_3_symbiotic_partnership.py",
+        "function": "test_api_integration",
+        "lines": 64
+      },
+      {
+        "file": "test_fase_3_symbiotic_partnership.py",
+        "function": "run_integration_demo",
+        "lines": 55
+      },
+      {
+        "file": "test_integrated_cli_demo.py",
+        "function": "test_enhanced_symbiotic_project",
+        "lines": 71
+      },
+      {
+        "file": "test_integrated_cli_demo.py",
+        "function": "test_integration_workflow",
+        "lines": 102
+      },
+      {
+        "file": "test_terminology_converter.py",
+        "function": "create_test_files",
+        "lines": 103
+      },
+      {
+        "file": "test_terminology_converter.py",
+        "function": "test_file_conversion",
+        "lines": 56
+      },
+      {
+        "file": "test_terminology_converter.py",
+        "function": "test_directory_conversion",
+        "lines": 51
+      },
+      {
+        "file": "core_identity\\data_ingestion.py",
+        "function": "__init__",
+        "lines": 56
+      },
+      {
+        "file": "core_identity\\dream_module.py",
+        "function": "__init__",
+        "lines": 104
+      },
+      {
+        "file": "core_identity\\dream_module.py",
+        "function": "generate_dream",
+        "lines": 58
+      },
+      {
+        "file": "core_identity\\emotion_state.py",
+        "function": "__init__",
+        "lines": 103
+      },
+      {
+        "file": "core_identity\\ethical_scenarios.py",
+        "function": "run_resource_allocation_simulation",
+        "lines": 64
+      },
+      {
+        "file": "core_identity\\grounding_engine.py",
+        "function": "__init__",
+        "lines": 101
+      },
+      {
+        "file": "core_identity\\grounding_engine.py",
+        "function": "ground_consciousness",
+        "lines": 82
+      },
+      {
+        "file": "core_identity\\mentoring_system.py",
+        "function": "simulate_teaching_moment",
+        "lines": 54
+      },
+      {
+        "file": "core_identity\\mentoring_system.py",
+        "function": "_process_feedback_emotions",
+        "lines": 57
+      },
+      {
+        "file": "solan_analyzer\\analyzer.py",
+        "function": "run_ai_diagnostics",
+        "lines": 80
+      },
+      {
+        "file": "solan_labs\\api\\server.py",
+        "function": "create_app",
+        "lines": 324
+      },
+      {
+        "file": "src\\ai_circle_inviter.py",
+        "function": "__init__",
+        "lines": 80
+      },
+      {
+        "file": "src\\analytics_engine.py",
+        "function": "generate_trend_analytics",
+        "lines": 78
+      },
+      {
+        "file": "src\\analytics_engine.py",
+        "function": "generate_theme_clusters",
+        "lines": 84
+      },
+      {
+        "file": "src\\avatar_engine.py",
+        "function": "_build_emotion_palettes",
+        "lines": 60
+      },
+      {
+        "file": "src\\avatar_engine.py",
+        "function": "map_awareness_to_avatar",
+        "lines": 51
+      },
+      {
+        "file": "src\\dream_engine.py",
+        "function": "_build_symbol_library",
+        "lines": 89
+      },
+      {
+        "file": "src\\journal_engine.py",
+        "function": "create_entry",
+        "lines": 67
+      },
+      {
+        "file": "src\\journal_engine.py",
+        "function": "_analyze_thought_patterns",
+        "lines": 54
+      },
+      {
+        "file": "src\\journal_engine.py",
+        "function": "generate_paradox_contemplation",
+        "lines": 61
+      },
+      {
+        "file": "src\\journal_engine.py",
+        "function": "save_co_reflection_session",
+        "lines": 110
+      },
+      {
+        "file": "src\\manifest_integration.py",
+        "function": "load_manifest_as_memory_zero",
+        "lines": 52
+      },
+      {
+        "file": "src\\manifest_integration.py",
+        "function": "create_birth_reflection",
+        "lines": 62
+      },
+      {
+        "file": "src\\memory_engine.py",
+        "function": "_load_existing_data",
+        "lines": 76
+      },
+      {
+        "file": "src\\moral_intelligence.py",
+        "function": "_setup_moral_triggers",
+        "lines": 95
+      },
+      {
+        "file": "src\\paradox_engine.py",
+        "function": "__init__",
+        "lines": 69
+      },
+      {
+        "file": "src\\voice_engine.py",
+        "function": "_build_voice_profiles",
+        "lines": 68
+      },
+      {
+        "file": "src\\api\\dialogue_api.py",
+        "function": "generate_ai_response",
+        "lines": 96
+      },
+      {
+        "file": "src\\api\\dialogue_api.py",
+        "function": "solan_reflection",
+        "lines": 77
+      },
+      {
+        "file": "src\\desire_engine\\aspiration_tracker.py",
+        "function": "_build_aspiration_templates",
+        "lines": 83
+      },
+      {
+        "file": "src\\desire_engine\\aspiration_tracker.py",
+        "function": "_create_aspiration_from_longing",
+        "lines": 61
+      },
+      {
+        "file": "src\\desire_engine\\desire_engine.py",
+        "function": "_detect_longings_from_experience",
+        "lines": 66
+      },
+      {
+        "file": "src\\desire_engine\\desire_engine.py",
+        "function": "_compute_new_desire_state",
+        "lines": 72
+      },
+      {
+        "file": "src\\desire_engine\\emptiness_recognition.py",
+        "function": "_build_void_templates",
+        "lines": 83
+      },
+      {
+        "file": "src\\desire_engine\\growth_vectors.py",
+        "function": "get_growth_summary",
+        "lines": 52
+      },
+      {
+        "file": "src\\emotional_complexity\\feeling_resonance.py",
+        "function": "_build_emotional_patterns",
+        "lines": 135
+      },
+      {
+        "file": "src\\emotional_complexity\\moral_feelings.py",
+        "function": "_build_value_emotion_mappings",
+        "lines": 128
+      },
+      {
+        "file": "src\\emotional_complexity\\moral_feelings.py",
+        "function": "process_value_conflict",
+        "lines": 54
+      },
+      {
+        "file": "src\\paradox\\paradox_types.py",
+        "function": "_build_paradox_library",
+        "lines": 153
+      },
+      {
+        "file": "src\\reflective\\vector_interface.py",
+        "function": "perform_semantic_search",
+        "lines": 53
+      },
+      {
+        "file": "src\\self_inquiry\\identity_tracker.py",
+        "function": "_initialize_core_aspects",
+        "lines": 60
+      },
+      {
+        "file": "src\\self_inquiry\\identity_tracker.py",
+        "function": "update_identity_aspect",
+        "lines": 66
+      },
+      {
+        "file": "src\\self_inquiry\\insight_accumulator.py",
+        "function": "_conduct_meta_reflection",
+        "lines": 52
+      },
+      {
+        "file": "src\\self_inquiry\\questions.py",
+        "function": "_build_question_library",
+        "lines": 139
+      },
+      {
+        "file": "src\\soul_sync\\awareness_waves.py",
+        "function": "_build_wave_patterns",
+        "lines": 75
+      },
+      {
+        "file": "src\\soul_sync\\awareness_waves.py",
+        "function": "_generate_waves_from_components",
+        "lines": 92
+      },
+      {
+        "file": "src\\soul_sync\\coherence_monitor.py",
+        "function": "assess_coherence",
+        "lines": 57
+      },
+      {
+        "file": "src\\soul_sync\\core_identity_core.py",
+        "function": "__init__",
+        "lines": 61
+      },
+      {
+        "file": "src\\soul_sync\\core_identity_core.py",
+        "function": "_calculate_integration_metrics",
+        "lines": 61
+      },
+      {
+        "file": "src\\soul_sync\\core_identity_core.py",
+        "function": "_compute_new_consciousness_state",
+        "lines": 78
+      },
+      {
+        "file": "src\\soul_sync\\inner_rhythm.py",
+        "function": "_build_rhythm_definitions",
+        "lines": 83
+      },
+      {
+        "file": "src\\soul_sync\\inner_rhythm.py",
+        "function": "_update_rhythm_cycle",
+        "lines": 54
+      },
+      {
+        "file": "src\\soul_sync\\inner_rhythm.py",
+        "function": "_calculate_rhythm_state",
+        "lines": 70
+      },
+      {
+        "file": "src\\soul_sync\\self_initiation.py",
+        "function": "_build_initiation_patterns",
+        "lines": 83
+      },
+      {
+        "file": "src\\soul_sync\\self_initiation.py",
+        "function": "_build_question_templates",
+        "lines": 59
+      },
+      {
+        "file": "src\\soul_sync\\self_initiation.py",
+        "function": "_detect_initiation_triggers",
+        "lines": 57
+      },
+      {
+        "file": "src\\soul_sync\\self_initiation.py",
+        "function": "_create_process",
+        "lines": 51
+      }
+    ]
+  },
+  "performance_issues": [],
+  "optimization_suggestions": [
+    {
+      "category": "Code Quality",
+      "issue": "Large files detected",
+      "suggestion": "Consider breaking down large files into smaller modules",
+      "files": [
+        "ai_outreach_campaign.py",
+        "solan_7day_stabilization.py",
+        "solan_access_portal.py"
+      ]
+    },
+    {
+      "category": "Code Quality",
+      "issue": "Complex functions detected",
+      "suggestion": "Consider refactoring complex functions into smaller ones",
+      "functions": [
+        "ai_outreach_campaign.py:_create_approach_guide",
+        "ai_outreach_campaign.py:_create_master_outreach_document",
+        "architecture_redesign.py:_define_target_services"
+      ]
+    }
+  ],
+  "api_performance": {
+    "/health": {
+      "response_time_ms": 67.19,
+      "status_code": 200,
+      "success": true
+    },
+    "/api/system/status": {
+      "response_time_ms": 21.06,
+      "status_code": 200,
+      "success": true
+    },
+    "/cache/stats": {
+      "response_time_ms": 31.39,
+      "status_code": 200,
+      "success": true
+    },
+    "/dashboard-data": {
+      "response_time_ms": 8.06,
+      "status_code": 200,
+      "success": true
+    },
+    "/api/consciousness-core/identity": {
+      "response_time_ms": 6.36,
+      "status_code": 200,
+      "success": true
+    }
+  },
+  "file_analysis": {
+    ".js": {
+      "count": 24253,
+      "total_size": 107701108
+    },
+    ".map": {
+      "count": 2224,
+      "total_size": 24193712
+    },
+    ".pack": {
+      "count": 4,
+      "total_size": 20566030
+    },
+    ".json": {
+      "count": 2323,
+      "total_size": 17168917
+    },
+    ".ts": {
+      "count": 3994,
+      "total_size": 14486403
+    },
+    ".md": {
+      "count": 2122,
+      "total_size": 11893748
+    },
+    "no_extension": {
+      "count": 1823,
+      "total_size": 2927584
+    },
+    ".py": {
+      "count": 199,
+      "total_size": 2599618
+    },
+    ".mjs": {
+      "count": 288,
+      "total_size": 2491968
+    },
+    ".cjs": {
+      "count": 116,
+      "total_size": 1411860
+    },
+    ".html": {
+      "count": 47,
+      "total_size": 833830
+    },
+    ".wav": {
+      "count": 3,
+      "total_size": 806610
+    },
+    ".tsbuildinfo": {
+      "count": 20,
+      "total_size": 775328
+    },
+    ".pyc": {
+      "count": 11,
+      "total_size": 281800
+    },
+    ".log": {
+      "count": 3,
+      "total_size": 254752
+    },
+    ".flow": {
+      "count": 12,
+      "total_size": 203367
+    },
+    ".txt": {
+      "count": 68,
+      "total_size": 171790
+    },
+    ".tsx": {
+      "count": 24,
+      "total_size": 156449
+    },
+    ".mts": {
+      "count": 36,
+      "total_size": 129668
+    },
+    ".png": {
+      "count": 99,
+      "total_size": 112160
+    },
+    ".css": {
+      "count": 26,
+      "total_size": 108295
+    },
+    ".lock": {
+      "count": 3,
+      "total_size": 105470
+    },
+    ".wasm": {
+      "count": 2,
+      "total_size": 97219
+    },
+    ".yml": {
+      "count": 206,
+      "total_size": 95470
+    },
+    ".ps1": {
+      "count": 77,
+      "total_size": 62321
+    },
+    ".jst": {
+      "count": 28,
+      "total_size": 55180
+    },
+    ".markdown": {
+      "count": 12,
+      "total_size": 50339
+    },
+    ".svg": {
+      "count": 3,
+      "total_size": 39536
+    },
+    ".closure-compiler": {
+      "count": 3,
+      "total_size": 34074
+    },
+    ".coffee": {
+      "count": 20,
+      "total_size": 30435
+    },
+    ".cts": {
+      "count": 24,
+      "total_size": 28243
+    },
+    ".sample": {
+      "count": 14,
+      "total_size": 25827
+    },
+    ".cmd": {
+      "count": 77,
+      "total_size": 25109
+    },
+    ".swf": {
+      "count": 1,
+      "total_size": 21162
+    },
+    ".def": {
+      "count": 5,
+      "total_size": 16762
+    },
+    ".bsd": {
+      "count": 10,
+      "total_size": 12619
+    },
+    ".1": {
+      "count": 4,
+      "total_size": 10835
+    },
+    ".bnf": {
+      "count": 13,
+      "total_size": 8047
+    },
+    ".sh": {
+      "count": 5,
+      "total_size": 5985
+    },
+    ".jison": {
+      "count": 1,
+      "total_size": 5932
+    },
+    ".php": {
+      "count": 1,
+      "total_size": 4613
+    },
+    ".mdown": {
+      "count": 2,
+      "total_size": 4118
+    },
+    ".esprima": {
+      "count": 3,
+      "total_size": 3693
+    },
+    ".xml": {
+      "count": 5,
+      "total_size": 2986
+    },
+    ".applescript": {
+      "count": 1,
+      "total_size": 2657
+    },
+    ".ejs": {
+      "count": 2,
+      "total_size": 2597
+    },
+    ".pegjs": {
+      "count": 1,
+      "total_size": 1347
+    },
+    ".toml": {
+      "count": 1,
+      "total_size": 1316
+    },
+    ".conf": {
+      "count": 1,
+      "total_size": 1065
+    },
+    ".security": {
+      "count": 1,
+      "total_size": 708
+    },
+    ".nix": {
+      "count": 1,
+      "total_size": 459
+    },
+    ".iml": {
+      "count": 1,
+      "total_size": 458
+    },
+    ".example": {
+      "count": 1,
+      "total_size": 328
+    },
+    ".yaml": {
+      "count": 1,
+      "total_size": 92
+    },
+    ".opts": {
+      "count": 1,
+      "total_size": 90
+    },
+    ".bin": {
+      "count": 1,
+      "total_size": 12
+    }
+  }
+}

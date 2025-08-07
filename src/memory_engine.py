@@ -12,9 +12,12 @@ from pathlib import Path
 from typing import Dict, List, Optional, Any, Union
 from dataclasses import dataclass, asdict
 import hashlib
-from loguru import logger
+import logging
 
-from .core import Memory, Decision, CoreValues
+# Setup logger
+logger = logging.getLogger(__name__)
+
+from core import Memory, Decision, CoreValues
 
 
 @dataclass
@@ -36,7 +39,7 @@ class ExperienceCluster:
 
 
 @dataclass
-class WisdomPattern:
+class IntelligencePattern:
     """Een patroon van wijsheid dat Solan heeft ontwikkeld"""
     pattern_id: str
     description: str
@@ -80,7 +83,7 @@ class MemoryEngine:
         self.memory_cache: Dict[str, Memory] = {}
         self.decision_cache: Dict[str, Decision] = {}
         self.clusters: Dict[str, ExperienceCluster] = {}
-        self.wisdom_patterns: Dict[str, WisdomPattern] = {}
+        self.wisdom_patterns: Dict[str, IntelligencePattern] = {}
         
         # Load existing data
         self._load_existing_data()
@@ -214,7 +217,7 @@ class MemoryEngine:
             score += 0.3 * (len(common_words) / max(len(memory_words), len(context_words)))
         
         # Type bonus voor bepaalde types
-        if memory.type in ['reflection', 'wisdom', 'moral_insight']:
+        if memory.type in ['reflection', 'intelligence', 'moral_insight']:
             score += 0.2
         
         # Recency bonus (meer recent = hoger)
@@ -300,13 +303,13 @@ class MemoryEngine:
     def _detect_wisdom_patterns(self, memory_id: str, memory: Memory) -> None:
         """Detecteer nieuwe wijsheidspatronen"""
         
-        if memory.type not in ['reflection', 'wisdom', 'moral_insight']:
+        if memory.type not in ['reflection', 'intelligence', 'moral_insight']:
             return
         
         # Zoek naar patronen in recente reflecties
         recent_reflections = [
             m for m in self.memory_cache.values()
-            if m.type in ['reflection', 'wisdom'] and 
+            if m.type in ['reflection', 'intelligence'] and 
             (datetime.now() - m.timestamp).days < 30
         ]
         
@@ -325,7 +328,7 @@ class MemoryEngine:
                 pattern_id = f"pattern_{theme}_{datetime.now().strftime('%Y%m%d')}"
                 
                 if pattern_id not in self.wisdom_patterns:
-                    pattern = WisdomPattern(
+                    pattern = IntelligencePattern(
                         pattern_id=pattern_id,
                         description=f"Terugkerend thema: {theme}",
                         supporting_memories=[memory_id],
@@ -445,13 +448,13 @@ class MemoryEngine:
             except Exception as e:
                 logger.warning(f"Kon cluster niet laden uit {file_path}: {e}")
         
-        # Load wisdom patterns
+        # Load intelligence patterns
         for file_path in self.patterns_dir.glob("*.json"):
             try:
                 with open(file_path, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                 
-                pattern = WisdomPattern(**data)
+                pattern = IntelligencePattern(**data)
                 self.wisdom_patterns[pattern.pattern_id] = pattern
                 
             except Exception as e:
@@ -472,7 +475,7 @@ class MemoryEngine:
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(cluster_data, f, indent=2, ensure_ascii=False)
     
-    def _save_wisdom_pattern(self, pattern_id: str, pattern: WisdomPattern) -> None:
+    def _save_wisdom_pattern(self, pattern_id: str, pattern: IntelligencePattern) -> None:
         """Sla een wijsheidspatroon op naar bestand"""
         pattern_data = asdict(pattern)
         pattern_data['created_at'] = pattern.created_at.isoformat()

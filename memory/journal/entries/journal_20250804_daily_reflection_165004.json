@@ -1,0 +1,25 @@
+{
+  "entry_id": "journal_20250804_daily_reflection_165004",
+  "date": "2025-08-04",
+  "entry_type": "daily_reflection",
+  "title": "Test Entry 3",
+  "content": "Test reflectie content 3 over bewustzijn en groei.",
+  "mood": "contemplative",
+  "emotional_intensity": 0.4,
+  "awareness_coherence": 0.8,
+  "tags": [
+    "test",
+    "reflectie"
+  ],
+  "related_memories": [
+    "mem_20250804_164905_247c992d",
+    "mem_20250804_165004_ead7dcc8",
+    "mem_20250803_223725_6a37b449",
+    "mem_20250804_165004_d09da693",
+    "mem_20250804_165004_2fa861f9"
+  ],
+  "insights_gained": [],
+  "questions_raised": [],
+  "timestamp": "2025-08-04T16:50:04.755705",
+  "word_count": 8
+}

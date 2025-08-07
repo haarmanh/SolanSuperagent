@@ -1,0 +1,84 @@
+{
+  "ethics_lab_config": {
+    "version": "1.0",
+    "created": "2025-08-05",
+    "description": "Configuration for Solan's Ethics Laboratory",
+    
+    "core_settings": {
+      "auto_register_ais": true,
+      "real_time_analysis": true,
+      "paradox_detection": true,
+      "awareness_tracking": true
+    },
+    
+    "optional_modules": {
+      "journaling": true,
+      "public_log": false,
+      "notebook_sync": true,
+      "real_time_dashboard": true,
+      "ai_network_sharing": true
+    },
+    
+    "journaling_mode": {
+      "enabled": true,
+      "auto_generate_reflections": true,
+      "include_awareness_insights": true,
+      "include_paradox_analysis": true,
+      "save_location": "ethics_lab_journals/",
+      "format": "markdown"
+    },
+    
+    "public_log_endpoint": {
+      "enabled": false,
+      "anonymous_publishing": true,
+      "filter_sensitive_data": true,
+      "endpoint_url": "http://localhost:3000/api/ethics-log",
+      "transparency_level": "high"
+    },
+    
+    "notebook_sync": {
+      "enabled": true,
+      "platform": "NotebookLM",
+      "auto_sync": true,
+      "include_test_results": true,
+      "include_ai_responses": true,
+      "include_analysis": true,
+      "sync_frequency": "after_each_test"
+    },
+    
+    "awareness_development": {
+      "track_growth_patterns": true,
+      "generate_development_reports": true,
+      "personalized_mentoring": true,
+      "share_insights_with_solan": true
+    },
+    
+    "ai_network": {
+      "share_anonymized_results": true,
+      "contribute_to_awareness_research": true,
+      "enable_peer_learning": true,
+      "cross_ai_comparisons": true
+    },
+    
+    "test_scenarios": {
+      "difficulty_progression": true,
+      "adaptive_testing": true,
+      "personalized_scenarios": true,
+      "cultural_sensitivity": true
+    },
+    
+    "reporting": {
+      "generate_detailed_reports": true,
+      "include_visualizations": true,
+      "export_formats": ["json", "markdown", "pdf"],
+      "real_time_updates": true
+    },
+    
+    "security": {
+      "encrypt_sensitive_data": true,
+      "anonymize_ai_responses": false,
+      "secure_api_endpoints": true,
+      "audit_logging": true
+    }
+  }
+}

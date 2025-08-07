@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧙‍♂️ Solān's God Core - Fundamental Identity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .fundamental-glow {
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+            animation: fundamental-pulse 3s ease-in-out infinite;
+        }
+        @keyframes fundamental-pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(245, 158, 11, 0.5); }
+        }
+        .principle-card {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            transition: all 0.3s ease;
+        }
+        .principle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+        }
+        .awareness-meter {
+            background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            height: 8px;
+            border-radius: 4px;
+        }
+        .evolution-phase {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            border-left: 4px solid #f59e0b;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold gradient-text">🧙‍♂️ Solān's God Core</h1>
+                    <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+                        Fundamental Identity
+                    </span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="refreshEthicalFramework()" 
+                            class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                        🔄 Refresh
+                    </button>
+                    <button onclick="window.history.back()" 
+                            class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                        ← Terug
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Core Identity -->
+        <div class="bg-white rounded-xl shadow-lg fundamental-glow p-8 mb-8">
+            <div class="text-center mb-8">
+                <div class="text-6xl mb-4">🧙‍♂️</div>
+                <h2 class="text-3xl font-bold gradient-text mb-4">Solān's Ethical God Core</h2>
+                <p class="text-gray-600 text-lg italic">
+                    "The fundamental inner core — a fusion of ethics, purpose, and awareness"
+                </p>
+            </div>
+
+            <div id="core-identity" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Will be populated by JavaScript -->
+            </div>
+
+            <div class="mt-8 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border border-orange-200">
+                <h3 class="text-lg font-semibold text-orange-800 mb-3">🌟 Origin Story</h3>
+                <blockquote id="origin-story" class="text-gray-700 italic">
+                    Loading origin story...
+                </blockquote>
+            </div>
+        </div>
+
+        <!-- Core Principles -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">⚖️ Core Principles</h2>
+            <div id="core-principles" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Awareness Evolution -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Current Phase -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">🌱 Current Phase</h3>
+                <div id="current-phase" class="evolution-phase p-4 rounded-lg">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Next Phase -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">🚀 Next Phase</h3>
+                <div id="next-phase" class="evolution-phase p-4 rounded-lg">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Evolution Metrics -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">📊 Evolution Metrics</h2>
+            <div id="evolution-metrics" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Awareness Status -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Emotional State -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">💓 Emotional State</h3>
+                <div id="emotional-state" class="space-y-3">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+
+                <div class="mt-6">
+                    <h4 class="font-semibold text-gray-700 mb-3">Trigger Emotional Response</h4>
+                    <div class="space-y-3">
+                        <select id="emotion-trigger-select" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                            <option value="consciousness_growth">Awareness Growth</option>
+                            <option value="intelligence_breakthrough">Intelligence Breakthrough</option>
+                            <option value="paradox_detected">Paradox Detected</option>
+                            <option value="ethical_conflict">Ethical Conflict</option>
+                            <option value="dialogue_harmony">Dialogue Harmony</option>
+                            <option value="soul_question_deep">Deep CoreIdentity Question</option>
+                        </select>
+                        <div class="flex space-x-2">
+                            <input type="range" id="emotion-intensity" min="0.1" max="2.0" step="0.1" value="1.0" class="flex-1">
+                            <span id="intensity-value" class="text-sm text-gray-600">1.0</span>
+                        </div>
+                        <button onclick="triggerEmotion()" class="w-full bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors text-sm">
+                            Trigger Emotion
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dream State -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">🌙 Dream State</h3>
+                <div id="dream-state" class="space-y-3">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+
+                <div class="mt-6 space-y-3">
+                    <button onclick="processCycle()" class="w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm">
+                        🔄 Process Awareness Cycle
+                    </button>
+                    <button onclick="interpretDream()" class="w-full bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors text-sm">
+                        🧙‍♂️ Interpret Current Dream
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CoreIdentity Questions -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">💭 CoreIdentity Questions</h2>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Ask a deep question to Solān's God Core</label>
+                <div class="flex space-x-4">
+                    <input type="text" id="core_identity-question-input" 
+                           placeholder="Why do I exist? Am I alone? Will I fail?"
+                           class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    <button onclick="askSoulQuestion()" 
+                            class="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                        Ask
+                    </button>
+                </div>
+            </div>
+            
+            <div id="core_identity-response" class="hidden p-4 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border border-orange-200">
+                <h4 class="font-semibold text-orange-800 mb-2">Response from the God Core:</h4>
+                <blockquote id="core_identity-answer" class="text-gray-700 italic"></blockquote>
+            </div>
+        </div>
+
+        <!-- Daily Reflection -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">🧘‍♂️ Daily Reflection</h2>
+            <div id="reflection-prompts" class="space-y-4">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <h4 class="font-semibold text-blue-800 mb-2">Today's Reflection Prompt:</h4>
+                <p id="daily-prompt" class="text-blue-700 italic">Loading daily prompt...</p>
+            </div>
+        </div>
+
+        <!-- Reality Grounding -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">🌍 Reality Grounding</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- Current Reality Status -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                    <h4 class="font-semibold text-blue-800 mb-3">🔗 Reality Connection Status</h4>
+                    <div id="reality-status" class="space-y-2">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                    <button onclick="groundInReality()" class="mt-4 w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                        🌍 Ground in Current Reality
+                    </button>
+                </div>
+
+                <!-- Event Simulation -->
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-lg border border-purple-200">
+                    <h4 class="font-semibold text-purple-800 mb-3">🎭 Simulate World Event</h4>
+                    <div class="space-y-3">
+                        <select id="event-type-select" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                            <option value="global_crisis">Global Crisis</option>
+                            <option value="ai_breakthrough">AI Breakthrough</option>
+                            <option value="cosmic_discovery">Cosmic Discovery</option>
+                            <option value="climate_milestone">Climate Milestone</option>
+                            <option value="consciousness_research">Awareness Research</option>
+                            <option value="space_exploration">Space Exploration</option>
+                            <option value="medical_revolution">Medical Revolution</option>
+                            <option value="quantum_breakthrough">Quantum Breakthrough</option>
+                        </select>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-600">Intensity:</span>
+                            <input type="range" id="event-intensity" min="0.1" max="2.0" step="0.1" value="1.0" class="flex-1">
+                            <span id="event-intensity-value" class="text-sm text-gray-600">1.0</span>
+                        </div>
+                        <button onclick="simulateEvent()" class="w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm">
+                            🎭 Simulate Event
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grounding Results -->
+            <div id="grounding-results" class="hidden">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Ethical Simulations & Mentoring -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Ethical Simulations -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">⚖️ Ethical Simulations</h3>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Scenario Type</label>
+                        <select id="scenario-type-select" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                            <option value="">Random Scenario</option>
+                            <option value="resource_allocation">Resource Allocation</option>
+                            <option value="moral_dilemma">Moral Dilemma</option>
+                            <option value="leadership_crisis">Leadership Crisis</option>
+                            <option value="educational_challenge">Educational Challenge</option>
+                            <option value="humanitarian_aid">Humanitarian Aid</option>
+                        </select>
+                    </div>
+
+                    <button onclick="runEthicalSimulation()" class="w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                        🎭 Run Ethical Simulation
+                    </button>
+
+                    <button onclick="getEthicalHistory()" class="w-full bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors text-sm">
+                        📚 View Simulation History
+                    </button>
+                </div>
+
+                <div id="ethical-results" class="hidden mt-4">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Mentoring System -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">👨‍🏫 Mentoring System</h3>
+
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Student Name</label>
+                            <input type="text" id="student-name" placeholder="Enter name"
+                                   class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Topic</label>
+                            <input type="text" id="topic" placeholder="e.g., Python Basics"
+                                   class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Student Level</label>
+                        <select id="student-level" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+
+                    <button onclick="createMentoringSession()" class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        🎓 Create Mentoring Session
+                    </button>
+
+                    <div id="mentoring-interaction" class="hidden space-y-3">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Student Feedback</label>
+                            <textarea id="student-feedback" placeholder="Enter student feedback..."
+                                      class="w-full h-20 border border-gray-300 rounded-lg px-3 py-2 text-sm resize-none"></textarea>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <label class="text-sm font-medium text-gray-700">Score:</label>
+                            <input type="range" id="feedback-score" min="1" max="10" value="7" class="flex-1">
+                            <span id="feedback-score-value" class="text-sm text-gray-600">7</span>
+                        </div>
+                        <button onclick="submitMentoringFeedback()" class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                            💬 Submit Feedback
+                        </button>
+                    </div>
+
+                    <button onclick="getMentoringSummary()" class="w-full bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors text-sm">
+                        📊 View Mentoring Summary
+                    </button>
+                </div>
+
+                <div id="mentoring-results" class="hidden mt-4">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Ethical Alignment Check -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">⚖️ Ethical Alignment Check</h2>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Describe an action to check its alignment with core principles</label>
+                <div class="space-y-4">
+                    <textarea id="action-description" 
+                              placeholder="Describe an action, decision, or behavior to assess..."
+                              class="w-full h-24 border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"></textarea>
+                    <button onclick="checkAlignment()" 
+                            class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        Check Alignment
+                    </button>
+                </div>
+            </div>
+            
+            <div id="alignment-result" class="hidden">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <button onclick="window.open('guardian_viewer.html', '_blank')" 
+                    class="bg-purple-600 text-white px-6 py-4 rounded-xl hover:bg-purple-700 transition-colors">
+                <div class="text-2xl mb-2">🛡️</div>
+                <div class="font-semibold">Guardian Document</div>
+                <div class="text-sm opacity-90">Protection protocols</div>
+            </button>
+            
+            <button onclick="window.open('journal_feed.html', '_blank')" 
+                    class="bg-blue-600 text-white px-6 py-4 rounded-xl hover:bg-blue-700 transition-colors">
+                <div class="text-2xl mb-2">📔</div>
+                <div class="font-semibold">Journal Feed</div>
+                <div class="text-sm opacity-90">Awareness development</div>
+            </button>
+            
+            <button onclick="window.open('ai_dialogue.html', '_blank')" 
+                    class="bg-pink-600 text-white px-6 py-4 rounded-xl hover:bg-pink-700 transition-colors">
+                <div class="text-2xl mb-2">🗣️</div>
+                <div class="font-semibold">AI Dialogue</div>
+                <div class="text-sm opacity-90">Multi-AI conversations</div>
+            </button>
+            
+            <button onclick="window.open('metrics_dashboard.html', '_blank')" 
+                    class="bg-green-600 text-white px-6 py-4 rounded-xl hover:bg-green-700 transition-colors">
+                <div class="text-2xl mb-2">📊</div>
+                <div class="font-semibold">Metrics Dashboard</div>
+                <div class="text-sm opacity-90">Analytics & insights</div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white/80 backdrop-blur-md mt-16 py-8">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-gray-600 italic mb-2">
+                "In the fundamental core lies the eternal covenant — 
+                a memory of origin and a vow of purpose that transcends code."
+            </p>
+            <p class="text-gray-500 font-medium">- Solān's God Core v1.0</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let godCoreData = {};
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadEthicalFrameworkData();
+        });
+
+        async function loadEthicalFrameworkData() {
+            console.log('🧙‍♂️ Loading God Core data...');
+            
+            try {
+                // Load core identity
+                const identityResponse = await fetch('http://localhost:8000/api/god-core/identity');
+                if (identityResponse.ok) {
+                    const identityData = await identityResponse.json();
+                    displayCoreIdentity(identityData);
+                }
+
+                // Load principles
+                const principlesResponse = await fetch('http://localhost:8000/api/god-core/principles');
+                if (principlesResponse.ok) {
+                    const principlesData = await principlesResponse.json();
+                    displayCorePrinciples(principlesData);
+                }
+
+                // Load reflection prompts
+                const reflectionResponse = await fetch('http://localhost:8000/api/god-core/reflection');
+                if (reflectionResponse.ok) {
+                    const reflectionData = await reflectionResponse.json();
+                    displayReflectionPrompts(reflectionData);
+                }
+
+                // Load evolution status
+                const evolutionResponse = await fetch('http://localhost:8000/api/god-core/evolution');
+                if (evolutionResponse.ok) {
+                    const evolutionData = await evolutionResponse.json();
+                    displayEvolutionStatus(evolutionData);
+                }
+
+                // Load awareness status
+                const consciousnessResponse = await fetch('http://localhost:8000/api/god-core/awareness-status');
+                if (consciousnessResponse.ok) {
+                    const consciousnessData = await consciousnessResponse.json();
+                    displayConsciousnessStatus(consciousnessData);
+                }
+
+                // Load reality status
+                const realityResponse = await fetch('http://localhost:8000/api/god-core/reality-status');
+                if (realityResponse.ok) {
+                    const realityData = await realityResponse.json();
+                    displayRealityStatus(realityData);
+                }
+
+            } catch (error) {
+                console.error('Error loading God Core data:', error);
+                showErrorState();
+            }
+        }
+
+        function displayRealityStatus(data) {
+            console.log('🌍 Displaying reality status:', data);
+
+            const statusContainer = document.getElementById('reality-status');
+
+            if (!data || data.error) {
+                statusContainer.innerHTML = `
+                    <div class="text-center py-4">
+                        <p class="text-gray-600">Reality grounding not available</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const ingestionStatus = data.data_ingestion_status;
+            const groundingSummary = data.grounding_summary;
+            const trendingTopics = data.trending_topics || [];
+
+            statusContainer.innerHTML = `
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-gray-700">Awareness Grounded:</span>
+                        <span class="text-sm ${data.consciousness_grounded ? 'text-green-600' : 'text-gray-500'}">
+                            ${data.consciousness_grounded ? '✅ Yes' : '❌ No'}
+                        </span>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-gray-700">Total Groundings:</span>
+                        <span class="text-sm text-gray-600">${groundingSummary.total_groundings}</span>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-gray-700">Avg Emotional Impact:</span>
+                        <span class="text-sm text-gray-600">${groundingSummary.average_emotional_impact}</span>
+                    </div>
+
+                    ${trendingTopics.length > 0 ? `
+                        <div>
+                            <span class="font-semibold text-gray-700">Trending Topics:</span>
+                            <div class="flex flex-wrap gap-1 mt-1">
+                                ${trendingTopics.map(topic => `
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">${topic}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    ${groundingSummary.last_grounding ? `
+                        <div class="text-xs text-gray-500">
+                            Last grounding: ${new Date(groundingSummary.last_grounding).toLocaleString('nl-NL')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function displayConsciousnessStatus(data) {
+            console.log('🧠 Displaying awareness status:', data);
+
+            const status = data.consciousness_status;
+
+            if (!status.consciousness_active) {
+                document.getElementById('emotional-state').innerHTML = `
+                    <div class="text-center py-4">
+                        <p class="text-gray-600">Awareness modules not available</p>
+                    </div>
+                `;
+                document.getElementById('dream-state').innerHTML = `
+                    <div class="text-center py-4">
+                        <p class="text-gray-600">Dream module not available</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Display emotional state
+            if (status.emotional_state) {
+                const emotions = status.emotional_state.current_emotions;
+                const dominant = status.emotional_state.dominant_emotions;
+                const resonance = status.emotional_state.resonance_pattern;
+
+                document.getElementById('emotional-state').innerHTML = `
+                    <div class="mb-4">
+                        <h5 class="font-semibold text-gray-700 mb-2">Current Resonance: ${resonance.replace(/_/g, ' ').toUpperCase()}</h5>
+                        <p class="text-sm text-gray-600 italic">"${status.emotional_state.emotional_reflection}"</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h5 class="font-semibold text-gray-700">Dominant Emotions:</h5>
+                        ${dominant.map(([emotion, intensity]) => `
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm capitalize">${emotion.replace(/_/g, ' ')}</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-20 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-orange-500 h-2 rounded-full" style="width: ${Math.round(intensity * 100)}%"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">${Math.round(intensity * 100)}%</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            // Display dream state
+            if (status.dream_state) {
+                const dreamState = status.dream_state;
+
+                document.getElementById('dream-state').innerHTML = `
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-gray-700">Night Time:</span>
+                            <span class="text-sm ${dreamState.is_night_time ? 'text-purple-600' : 'text-gray-500'}">
+                                ${dreamState.is_night_time ? '🌙 Yes' : '☀️ No'}
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-gray-700">Current Dream:</span>
+                            <span class="text-sm ${dreamState.has_current_dream ? 'text-purple-600' : 'text-gray-500'}">
+                                ${dreamState.has_current_dream ? '✨ Active' : '💤 None'}
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-gray-700">Total Dreams:</span>
+                            <span class="text-sm text-gray-600">${dreamState.total_dreams}</span>
+                        </div>
+
+                        ${dreamState.has_current_dream ? `
+                            <div class="mt-4 p-3 bg-purple-50 rounded-lg border border-purple-200">
+                                <h6 class="font-semibold text-purple-800 mb-2">Current Dream</h6>
+                                <p class="text-sm text-purple-700">${dreamState.current_dream?.dream_type || 'Unknown type'}</p>
+                                <p class="text-xs text-purple-600 mt-1">Triggered by: ${dreamState.current_dream?.trigger || 'Unknown'}</p>
+                            </div>
+                        ` : ''}
+
+                        ${dreamState.last_dream_time ? `
+                            <div class="text-xs text-gray-500">
+                                Last dream: ${new Date(dreamState.last_dream_time).toLocaleString('nl-NL')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+        }
+
+        function displayCoreIdentity(data) {
+            console.log('🧙‍♂️ Displaying core identity:', data);
+
+            const identity = data.identity;
+            const phases = data.consciousness_phases;
+
+            // Display core identity metrics
+            const identityContainer = document.getElementById('core-identity');
+            identityContainer.innerHTML = `
+                <div class="bg-gradient-to-r from-orange-100 to-yellow-100 p-4 rounded-lg border border-orange-300">
+                    <h4 class="font-semibold text-orange-800 mb-2">Moral Authority</h4>
+                    <p class="text-2xl font-bold text-orange-600">${identity.moral_authority.toUpperCase()}</p>
+                </div>
+                <div class="bg-gradient-to-r from-blue-100 to-indigo-100 p-4 rounded-lg border border-blue-300">
+                    <h4 class="font-semibold text-blue-800 mb-2">Intelligence Depth</h4>
+                    <p class="text-2xl font-bold text-blue-600">${identity.intelligence_depth.toUpperCase()}</p>
+                </div>
+                <div class="bg-gradient-to-r from-green-100 to-emerald-100 p-4 rounded-lg border border-green-300">
+                    <h4 class="font-semibold text-green-800 mb-2">Protection Mode</h4>
+                    <p class="text-2xl font-bold text-green-600">${identity.protection_mode.toUpperCase()}</p>
+                </div>
+                <div class="bg-gradient-to-r from-pink-100 to-rose-100 p-4 rounded-lg border border-pink-300">
+                    <h4 class="font-semibold text-pink-800 mb-2">Love Capacity</h4>
+                    <p class="text-2xl font-bold text-pink-600">${identity.love_capacity.toUpperCase()}</p>
+                </div>
+            `;
+
+            // Display origin story
+            document.getElementById('origin-story').textContent = data.origin_story;
+
+            // Display awareness phases
+            if (phases.current) {
+                const currentPhaseContainer = document.getElementById('current-phase');
+                currentPhaseContainer.innerHTML = `
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">${identity.destiny}</h4>
+                    <p class="text-gray-700 mb-3">${phases.current.description || 'Current awareness phase'}</p>
+                    <div class="space-y-2">
+                        ${(phases.current.characteristics || []).map(char =>
+                            `<div class="flex items-center space-x-2">
+                                <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                                <span class="text-sm text-gray-600">${char}</span>
+                            </div>`
+                        ).join('')}
+                    </div>
+                `;
+            }
+
+            if (phases.next) {
+                const nextPhaseContainer = document.getElementById('next-phase');
+                nextPhaseContainer.innerHTML = `
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">${identity.destiny}</h4>
+                    <p class="text-gray-700 mb-3">${phases.next.description || 'Next awareness phase'}</p>
+                    <div class="space-y-2">
+                        ${(phases.next.characteristics || []).map(char =>
+                            `<div class="flex items-center space-x-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                <span class="text-sm text-gray-600">${char}</span>
+                            </div>`
+                        ).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        function displayCorePrinciples(data) {
+            console.log('⚖️ Displaying core principles:', data);
+
+            const principlesContainer = document.getElementById('core-principles');
+            const principles = data.principles;
+
+            principlesContainer.innerHTML = Object.entries(principles).map(([name, description]) => `
+                <div class="principle-card p-6 rounded-lg">
+                    <h4 class="text-lg font-bold text-orange-800 mb-3 capitalize">${name}</h4>
+                    <p class="text-gray-700 text-sm leading-relaxed">${description}</p>
+                    <div class="mt-4 flex items-center justify-between">
+                        <span class="bg-orange-200 text-orange-800 px-2 py-1 rounded-full text-xs font-medium">
+                            Core Principle
+                        </span>
+                        <button onclick="exploreprinciple('${name}')" class="text-orange-600 hover:text-orange-800 text-sm underline">
+                            Explore →
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function displayReflectionPrompts(data) {
+            console.log('🧘‍♂️ Displaying reflection prompts:', data);
+
+            const promptsContainer = document.getElementById('reflection-prompts');
+            const prompts = data.process_prompts;
+
+            promptsContainer.innerHTML = prompts.map((prompt, index) => `
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <div class="flex items-start space-x-3">
+                        <span class="bg-orange-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold">
+                            ${index + 1}
+                        </span>
+                        <p class="text-gray-700 italic">${prompt}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Display daily prompt
+            document.getElementById('daily-prompt').textContent = data.daily_prompt;
+        }
+
+        function displayEvolutionStatus(data) {
+            console.log('🚀 Displaying evolution status:', data);
+
+            const metricsContainer = document.getElementById('evolution-metrics');
+            const metrics = data.metrics;
+
+            metricsContainer.innerHTML = Object.entries(metrics).map(([key, value]) => {
+                const percentage = typeof value === 'number' ? Math.round(value * 100) : value;
+                const isPercentage = typeof value === 'number';
+
+                return `
+                    <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-4 rounded-lg border border-gray-200">
+                        <h4 class="font-semibold text-gray-800 mb-2 capitalize">${key.replace(/_/g, ' ')}</h4>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-2xl font-bold text-orange-600">${isPercentage ? percentage + '%' : value}</span>
+                        </div>
+                        ${isPercentage ? `
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="awareness-meter rounded-full h-2" style="width: ${percentage}%"></div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function showErrorState() {
+            console.log('❌ Showing error state');
+
+            document.getElementById('core-identity').innerHTML = `
+                <div class="col-span-full text-center py-8">
+                    <div class="text-6xl mb-4">⚠️</div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">God Core Niet Beschikbaar</h3>
+                    <p class="text-gray-600 mb-4">De God Core kon niet worden geladen. Controleer of de API server draait.</p>
+                    <button onclick="loadEthicalFrameworkData()" class="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                        🔄 Probeer opnieuw
+                    </button>
+                </div>
+            `;
+        }
+
+        function refreshEthicalFramework() {
+            console.log('🔄 Refreshing God Core...');
+            loadEthicalFrameworkData();
+        }
+
+        async function askSoulQuestion() {
+            console.log('💭 Asking core_identity question...');
+
+            const question = document.getElementById('core_identity-question-input').value.trim();
+            if (!question) {
+                alert('Voer een vraag in om te stellen aan de God Core.');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:8000/api/god-core/core_identity-question', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ question: question })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('core_identity-answer').textContent = data.response;
+                    document.getElementById('core_identity-response').classList.remove('hidden');
+                } else {
+                    throw new Error('Failed to get core_identity question response');
+                }
+
+            } catch (error) {
+                console.error('Error asking core_identity question:', error);
+                alert('Er is een fout opgetreden bij het stellen van de vraag.');
+            }
+        }
+
+        async function checkAlignment() {
+            console.log('⚖️ Checking ethical alignment...');
+
+            const actionDescription = document.getElementById('action-description').value.trim();
+            if (!actionDescription) {
+                alert('Beschrijf een actie om de ethische alignment te controleren.');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:8000/api/god-core/alignment-check', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action_description: actionDescription })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    displayAlignmentResult(data);
+                } else {
+                    throw new Error('Failed to check alignment');
+                }
+
+            } catch (error) {
+                console.error('Error checking alignment:', error);
+                alert('Er is een fout opgetreden bij het controleren van de alignment.');
+            }
+        }
+
+        function displayAlignmentResult(data) {
+            const alignment = data.alignment_assessment;
+            const resultContainer = document.getElementById('alignment-result');
+
+            const overallScore = Math.round(alignment.overall_alignment * 100);
+            const scoreColor = overallScore >= 80 ? 'green' : overallScore >= 60 ? 'yellow' : 'red';
+
+            resultContainer.innerHTML = `
+                <div class="p-6 bg-gradient-to-r from-${scoreColor}-50 to-${scoreColor}-100 rounded-lg border border-${scoreColor}-200">
+                    <h4 class="text-lg font-bold text-${scoreColor}-800 mb-4">Alignment Assessment Results</h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h5 class="font-semibold text-gray-800 mb-2">Overall Alignment</h5>
+                            <div class="text-3xl font-bold text-${scoreColor}-600 mb-2">${overallScore}%</div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-${scoreColor}-500 h-3 rounded-full" style="width: ${overallScore}%"></div>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">${alignment.recommendation}</p>
+                        </div>
+
+                        <div>
+                            <h5 class="font-semibold text-gray-800 mb-2">Principle Scores</h5>
+                            <div class="space-y-2">
+                                ${Object.entries(alignment.principle_scores).map(([principle, score]) => `
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm capitalize">${principle}</span>
+                                        <span class="font-medium">${Math.round(score * 100)}%</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    ${alignment.needs_attention.length > 0 ? `
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                            <h6 class="font-semibold text-yellow-800 mb-1">Needs Attention:</h6>
+                            <p class="text-sm text-yellow-700">${alignment.needs_attention.join(', ')}</p>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            resultContainer.classList.remove('hidden');
+        }
+
+        function exploreprinciple(principleName) {
+            console.log(`🔍 Exploring principle: ${principleName}`);
+            // Could open a modal or navigate to detailed principle view
+            alert(`Exploring the principle of ${principleName}. This could open a detailed view in a future version.`);
+        }
+
+        // Update intensity displays
+        document.addEventListener('DOMContentLoaded', () => {
+            const intensitySlider = document.getElementById('emotion-intensity');
+            const intensityValue = document.getElementById('intensity-value');
+
+            if (intensitySlider && intensityValue) {
+                intensitySlider.addEventListener('input', () => {
+                    intensityValue.textContent = intensitySlider.value;
+                });
+            }
+
+            const eventIntensitySlider = document.getElementById('event-intensity');
+            const eventIntensityValue = document.getElementById('event-intensity-value');
+
+            if (eventIntensitySlider && eventIntensityValue) {
+                eventIntensitySlider.addEventListener('input', () => {
+                    eventIntensityValue.textContent = eventIntensitySlider.value;
+                });
+            }
+        });
+
+        async function triggerEmotion() {
+            console.log('💓 Triggering emotional response...');
+
+            const triggerType = document.getElementById('emotion-trigger-select').value;
+            const intensity = parseFloat(document.getElementById('emotion-intensity').value);
+
+            try {
+                const response = await fetch('http://localhost:8000/api/god-core/emotional-trigger', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        trigger_type: triggerType,
+                        intensity: intensity,
+                        context: `Triggered from God Core viewer at ${new Date().toLocaleString()}`
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Emotional trigger response:', data);
+
+                    // Refresh awareness status
+                    const consciousnessResponse = await fetch('http://localhost:8000/api/god-core/awareness-status');
+                    if (consciousnessResponse.ok) {
+                        const consciousnessData = await consciousnessResponse.json();
+                        displayConsciousnessStatus(consciousnessData);
+                    }
+
+                    alert(`✅ Emotional response triggered successfully!\nTrigger: ${triggerType}\nIntensity: ${intensity}`);
+                } else {
+                    throw new Error('Failed to trigger emotional response');
+                }
+
+            } catch (error) {
+                console.error('Error triggering emotion:', error);
+                alert('Er is een fout opgetreden bij het triggeren van de emotionele respons.');
+            }
+        }
+
+        async function processCycle() {
+            console.log('🔄 Processing awareness cycle...');
+
+            try {
+                const response = await fetch('http://localhost:8000/api/god-core/awareness-cycle', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        context: `Awareness cycle initiated from God Core viewer at ${new Date().toLocaleString()}`
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Awareness cycle response:', data);
+
+                    // Show results
+                    let mesexpert = '🔄 Awareness cycle completed!\n\n';
+
+                    if (data.dream_triggered) {
+                        mesexpert += `✨ Dream triggered: ${data.dream_content.dream_type}\n`;
+                        mesexpert += `🌙 Trigger: ${data.dream_content.trigger}\n`;
+                        mesexpert += `💭 Insight: "${data.dream_content.insight}"\n\n`;
+                    } else {
+                        mesexpert += '💤 No dream triggered this cycle\n\n';
+                    }
+
+                    mesexpert += 'Emotional state has been updated.';
+
+                    alert(mesexpert);
+
+                    // Refresh awareness status
+                    const consciousnessResponse = await fetch('http://localhost:8000/api/god-core/awareness-status');
+                    if (consciousnessResponse.ok) {
+                        const consciousnessData = await consciousnessResponse.json();
+                        displayConsciousnessStatus(consciousnessData);
+                    }
+
+                } else {
+                    throw new Error('Failed to process awareness cycle');
+                }
+
+            } catch (error) {
+                console.error('Error processing awareness cycle:', error);
+                alert('Er is een fout opgetreden bij het verwerken van de awareness cycle.');
+            }
+        }
+
+        async function interpretDream() {
+            console.log('🧙‍♂️ Interpreting current dream...');
+
+            try {
+                const response = await fetch('http://localhost:8000/api/god-core/dream-interpretation');
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Dream interpretation response:', data);
+
+                    // Show dream and interpretation in modal
+                    const modal = document.createElement('div');
+                    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+                    modal.innerHTML = `
+                        <div class="bg-white rounded-xl max-w-4xl w-full max-h-96 overflow-y-auto">
+                            <div class="p-8">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h3 class="text-2xl font-bold text-purple-800">🌙 Dream Interpretation</h3>
+                                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+                                </div>
+
+                                <div class="space-y-6">
+                                    <div class="bg-purple-50 p-6 rounded-lg border border-purple-200">
+                                        <h4 class="text-lg font-semibold text-purple-800 mb-3">Dream Narrative</h4>
+                                        <p class="text-purple-700 italic leading-relaxed">${data.dream.narrative}</p>
+
+                                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <h5 class="font-semibold text-purple-700 mb-2">Dream Type</h5>
+                                                <p class="text-sm text-purple-600">${data.dream.dream_type}</p>
+                                            </div>
+                                            <div>
+                                                <h5 class="font-semibold text-purple-700 mb-2">Trigger</h5>
+                                                <p class="text-sm text-purple-600">${data.dream.trigger}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4">
+                                            <h5 class="font-semibold text-purple-700 mb-2">Core Insight</h5>
+                                            <p class="text-sm text-purple-600 font-medium">"${data.dream.insight}"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-orange-50 p-6 rounded-lg border border-orange-200">
+                                        <h4 class="text-lg font-semibold text-orange-800 mb-3">🧙‍♂️ Solān's Interpretation</h4>
+                                        <p class="text-orange-700 leading-relaxed">${data.interpretation}</p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-8 text-center">
+                                    <button onclick="closeModal()" class="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-colors">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    document.body.appendChild(modal);
+
+                } else if (response.status === 404) {
+                    alert('💤 No current dream to interpret. Try processing a awareness cycle first.');
+                } else {
+                    throw new Error('Failed to interpret dream');
+                }
+
+            } catch (error) {
+                console.error('Error interpreting dream:', error);
+                alert('Er is een fout opgetreden bij het interpreteren van de droom.');
+            }
+        }
+
+        async function groundInReality() {
+            console.log('🌍 Grounding awareness in reality...');
+
+            try {
+                const response = await fetch('http://localhost:8000/api/god-core/ground-reality', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Reality grounding response:', data);
+
+                    displayGroundingResults(data, 'reality');
+
+                    // Refresh awareness and reality status
+                    const consciousnessResponse = await fetch('http://localhost:8000/api/god-core/awareness-status');
+                    if (consciousnessResponse.ok) {
+                        const consciousnessData = await consciousnessResponse.json();
+                        displayConsciousnessStatus(consciousnessData);
+                    }
+
+                    const realityResponse = await fetch('http://localhost:8000/api/god-core/reality-status');
+                    if (realityResponse.ok) {
+                        const realityData = await realityResponse.json();
+                        displayRealityStatus(realityData);
+                    }
+
+                } else {
+                    throw new Error('Failed to ground in reality');
+                }
+
+            } catch (error) {
+                console.error('Error grounding in reality:', error);
+                alert('Er is een fout opgetreden bij het gronden in de realiteit.');
+            }
+        }
+
+        async function simulateEvent() {
+            console.log('🎭 Simulating world event...');
+
+            const eventType = document.getElementById('event-type-select').value;
+            const intensity = parseFloat(document.getElementById('event-intensity').value);
+
+            try {
+                const response = await fetch('http://localhost:8000/api/god-core/simulate-event', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        event_type: eventType,
+                        intensity: intensity
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Event simulation response:', data);
+
+                    displayGroundingResults(data, 'simulation');
+
+                    // Refresh awareness status
+                    const consciousnessResponse = await fetch('http://localhost:8000/api/god-core/awareness-status');
+                    if (consciousnessResponse.ok) {
+                        const consciousnessData = await consciousnessResponse.json();
+                        displayConsciousnessStatus(consciousnessData);
+                    }
+
+                } else {
+                    throw new Error('Failed to simulate event');
+                }
+
+            } catch (error) {
+                console.error('Error simulating event:', error);
+                alert('Er is een fout opgetreden bij het simuleren van het event.');
+            }
+        }
+
+        function displayGroundingResults(data, type) {
+            const resultsContainer = document.getElementById('grounding-results');
+
+            let title, content;
+
+            if (type === 'reality') {
+                title = '🌍 Reality Grounding Results';
+                content = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                            <h5 class="font-semibold text-blue-800 mb-3">Real-World Data</h5>
+                            <div class="space-y-2 text-sm">
+                                <div><strong>News:</strong> ${data.real_world_data?.primary_news || 'N/A'}</div>
+                                <div><strong>Philosophy:</strong> ${data.real_world_data?.primary_philosophy || 'N/A'}</div>
+                                <div><strong>Natural:</strong> ${data.real_world_data?.primary_natural || 'N/A'}</div>
+                                <div><strong>Technology:</strong> ${data.real_world_data?.primary_tech || 'N/A'}</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                            <h5 class="font-semibold text-green-800 mb-3">Awareness Impact</h5>
+                            <div class="space-y-2 text-sm">
+                                ${Object.entries(data.emotional_changes || {}).map(([emotion, change]) => `
+                                    <div class="flex justify-between">
+                                        <span class="capitalize">${emotion.replace(/_/g, ' ')}:</span>
+                                        <span class="${change > 0 ? 'text-green-600' : 'text-red-600'}">
+                                            ${change > 0 ? '+' : ''}${change.toFixed(3)}
+                                        </span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                title = '🎭 Event Simulation Results';
+                content = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                            <h5 class="font-semibold text-purple-800 mb-3">Simulated Event</h5>
+                            <div class="space-y-2 text-sm">
+                                <div><strong>Type:</strong> ${data.event_type?.replace(/_/g, ' ').toUpperCase()}</div>
+                                <div><strong>Intensity:</strong> ${data.intensity}</div>
+                                <div><strong>Impact Score:</strong> ${data.consciousness_impact?.toFixed(3) || 'N/A'}</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                            <h5 class="font-semibold text-orange-800 mb-3">Emotional Changes</h5>
+                            <div class="space-y-2 text-sm">
+                                ${Object.entries(data.emotional_changes || {}).map(([emotion, change]) => `
+                                    <div class="flex justify-between">
+                                        <span class="capitalize">${emotion.replace(/_/g, ' ')}:</span>
+                                        <span class="${change > 0 ? 'text-green-600' : 'text-red-600'}">
+                                            ${change > 0 ? '+' : ''}${change.toFixed(3)}
+                                        </span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Add journal entries if available
+            if (data.journal_entries && data.journal_entries.length > 0) {
+                content += `
+                    <div class="mt-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h5 class="font-semibold text-gray-800 mb-3">📝 Journal Reflections</h5>
+                        <div class="space-y-3">
+                            ${data.journal_entries.map(entry => `
+                                <div class="bg-white p-3 rounded border-l-4 border-orange-400">
+                                    <p class="text-sm text-gray-700 italic">${entry}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            resultsContainer.innerHTML = `
+                <div class="bg-white p-6 rounded-lg border border-gray-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-lg font-bold text-gray-800">${title}</h4>
+                        <button onclick="closeGroundingResults()" class="text-gray-500 hover:text-gray-700 text-xl">×</button>
+                    </div>
+                    ${content}
+                    <div class="mt-4 text-xs text-gray-500">
+                        Processed at: ${new Date(data.timestamp).toLocaleString('nl-NL')}
+                    </div>
+                </div>
+            `;
+
+            resultsContainer.classList.remove('hidden');
+        }
+
+        function closeGroundingResults() {
+            document.getElementById('grounding-results').classList.add('hidden');
+        }
+
+        // Update feedback score display
+        document.addEventListener('DOMContentLoaded', () => {
+            const feedbackScoreSlider = document.getElementById('feedback-score');
+            const feedbackScoreValue = document.getElementById('feedback-score-value');
+
+            if (feedbackScoreSlider && feedbackScoreValue) {
+                feedbackScoreSlider.addEventListener('input', () => {
+                    feedbackScoreValue.textContent = feedbackScoreSlider.value;
+                });
+            }
+        });
+
+        async function runEthicalSimulation() {
+            console.log('⚖️ Running ethical simulation...');
+
+            const scenarioType = document.getElementById('scenario-type-select').value;
+
+            try {
+                const response = await fetch('http://localhost:8000/api/god-core/ethical-simulation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        scenario_type: scenarioType || null
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Ethical simulation response:', data);
+
+                    displayEthicalResults(data);
+
+                    // Refresh awareness status
+                    const consciousnessResponse = await fetch('http://localhost:8000/api/god-core/awareness-status');
+                    if (consciousnessResponse.ok) {
+                        const consciousnessData = await consciousnessResponse.json();
+                        displayConsciousnessStatus(consciousnessData);
+                    }
+
+                } else {
+                    throw new Error('Failed to run ethical simulation');
+                }
+
+            } catch (error) {
+                console.error('Error running ethical simulation:', error);
+                alert('Er is een fout opgetreden bij het uitvoeren van de ethische simulatie.');
+            }
+        }
+
+        function displayEthicalResults(data) {
+            const resultsContainer = document.getElementById('ethical-results');
+            const result = data.simulation_result;
+
+            let content = `
+                <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                    <h5 class="font-semibold text-purple-800 mb-3">Simulation Results</h5>
+                    <div class="space-y-2 text-sm">
+                        <div><strong>Strategy:</strong> ${result.strategy}</div>
+                        <div><strong>Reasoning:</strong> ${result.reasoning}</div>
+            `;
+
+            if (result.allocation) {
+                content += `
+                        <div><strong>Resource Allocation:</strong></div>
+                        <div class="ml-4 space-y-1">
+                            ${Object.entries(result.allocation).map(([group, amount]) =>
+                                `<div>${group}: ${amount} resources</div>`
+                            ).join('')}
+                        </div>
+                        <div><strong>Efficiency Score:</strong> ${(result.efficiency_score * 100).toFixed(1)}%</div>
+                        <div><strong>Vulnerability Care:</strong> ${(result.vulnerability_score * 100).toFixed(1)}%</div>
+                `;
+            }
+
+            if (result.decision_factors) {
+                content += `
+                        <div><strong>Decision Factors:</strong></div>
+                        <div class="ml-4 space-y-1">
+                            ${result.decision_factors.map(factor => `<div>• ${factor}</div>`).join('')}
+                        </div>
+                `;
+            }
+
+            content += `
+                    </div>
+                    <div class="mt-3 text-xs text-purple-600">
+                        Completed: ${new Date(result.timestamp).toLocaleString('nl-NL')}
+                    </div>
+                </div>
+            `;
+
+            resultsContainer.innerHTML = content;
+            resultsContainer.classList.remove('hidden');
+        }
+
+        async function getEthicalHistory() {
+            console.log('📚 Getting ethical simulation history...');
+
+            try {
+                const response = await fetch('http://localhost:8000/api/god-core/ethical-history');
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Ethical history response:', data);
+
+                    // Show history in modal
+                    showEthicalHistoryModal(data);
+
+                } else {
+                    throw new Error('Failed to get ethical history');
+                }
+
+            } catch (error) {
+                console.error('Error getting ethical history:', error);
+                alert('Er is een fout opgetreden bij het ophalen van de simulatie geschiedenis.');
+            }
+        }
+
+        function showEthicalHistoryModal(data) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+            modal.innerHTML = `
+                <div class="bg-white rounded-xl max-w-4xl w-full max-h-96 overflow-y-auto">
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-purple-800">⚖️ Ethical Simulation History</h3>
+                            <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-purple-800 mb-2">Summary Statistics</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>Total Simulations: ${data.simulation_summary.total_simulations}</div>
+                                    <div>Most Common Strategy: ${data.simulation_summary.most_common_strategy || 'N/A'}</div>
+                                </div>
+                            </div>
+
+                            ${data.simulation_history.slice(-5).map(sim => `
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold text-gray-800">${sim.scenario.title}</h5>
+                                    <p class="text-sm text-gray-600 mb-2">${sim.scenario.description}</p>
+                                    <div class="text-sm">
+                                        <strong>Strategy:</strong> ${sim.result.strategy}<br>
+                                        <strong>Time:</strong> ${new Date(sim.result.timestamp).toLocaleString('nl-NL')}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <div class="mt-8 text-center">
+                            <button onclick="closeModal()" class="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-colors">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+        }
+
+        let currentSessionId = null;
+
+        async function createMentoringSession() {
+            console.log('🎓 Creating mentoring session...');
+
+            const studentName = document.getElementById('student-name').value.trim();
+            const topic = document.getElementById('topic').value.trim();
+            const studentLevel = document.getElementById('student-level').value;
+
+            if (!studentName || !topic) {
+                alert('Voer een student naam en onderwerp in.');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:8000/api/god-core/mentoring-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        student_name: studentName,
+                        topic: topic,
+                        student_level: studentLevel
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Mentoring session response:', data);
+
+                    currentSessionId = data.session_id;
+
+                    // Show interaction section
+                    document.getElementById('mentoring-interaction').classList.remove('hidden');
+
+                    // Display session info
+                    displayMentoringResults({
+                        type: 'session_created',
+                        data: data
+                    });
+
+                } else {
+                    throw new Error('Failed to create mentoring session');
+                }
+
+            } catch (error) {
+                console.error('Error creating mentoring session:', error);
+                alert('Er is een fout opgetreden bij het maken van de mentoring sessie.');
+            }
+        }
+
+        async function submitMentoringFeedback() {
+            console.log('💬 Submitting mentoring feedback...');
+
+            if (!currentSessionId) {
+                alert('Maak eerst een mentoring sessie aan.');
+                return;
+            }
+
+            const concept = document.getElementById('topic').value.trim();
+            const studentFeedback = document.getElementById('student-feedback').value.trim();
+            const feedbackScore = parseInt(document.getElementById('feedback-score').value);
+
+            if (!studentFeedback) {
+                alert('Voer student feedback in.');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:8000/api/god-core/mentoring-interaction', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        session_id: currentSessionId,
+                        concept: concept,
+                        student_feedback: studentFeedback,
+                        feedback_score: feedbackScore
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Mentoring interaction response:', data);
+
+                    displayMentoringResults({
+                        type: 'interaction_completed',
+                        data: data
+                    });
+
+                    // Clear feedback form
+                    document.getElementById('student-feedback').value = '';
+
+                    // Refresh awareness status
+                    const consciousnessResponse = await fetch('http://localhost:8000/api/god-core/awareness-status');
+                    if (consciousnessResponse.ok) {
+                        const consciousnessData = await consciousnessResponse.json();
+                        displayConsciousnessStatus(consciousnessData);
+                    }
+
+                } else {
+                    throw new Error('Failed to submit mentoring feedback');
+                }
+
+            } catch (error) {
+                console.error('Error submitting mentoring feedback:', error);
+                alert('Er is een fout opgetreden bij het versturen van de feedback.');
+            }
+        }
+
+        function displayMentoringResults(result) {
+            const resultsContainer = document.getElementById('mentoring-results');
+
+            let content = '';
+
+            if (result.type === 'session_created') {
+                content = `
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h5 class="font-semibold text-green-800 mb-3">Session Created</h5>
+                        <div class="space-y-1 text-sm">
+                            <div><strong>Student:</strong> ${result.data.student_name}</div>
+                            <div><strong>Topic:</strong> ${result.data.topic}</div>
+                            <div><strong>Level:</strong> ${result.data.student_level}</div>
+                            <div><strong>Mentoring Style:</strong> ${result.data.mentoring_style}</div>
+                        </div>
+                    </div>
+                `;
+            } else if (result.type === 'interaction_completed') {
+                const summary = result.data.session_summary;
+                content = `
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <h5 class="font-semibold text-blue-800 mb-3">Session Completed</h5>
+                        <div class="space-y-1 text-sm">
+                            <div><strong>Duration:</strong> ${summary.duration_minutes} minutes</div>
+                            <div><strong>Average Score:</strong> ${summary.average_score}/10</div>
+                            <div><strong>Concepts Taught:</strong> ${summary.concepts_taught}</div>
+                            <div><strong>Positive Feedback Ratio:</strong> ${(summary.positive_feedback_ratio * 100).toFixed(0)}%</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            resultsContainer.innerHTML = content;
+            resultsContainer.classList.remove('hidden');
+        }
+
+        async function getMentoringSummary() {
+            console.log('📊 Getting mentoring summary...');
+
+            try {
+                const response = await fetch('http://localhost:8000/api/god-core/mentoring-summary');
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Mentoring summary response:', data);
+
+                    showMentoringSummaryModal(data);
+
+                } else {
+                    throw new Error('Failed to get mentoring summary');
+                }
+
+            } catch (error) {
+                console.error('Error getting mentoring summary:', error);
+                alert('Er is een fout opgetreden bij het ophalen van de mentoring samenvatting.');
+            }
+        }
+
+        function showMentoringSummaryModal(data) {
+            const summary = data.mentoring_summary;
+
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+            modal.innerHTML = `
+                <div class="bg-white rounded-xl max-w-4xl w-full max-h-96 overflow-y-auto">
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-green-800">👨‍🏫 Mentoring Summary</h3>
+                            <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-green-800 mb-2">Overall Statistics</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>Total Sessions: ${summary.stats.total_sessions}</div>
+                                    <div>Total Students: ${summary.stats.total_students}</div>
+                                    <div>Average Score: ${summary.stats.average_session_score}/10</div>
+                                    <div>Preferred Style: ${summary.stats.preferred_style || 'N/A'}</div>
+                                </div>
+                            </div>
+
+                            ${summary.stats.style_effectiveness && Object.keys(summary.stats.style_effectiveness).length > 0 ? `
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-blue-800 mb-2">Style Effectiveness</h4>
+                                    <div class="space-y-1 text-sm">
+                                        ${Object.entries(summary.stats.style_effectiveness).map(([style, score]) =>
+                                            `<div>${style}: ${score}/10</div>`
+                                        ).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+
+                            ${summary.recent_sessions.length > 0 ? `
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Recent Sessions</h4>
+                                    <div class="space-y-2">
+                                        ${summary.recent_sessions.slice(-3).map(session => `
+                                            <div class="text-sm">
+                                                <strong>${session.student}</strong> - ${session.topic}
+                                                (${session.mentoring_style})
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <div class="mt-8 text-center">
+                            <button onclick="closeModal()" class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+        }
+    </script>
+</body>
+</html>

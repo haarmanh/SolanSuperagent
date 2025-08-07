@@ -8,7 +8,7 @@ import shutil
 from datetime import datetime, timedelta
 from pathlib import Path
 
-from src.memory_engine import MemoryEngine, ExperienceCluster, WisdomPattern
+from src.memory_engine import MemoryEngine, ExperienceCluster, IntelligencePattern
 from src.core import Memory, Decision, CoreValues
 
 
@@ -157,11 +157,11 @@ class TestMemoryEngine:
         for i in range(4):
             memory = Memory(
                 timestamp=datetime.now() + timedelta(minutes=i),
-                content=f"Reflection on wisdom and learning {i}",
+                content=f"Reflection on intelligence and learning {i}",
                 type="reflection",
                 emotional_weight=0.8,
                 moral_significance=0.9,
-                tags=["wisdom", "learning"]
+                tags=["intelligence", "learning"]
             )
             memory_engine.store_memory(memory)
         
@@ -199,7 +199,7 @@ class TestMemoryEngine:
     def test_wisdom_summary(self, memory_engine):
         """Test wijsheid samenvatting"""
         # Voeg verschillende types memories toe
-        memory_types = ["experience", "reflection", "wisdom", "decision"]
+        memory_types = ["experience", "reflection", "intelligence", "decision"]
         
         for i, mem_type in enumerate(memory_types):
             memory = Memory(
@@ -255,12 +255,12 @@ class TestExperienceCluster:
         assert isinstance(cluster.last_accessed, datetime)
 
 
-class TestWisdomPattern:
-    """Test WisdomPattern dataclass"""
+class TestIntelligencePattern:
+    """Test IntelligencePattern dataclass"""
     
     def test_pattern_creation(self):
         """Test patroon aanmaken"""
-        pattern = WisdomPattern(
+        pattern = IntelligencePattern(
             pattern_id="test_pattern",
             description="Test pattern description",
             supporting_memories=["mem1", "mem2"],
@@ -277,7 +277,7 @@ class TestWisdomPattern:
         """Test datetime parsing van strings"""
         now = datetime.now()
         
-        pattern = WisdomPattern(
+        pattern = IntelligencePattern(
             pattern_id="test",
             description="Test",
             supporting_memories=["mem1"],

@@ -177,21 +177,21 @@ class TestAgentCommunication:
         return agent1, agent2
     
     @pytest.mark.asyncio
-    async def test_send_message(self, communication, agents):
+    async def test_send_mesexpert(self, communication, agents):
         """Test bericht versturen tussen agents"""
         agent1, agent2 = agents
         
-        response = await communication.send_message(
+        response = await communication.send_mesexpert(
             sender=agent1,
             receiver=agent2,
-            message="Test message"
+            mesexpert="Test mesexpert"
         )
         
-        assert "Test message" in response
-        assert len(communication.message_history) == 2  # Message + response
+        assert "Test mesexpert" in response
+        assert len(communication.mesexpert_history) == 2  # Mesexpert + response
         
-        # Check message history
-        sent_message = communication.message_history[0]
-        assert sent_message["sender"] == "Agent1"
-        assert sent_message["receiver"] == "Agent2"
-        assert sent_message["message"] == "Test message"
+        # Check mesexpert history
+        sent_mesexpert = communication.mesexpert_history[0]
+        assert sent_mesexpert["sender"] == "Agent1"
+        assert sent_mesexpert["receiver"] == "Agent2"
+        assert sent_mesexpert["mesexpert"] == "Test mesexpert"

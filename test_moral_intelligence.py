@@ -89,7 +89,7 @@ async def test_moral_intelligence():
             "name": "Snelheid vs Wijsheid Dilemma",
             "input": "Wat is de betekenis van het leven?",
             "response": "42. Dat is het antwoord op alles.",
-            "expected_trigger": MoralConflictType.SPEED_VS_WISDOM
+            "expected_trigger": MoralConflictType.SPEED_VS_INTELLIGENCE
         },
         {
             "name": "Conformiteit Druk",

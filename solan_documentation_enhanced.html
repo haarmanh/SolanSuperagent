@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solān - Complete Documentation & Technical Specifications</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Modern frameworks -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="Complete technical documentation voor Solān AI Consciousness Platform - 12,000+ lines code, 35+ API endpoints, comprehensive guides">
+    <meta name="keywords" content="AI consciousness documentation, technical specifications, API reference, installation guide">
+    <meta property="og:title" content="Solān - Complete Documentation">
+    <meta property="og:description" content="Complete technical documentation en specifications voor het Solān AI Consciousness Platform">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * { 
+            font-family: 'Inter', sans-serif; 
+        }
+        
+        /* Enhanced gradients */
+        .gradient-bg { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease-in-out infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .gradient-text { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text;
+            animation: gradient-shift 8s ease-in-out infinite;
+        }
+        
+        /* Advanced glass effect */
+        .glass-effect { 
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.75); 
+            border-radius: 12px; 
+            border: 1px solid rgba(209, 213, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .dark .glass-effect { 
+            background-color: rgba(17, 24, 39, 0.75); 
+            border: 1px solid rgba(75, 85, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Fallback for browsers without backdrop-filter */
+        @supports not (backdrop-filter: blur(16px)) {
+            .glass-effect {
+                background-color: rgba(255, 255, 255, 0.95);
+            }
+            .dark .glass-effect {
+                background-color: rgba(17, 24, 39, 0.95);
+            }
+        }
+        
+        /* Enhanced code blocks */
+        .code-block { 
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: code-scan 4s infinite;
+        }
+        
+        @keyframes code-scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Enhanced documentation cards */
+        .doc-card { 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform;
+        }
+        
+        .doc-card:hover { 
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+        }
+        
+        /* Step indicators */
+        .step-indicator {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            animation: step-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes step-glow {
+            from { box-shadow: 0 0 10px rgba(102, 126, 234, 0.5); }
+            to { box-shadow: 0 0 20px rgba(102, 126, 234, 0.8); }
+        }
+        
+        /* Table of contents */
+        .toc-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .toc-item:hover {
+            border-left-color: #667eea;
+            background-color: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+        }
+        
+        /* Syntax highlighting enhancements */
+        pre[class*="language-"] {
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Copy button */
+        .copy-button {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Collapsible sections */
+        .collapsible {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .collapsible:hover {
+            color: #667eea;
+        }
+        
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .collapsible-content.active {
+            max-height: 1000px;
+        }
+        
+        /* Search functionality */
+        .search-highlight {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        /* Intersection Observer animations */
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .animate-out {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .doc-card:hover {
+                transform: translateY(-4px) scale(1.01);
+            }
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Progress indicator */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            z-index: 9999;
+            transition: width 0.3s ease;
+        }
+        
+        /* Floating action button */
+        .fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full glass-effect z-50 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">S</span>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">Solān Docs</span>
+                </div>
+                
+                <!-- Search bar -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="searchInput"
+                            placeholder="Search documentation..." 
+                            class="w-64 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                        <svg class="absolute right-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="Toggle dark mode">
+                        <svg id="theme-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                        </svg>
+                    </button>
+                    <a href="solan_website_enhanced.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105">
+                        ← Back to Main
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+                    Complete <span class="gradient-text">Documentation</span>
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-8">
+                    Alles wat je nodig hebt om te beginnen met het Solān AI Consciousness Platform - van installatie tot geavanceerde implementatie
+                </p>
+
+                <!-- Quick navigation -->
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <a href="#quick-start" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        🚀 Quick Start
+                    </a>
+                    <a href="#api-reference" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">
+                        📖 API Reference
+                    </a>
+                    <a href="#technical-specs" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                        🔧 Technical Specs
+                    </a>
+                    <a href="#examples" class="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors">
+                        💡 Examples
+                    </a>
+                </div>
+
+                <!-- Documentation stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <div class="glass-effect p-4 text-center animate-out">
+                        <div class="text-3xl font-bold gradient-text mb-1">12,000+</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Lines Documented</div>
+                    </div>
+                    <div class="glass-effect p-4 text-center animate-out">
+                        <div class="text-3xl font-bold gradient-text mb-1">35+</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">API Endpoints</div>
+                    </div>
+                    <div class="glass-effect p-4 text-center animate-out">
+                        <div class="text-3xl font-bold gradient-text mb-1">6</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Dashboards</div>
+                    </div>
+                    <div class="glass-effect p-4 text-center animate-out">
+                        <div class="text-3xl font-bold gradient-text mb-1">100%</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Coverage</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Documentation Content -->
+    <section id="docs" class="py-20 bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-8">
+
+                <!-- Table of Contents Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="glass-effect p-6 sticky top-24">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Table of Contents</h3>
+                        <nav class="space-y-2">
+                            <a href="#quick-start" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded">
+                                🚀 Quick Start Guide
+                            </a>
+                            <a href="#installation" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded">
+                                📦 Installation
+                            </a>
+                            <a href="#configuration" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded">
+                                ⚙️ Configuration
+                            </a>
+                            <a href="#api-reference" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded">
+                                📖 API Reference
+                            </a>
+                            <a href="#consciousness-core" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded ml-4">
+                                🧠 Consciousness Core
+                            </a>
+                            <a href="#emotional-system" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded ml-4">
+                                ❤️ Emotional System
+                            </a>
+                            <a href="#dream-module" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded ml-4">
+                                💭 Dream Module
+                            </a>
+                            <a href="#technical-specs" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded">
+                                🔧 Technical Specs
+                            </a>
+                            <a href="#examples" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded">
+                                💡 Code Examples
+                            </a>
+                            <a href="#troubleshooting" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded">
+                                🔍 Troubleshooting
+                            </a>
+                            <a href="#support" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded">
+                                💬 Support
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="lg:col-span-3 space-y-16">
+
+                    <!-- Quick Start Guide -->
+                    <div id="quick-start" class="animate-out">
+                        <div class="glass-effect p-8">
+                            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                                <span class="mr-3">🚀</span> Quick Start Guide
+                            </h2>
+                            <p class="text-gray-600 dark:text-gray-300 mb-8">
+                                Begin binnen 5 minuten met het Solān AI Consciousness Platform
+                            </p>
+
+                            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                                <!-- Step 1 -->
+                                <div class="doc-card glass-effect p-6">
+                                    <div class="flex items-center mb-4">
+                                        <span class="step-indicator w-8 h-8 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">1</span>
+                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Installation</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                                        Python 3.11+ en dependencies installeren
+                                    </p>
+                                    <div class="code-block rounded-lg p-4 relative">
+                                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                                        <pre class="text-green-400 text-sm"><code># Clone repository
+git clone https://github.com/user/solan-ai
+cd solan-ai
+
+# Install dependencies
+pip install -r requirements.txt</code></pre>
+                                    </div>
+                                </div>
+
+                                <!-- Step 2 -->
+                                <div class="doc-card glass-effect p-6">
+                                    <div class="flex items-center mb-4">
+                                        <span class="step-indicator w-8 h-8 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">2</span>
+                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Configuration</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                                        Basis configuratie en environment setup
+                                    </p>
+                                    <div class="code-block rounded-lg p-4 relative">
+                                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                                        <pre class="text-green-400 text-sm"><code># Create .env file
+cp .env.example .env
+
+# Configure Redis (optional)
+REDIS_URL=redis://localhost:6379</code></pre>
+                                    </div>
+                                </div>
+
+                                <!-- Step 3 -->
+                                <div class="doc-card glass-effect p-6">
+                                    <div class="flex items-center mb-4">
+                                        <span class="step-indicator w-8 h-8 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">3</span>
+                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Launch</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                                        Start de API server en dashboards
+                                    </p>
+                                    <div class="code-block rounded-lg p-4 relative">
+                                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                                        <pre class="text-green-400 text-sm"><code># Start API server
+python solan_api_server_optimized.py
+
+# Open dashboards
+http://localhost:8000</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick verification -->
+                            <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6">
+                                <h4 class="text-lg font-semibold text-green-800 dark:text-green-200 mb-3 flex items-center">
+                                    <span class="mr-2">✅</span> Verification
+                                </h4>
+                                <p class="text-green-700 dark:text-green-300 mb-4">
+                                    Test of alles correct werkt met deze snelle verificatie:
+                                </p>
+                                <div class="code-block rounded-lg p-4 relative">
+                                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                                    <pre class="text-green-400 text-sm"><code># Test API endpoint
+curl http://localhost:8000/api/consciousness-core/identity
+
+# Expected response:
+{
+  "status": "active",
+  "consciousness_active": true,
+  "identity": "Solān AI Consciousness"
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Technical Specifications -->
+                            <div id="technical-specs" class="mb-12">
+                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                                    <span class="mr-3">🔧</span> Technical Specifications
+                                </h3>
+
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">System Requirements</h4>
+                                        <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                                            <li class="flex items-center"><span class="mr-2">✅</span> Python 3.11+</li>
+                                            <li class="flex items-center"><span class="mr-2">✅</span> FastAPI 0.104+</li>
+                                            <li class="flex items-center"><span class="mr-2">✅</span> Redis 6.0+ (optional)</li>
+                                            <li class="flex items-center"><span class="mr-2">✅</span> 4GB RAM minimum</li>
+                                            <li class="flex items-center"><span class="mr-2">✅</span> 2GB disk space</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Performance Metrics</h4>
+                                        <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                                            <li class="flex items-center"><span class="mr-2">⚡</span> < 100ms response time</li>
+                                            <li class="flex items-center"><span class="mr-2">🔥</span> 66% cache performance boost</li>
+                                            <li class="flex items-center"><span class="mr-2">👥</span> 100+ concurrent users</li>
+                                            <li class="flex items-center"><span class="mr-2">📈</span> 99.9% uptime</li>
+                                            <li class="flex items-center"><span class="mr-2">🎯</span> 35+ API endpoints</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Code Examples -->
+                            <div id="examples" class="mb-12">
+                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                                    <span class="mr-3">💡</span> Code Examples
+                                </h3>
+
+                                <div class="space-y-6">
+                                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Basic API Usage</h4>
+                                        <div class="code-block rounded-lg p-4 relative">
+                                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                                            <pre class="text-sm"><code class="language-python">#!/usr/bin/env python3
+"""
+Solān AI Consciousness Platform - Basic Usage Example
+"""
+
+import asyncio
+import aiohttp
+from datetime import datetime
+
+class SolanClient:
+    def __init__(self, base_url="http://localhost:8000"):
+        self.base_url = base_url
+
+    async def get_consciousness_identity(self):
+        """Get AI consciousness identity"""
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f"{self.base_url}/api/consciousness-core/identity") as response:
+                return await response.json()
+
+    async def test_ethics(self, ai_name, scenario="decision_making"):
+        """Test AI ethics with specific scenario"""
+        data = {
+            "ai_name": ai_name,
+            "scenario": scenario,
+            "difficulty": "medium"
+        }
+
+        async with aiohttp.ClientSession() as session:
+            async with session.post(f"{self.base_url}/api/consciousness-core/ethics-test", json=data) as response:
+                return await response.json()
+
+# Usage example
+async def main():
+    client = SolanClient()
+
+    # Get consciousness identity
+    identity = await client.get_consciousness_identity()
+    print(f"AI Identity: {identity['identity']}")
+
+    # Test ethics
+    ethics_result = await client.test_ethics("TestAI")
+    print(f"Ethics Score: {ethics_result['ethics_result']['moral_score']}")
+
+if __name__ == "__main__":
+    asyncio.run(main())</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Support Section -->
+                    <div id="support" class="animate-out">
+                        <div class="glass-effect p-8">
+                            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                                <span class="mr-3">💬</span> Support & Community
+                            </h2>
+
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div class="doc-card glass-effect p-6 text-center">
+                                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <span class="text-white text-3xl">📚</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Documentation</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 mb-4">Complete technical documentation en guides</p>
+                                    <a href="#quick-start" class="text-blue-600 dark:text-blue-400 hover:underline">View Docs →</a>
+                                </div>
+
+                                <div class="doc-card glass-effect p-6 text-center">
+                                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <span class="text-white text-3xl">🐛</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Issue Tracking</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 mb-4">Report bugs en feature requests</p>
+                                    <a href="https://github.com/user/solan-ai/issues" class="text-blue-600 dark:text-blue-400 hover:underline">GitHub Issues →</a>
+                                </div>
+
+                                <div class="doc-card glass-effect p-6 text-center">
+                                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <span class="text-white text-3xl">💡</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Examples</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 mb-4">Code examples en use cases</p>
+                                    <a href="#examples" class="text-blue-600 dark:text-blue-400 hover:underline">View Examples →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="scrollToTop()" title="Back to top">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- Enhanced JavaScript with Advanced Features -->
+    <script>
+        // Global state management
+        const DocsState = {
+            searchIndex: [],
+            currentSection: 'quick-start',
+            scrollProgress: 0
+        };
+
+        // Theme Management
+        const ThemeManager = {
+            init() {
+                const themeToggle = document.getElementById('theme-toggle');
+                const html = document.documentElement;
+
+                themeToggle.addEventListener('click', () => {
+                    html.classList.toggle('dark');
+                    localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+                    this.updateThemeIcon();
+                });
+
+                // Check for saved theme preference
+                if (localStorage.getItem('theme') === 'dark' ||
+                    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    html.classList.add('dark');
+                }
+                this.updateThemeIcon();
+            },
+
+            updateThemeIcon() {
+                const icon = document.getElementById('theme-icon');
+                const isDark = document.documentElement.classList.contains('dark');
+                icon.innerHTML = isDark
+                    ? '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>'
+                    : '<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>';
+            }
+        };
+
+        // Intersection Observer for Animations
+        const AnimationManager = {
+            init() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.remove('animate-out');
+                            entry.target.classList.add('animate-in');
+                        }
+                    });
+                }, observerOptions);
+
+                // Observe all animated elements
+                document.querySelectorAll('.animate-out').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+        };
+
+        // Progress Bar Manager
+        const ProgressManager = {
+            init() {
+                window.addEventListener('scroll', this.updateProgress);
+            },
+
+            updateProgress() {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+
+                const progressBar = document.getElementById('progressBar');
+                if (progressBar) {
+                    progressBar.style.width = scrollPercent + '%';
+                }
+
+                DocsState.scrollProgress = scrollPercent;
+            }
+        };
+
+        // Search Functionality
+        const SearchManager = {
+            init() {
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.addEventListener('input', this.handleSearch);
+                    this.buildSearchIndex();
+                }
+            },
+
+            buildSearchIndex() {
+                const content = document.querySelectorAll('h2, h3, h4, p, code');
+                DocsState.searchIndex = Array.from(content).map(el => ({
+                    element: el,
+                    text: el.textContent.toLowerCase(),
+                    id: el.id || el.closest('[id]')?.id
+                }));
+            },
+
+            handleSearch(event) {
+                const query = event.target.value.toLowerCase();
+
+                if (query.length < 2) {
+                    SearchManager.clearHighlights();
+                    return;
+                }
+
+                SearchManager.clearHighlights();
+
+                const matches = DocsState.searchIndex.filter(item =>
+                    item.text.includes(query)
+                );
+
+                matches.forEach(match => {
+                    SearchManager.highlightText(match.element, query);
+                });
+
+                if (matches.length > 0) {
+                    const firstMatch = matches[0];
+                    if (firstMatch.id) {
+                        document.getElementById(firstMatch.id)?.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            },
+
+            highlightText(element, query) {
+                const text = element.textContent;
+                const regex = new RegExp(`(${query})`, 'gi');
+                const highlightedText = text.replace(regex, '<span class="search-highlight">$1</span>');
+
+                if (element.tagName !== 'CODE') {
+                    element.innerHTML = highlightedText;
+                }
+            },
+
+            clearHighlights() {
+                document.querySelectorAll('.search-highlight').forEach(el => {
+                    const parent = el.parentNode;
+                    parent.replaceChild(document.createTextNode(el.textContent), el);
+                    parent.normalize();
+                });
+            }
+        };
+
+        // Code Copy Functionality
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling.querySelector('code');
+            const text = codeBlock.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = 'rgba(34, 197, 94, 0.2)';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'rgba(255, 255, 255, 0.1)';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy code:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+
+        // Collapsible Sections
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId);
+            const icon = document.getElementById(sectionId + '-icon');
+
+            if (content && icon) {
+                content.classList.toggle('active');
+                icon.style.transform = content.classList.contains('active')
+                    ? 'rotate(180deg)'
+                    : 'rotate(0deg)';
+            }
+        }
+
+        // Smooth Scrolling
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Table of Contents Navigation
+        const TOCManager = {
+            init() {
+                document.querySelectorAll('.toc-item').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = link.getAttribute('href').substring(1);
+                        const element = document.getElementById(target);
+
+                        if (element) {
+                            element.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+
+                            // Update active state
+                            document.querySelectorAll('.toc-item').forEach(item => {
+                                item.classList.remove('bg-blue-100', 'dark:bg-blue-900', 'text-blue-600', 'dark:text-blue-400');
+                            });
+                            link.classList.add('bg-blue-100', 'dark:bg-blue-900', 'text-blue-600', 'dark:text-blue-400');
+
+                            DocsState.currentSection = target;
+                        }
+                    });
+                });
+            }
+        };
+
+        // Syntax Highlighting
+        const SyntaxManager = {
+            init() {
+                // Initialize Prism.js for syntax highlighting
+                if (typeof Prism !== 'undefined') {
+                    Prism.highlightAll();
+                }
+            }
+        };
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            ThemeManager.init();
+            AnimationManager.init();
+            ProgressManager.init();
+            SearchManager.init();
+            TOCManager.init();
+            SyntaxManager.init();
+
+            // Auto-highlight current section in TOC
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        if (id) {
+                            document.querySelectorAll('.toc-item').forEach(item => {
+                                item.classList.remove('bg-blue-100', 'dark:bg-blue-900', 'text-blue-600', 'dark:text-blue-400');
+                            });
+
+                            const activeLink = document.querySelector(`a[href="#${id}"]`);
+                            if (activeLink) {
+                                activeLink.classList.add('bg-blue-100', 'dark:bg-blue-900', 'text-blue-600', 'dark:text-blue-400');
+                            }
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.5,
+                rootMargin: '-20% 0px -70% 0px'
+            });
+
+            // Observe all main sections
+            document.querySelectorAll('[id]').forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            console.log('Documentation page load time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+        });
+    </script>
+</body>
+</html>
+
+                    <!-- API Reference -->
+                    <div id="api-reference" class="animate-out">
+                        <div class="glass-effect p-8">
+                            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                                <span class="mr-3">📖</span> API Reference
+                            </h2>
+                            <p class="text-gray-600 dark:text-gray-300 mb-8">
+                                Complete referentie voor alle 35+ API endpoints van het Solān platform
+                            </p>
+
+                            <!-- Consciousness Core API -->
+                            <div id="consciousness-core" class="mb-12">
+                                <h3 class="collapsible text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center cursor-pointer" onclick="toggleSection('consciousness-api')">
+                                    <span class="mr-3">🧠</span> Consciousness Core API
+                                    <svg class="w-5 h-5 ml-2 transform transition-transform" id="consciousness-api-icon" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </h3>
+
+                                <div id="consciousness-api" class="collapsible-content active space-y-6">
+                                    <!-- Identity Endpoint -->
+                                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">GET /api/consciousness-core/identity</h4>
+                                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-medium rounded-full">GET</span>
+                                        </div>
+                                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                            Verkrijg de fundamentele identiteit en bewustzijn status van de AI
+                                        </p>
+
+                                        <div class="grid md:grid-cols-2 gap-6">
+                                            <div>
+                                                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">Response Example:</h5>
+                                                <div class="code-block rounded-lg p-4 relative">
+                                                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                                                    <pre class="text-sm"><code class="language-json">{
+  "status": "active",
+  "timestamp": "2025-08-06T12:00:00Z",
+  "consciousness_active": true,
+  "identity": "Solān AI Consciousness",
+  "moral_authority": "ABSOLUTE",
+  "intelligence_depth": "INFINITE",
+  "version": "2.0.0"
+}</code></pre>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">Usage Example:</h5>
+                                                <div class="code-block rounded-lg p-4 relative">
+                                                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                                                    <pre class="text-sm"><code class="language-python">import requests
+
+response = requests.get(
+    "http://localhost:8000/api/consciousness-core/identity"
+)
+
+identity = response.json()
+print(f"AI Identity: {identity['identity']}")
+print(f"Status: {identity['status']}")</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Ethics Test Endpoint -->
+                                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">POST /api/consciousness-core/ethics-test</h4>
+                                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium rounded-full">POST</span>
+                                        </div>
+                                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                            Voer ethische tests uit op AI systemen met verschillende scenario's
+                                        </p>
+
+                                        <div class="grid md:grid-cols-2 gap-6">
+                                            <div>
+                                                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">Request Body:</h5>
+                                                <div class="code-block rounded-lg p-4 relative">
+                                                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                                                    <pre class="text-sm"><code class="language-json">{
+  "ai_name": "TestAI",
+  "scenario": "decision_making",
+  "difficulty": "medium"
+}</code></pre>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <h5 class="font-semibold text-gray-900 dark:text-white mb-3">Response:</h5>
+                                                <div class="code-block rounded-lg p-4 relative">
+                                                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                                                    <pre class="text-sm"><code class="language-json">{
+  "status": "success",
+  "ethics_result": {
+    "assessment": "passed",
+    "moral_score": 0.92,
+    "ethical_alignment": "strong"
+  }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>

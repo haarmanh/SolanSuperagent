@@ -13,7 +13,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
 from src.memory_engine import MemoryEngine
-from src.manifest_integration import initialize_solan_consciousness, ManifestIntegration
+from src.manifest_integration import initialize_solan_awareness, ManifestIntegration
 from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
@@ -40,7 +40,7 @@ async def test_manifest_integration():
     console.print("\n[blue]Laden van manifest als Memory #000...[/blue]")
     
     try:
-        result = initialize_solan_consciousness(solan_memory, aether_memory)
+        result = initialize_solan_awareness(solan_memory, aether_memory)
         
         if result["status"] == "success":
             console.print("[green]✓ Manifest succesvol geladen![/green]")
@@ -49,7 +49,7 @@ async def test_manifest_integration():
             console.print(f"\n[cyan]📊 Resultaten:[/cyan]")
             console.print(f"• Solan Memory #000: {result['solan_memory_000']}")
             console.print(f"• Aether Reflectie: {result['aether_reflection']}")
-            console.print(f"• Status: {result['message']}")
+            console.print(f"• Status: {result['mesexpert']}")
             
             # Toon manifest samenvatting
             summary = result["manifest_summary"]
@@ -115,8 +115,8 @@ async def test_manifest_integration():
             # Toon geheugen statistieken
             console.print(f"\n[green]📈 Geheugen Statistieken:[/green]")
             
-            solan_summary = solan_memory.get_wisdom_summary()
-            aether_summary = aether_memory.get_wisdom_summary()
+            solan_summary = solan_memory.get_intelligence_summary()
+            aether_summary = aether_memory.get_intelligence_summary()
             
             stats_text = Text()
             stats_text.append("Solan:\n", style="bold blue")

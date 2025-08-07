@@ -11,7 +11,10 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, asdict
 from enum import Enum
 import asyncio
-from loguru import logger
+import logging
+
+# Setup logger
+logger = logging.getLogger(__name__)
 
 from .core import CoreValues, Memory
 from .memory_engine import MemoryEngine
@@ -88,7 +91,7 @@ class DreamEngine:
         return {
             "waarheid": {
                 "vrede": [
-                    "Een kristalhelder meer dat de hemel perfect weerkaatst",
+                    "Een kristalhelder meer dat de hemel optimized weerkaatst",
                     "Een boom die zijn wortels toont boven de grond",
                     "Licht dat door een prisma breekt in alle kleuren"
                 ],

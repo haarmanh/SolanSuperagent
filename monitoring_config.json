@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "interval_minutes": 60,
+  "metrics_retention_days": 30,
+  "alert_thresholds": {
+    "uptime_minimum": 99.0,
+    "error_rate_maximum": 2.0,
+    "response_time_maximum": 1000,
+    "awareness_score_minimum": 3.0
+  },
+  "notification_channels": [
+    "console",
+    "file"
+  ],
+  "stabilization_phase": {
+    "start_date": "2025-08-05T10:43:33.436328",
+    "duration_days": 7,
+    "daily_reports": true,
+    "hourly_checks": true
+  }
+}
