@@ -22,7 +22,7 @@ export default function Home() {
 
   const checkApiHealth = async () => {
     try {
-      const apiBase = (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_API_BASE) || 'https://api.solanai.ai';
+      const apiBase = 'https://api.solanai.ai'; // Hardcoded for debugging
       console.log('API Base URL:', apiBase); // Debug log
       const response = await fetch(`${apiBase}/health`, {
         cache: 'no-store',        // Geen cache
