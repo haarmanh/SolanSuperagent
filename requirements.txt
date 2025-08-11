@@ -37,10 +37,20 @@ flake8>=6.0.0
 mypy>=1.0.0
 
 # Web framework and API
-fastapi>=0.116.0
-uvicorn>=0.35.0
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
 websockets>=15.0.0
-python-multipart>=0.0.20
+python-multipart>=0.0.6
+
+# Data validation & settings
+pydantic>=2.5.0
+pydantic-settings>=2.0.0
+
+# Security & Rate Limiting for Production
+slowapi>=0.1.9
+email-validator>=2.1.0
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
 
 # Voice and TTS
 pyttsx3>=2.99

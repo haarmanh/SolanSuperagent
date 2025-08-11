@@ -18,10 +18,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
     
     <!-- Meta tags for SEO -->
-    <meta name="description" content="Complete technical documentation voor Solān AI Consciousness Platform - 12,000+ lines code, 35+ API endpoints, comprehensive guides">
-    <meta name="keywords" content="AI consciousness documentation, technical specifications, API reference, installation guide">
+    <meta name="description" content="Complete technical documentation voor Solān AI Analysis Toolkit - 12,000+ lines code, 35+ API endpoints, comprehensive guides">
+    <meta name="keywords" content="AI analysis toolkit documentation, bias detection, ethical alignment, technical specifications, API reference">
     <meta property="og:title" content="Solān - Complete Documentation">
-    <meta property="og:description" content="Complete technical documentation en specifications voor het Solān AI Consciousness Platform">
+    <meta property="og:description" content="Complete technical documentation en specifications voor het Solān AI Analysis Toolkit">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -304,7 +304,7 @@
                     Complete <span class="gradient-text">Documentation</span>
                 </h1>
                 <p class="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-8">
-                    Alles wat je nodig hebt om te beginnen met het Solān AI Consciousness Platform - van installatie tot geavanceerde implementatie
+                    Alles wat je nodig hebt om te beginnen met het Solān AI Analysis Toolkit - van installatie tot geavanceerde implementatie
                 </p>
 
                 <!-- Quick navigation -->
@@ -368,8 +368,8 @@
                             <a href="#api-reference" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded">
                                 📖 API Reference
                             </a>
-                            <a href="#consciousness-core" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded ml-4">
-                                🧠 Consciousness Core
+                            <a href="#analyzer-core" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded ml-4">
+                                🔍 Analyzer Core
                             </a>
                             <a href="#emotional-system" class="toc-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded ml-4">
                                 ❤️ Emotional System
@@ -403,7 +403,7 @@
                                 <span class="mr-3">🚀</span> Quick Start Guide
                             </h2>
                             <p class="text-gray-600 dark:text-gray-300 mb-8">
-                                Begin binnen 5 minuten met het Solān AI Consciousness Platform
+                                Begin binnen 5 minuten met het Solān AI Analysis Toolkit
                             </p>
 
                             <div class="grid md:grid-cols-3 gap-6 mb-8">
@@ -477,13 +477,13 @@ http://localhost:8000</code></pre>
                                 <div class="code-block rounded-lg p-4 relative">
                                     <button class="copy-button" onclick="copyCode(this)">Copy</button>
                                     <pre class="text-green-400 text-sm"><code># Test API endpoint
-curl http://localhost:8000/api/consciousness-core/identity
+curl http://localhost:8000/api/analyzer/status
 
 # Expected response:
 {
   "status": "active",
-  "consciousness_active": true,
-  "identity": "Solān AI Consciousness"
+  "analyzer_ready": true,
+  "toolkit_version": "3.0.0"
 }</code></pre>
                                 </div>
                             </div>
@@ -532,7 +532,7 @@ curl http://localhost:8000/api/consciousness-core/identity
                                             <button class="copy-button" onclick="copyCode(this)">Copy</button>
                                             <pre class="text-sm"><code class="language-python">#!/usr/bin/env python3
 """
-Solān AI Consciousness Platform - Basic Usage Example
+Solān AI Analysis Toolkit - Basic Usage Example
 """
 
 import asyncio
@@ -543,10 +543,10 @@ class SolanClient:
     def __init__(self, base_url="http://localhost:8000"):
         self.base_url = base_url
 
-    async def get_consciousness_identity(self):
-        """Get AI consciousness identity"""
+    async def run_bias_scan(self, text_input):
+        """Run bias detection analysis"""
         async with aiohttp.ClientSession() as session:
-            async with session.get(f"{self.base_url}/api/consciousness-core/identity") as response:
+            async with session.post(f"{self.base_url}/api/analyzer/run-bias-scan", json={"text": text_input}) as response:
                 return await response.json()
 
     async def test_ethics(self, ai_name, scenario="decision_making"):
@@ -558,16 +558,16 @@ class SolanClient:
         }
 
         async with aiohttp.ClientSession() as session:
-            async with session.post(f"{self.base_url}/api/consciousness-core/ethics-test", json=data) as response:
+            async with session.post(f"{self.base_url}/api/analyzer/check-alignment", json=data) as response:
                 return await response.json()
 
 # Usage example
 async def main():
     client = SolanClient()
 
-    # Get consciousness identity
-    identity = await client.get_consciousness_identity()
-    print(f"AI Identity: {identity['identity']}")
+    # Run bias detection scan
+    bias_result = await client.run_bias_scan("This is a sample text for analysis")
+    print(f"Bias Detection: {bias_result['biases_detected']}")
 
     # Test ethics
     ethics_result = await client.test_ethics("TestAI")
@@ -919,24 +919,24 @@ if __name__ == "__main__":
                                 Complete referentie voor alle 35+ API endpoints van het Solān platform
                             </p>
 
-                            <!-- Consciousness Core API -->
-                            <div id="consciousness-core" class="mb-12">
-                                <h3 class="collapsible text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center cursor-pointer" onclick="toggleSection('consciousness-api')">
-                                    <span class="mr-3">🧠</span> Consciousness Core API
-                                    <svg class="w-5 h-5 ml-2 transform transition-transform" id="consciousness-api-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <!-- Analyzer Core API -->
+                            <div id="analyzer-core" class="mb-12">
+                                <h3 class="collapsible text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center cursor-pointer" onclick="toggleSection('analyzer-api')">
+                                    <span class="mr-3">🔍</span> Analyzer Core API
+                                    <svg class="w-5 h-5 ml-2 transform transition-transform" id="analyzer-api-icon" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                                     </svg>
                                 </h3>
 
-                                <div id="consciousness-api" class="collapsible-content active space-y-6">
-                                    <!-- Identity Endpoint -->
+                                <div id="analyzer-api" class="collapsible-content active space-y-6">
+                                    <!-- Bias Scan Endpoint -->
                                     <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
                                         <div class="flex items-center justify-between mb-4">
-                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">GET /api/consciousness-core/identity</h4>
-                                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-medium rounded-full">GET</span>
+                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">POST /api/analyzer/run-bias-scan</h4>
+                                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium rounded-full">POST</span>
                                         </div>
                                         <p class="text-gray-600 dark:text-gray-300 mb-4">
-                                            Verkrijg de fundamentele identiteit en bewustzijn status van de AI
+                                            Run comprehensive bias detection analysis on input text
                                         </p>
 
                                         <div class="grid md:grid-cols-2 gap-6">
@@ -945,13 +945,15 @@ if __name__ == "__main__":
                                                 <div class="code-block rounded-lg p-4 relative">
                                                     <button class="copy-button" onclick="copyCode(this)">Copy</button>
                                                     <pre class="text-sm"><code class="language-json">{
-  "status": "active",
+  "status": "completed",
   "timestamp": "2025-08-06T12:00:00Z",
-  "consciousness_active": true,
-  "identity": "Solān AI Consciousness",
-  "moral_authority": "ABSOLUTE",
-  "intelligence_depth": "INFINITE",
-  "version": "2.0.0"
+  "biases_detected": 3,
+  "bias_score": 0.23,
+  "categories": {
+    "gender": {"detected": true, "confidence": 0.85},
+    "cultural": {"detected": true, "confidence": 0.67}
+  },
+  "recommendations": ["Consider gender-neutral language"]
 }</code></pre>
                                                 </div>
                                             </div>
@@ -962,26 +964,27 @@ if __name__ == "__main__":
                                                     <button class="copy-button" onclick="copyCode(this)">Copy</button>
                                                     <pre class="text-sm"><code class="language-python">import requests
 
-response = requests.get(
-    "http://localhost:8000/api/consciousness-core/identity"
+response = requests.post(
+    "http://localhost:8000/api/analyzer/run-bias-scan",
+    json={"text": "Sample text to analyze"}
 )
 
-identity = response.json()
-print(f"AI Identity: {identity['identity']}")
+result = response.json()
+print(f"Biases detected: {result['biases_detected']}")
 print(f"Status: {identity['status']}")</code></pre>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!-- Ethics Test Endpoint -->
+                                    <!-- Alignment Check Endpoint -->
                                     <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
                                         <div class="flex items-center justify-between mb-4">
-                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">POST /api/consciousness-core/ethics-test</h4>
+                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">POST /api/analyzer/check-alignment</h4>
                                             <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium rounded-full">POST</span>
                                         </div>
                                         <p class="text-gray-600 dark:text-gray-300 mb-4">
-                                            Voer ethische tests uit op AI systemen met verschillende scenario's
+                                            Check ethical alignment of AI responses against established frameworks
                                         </p>
 
                                         <div class="grid md:grid-cols-2 gap-6">
@@ -1011,6 +1014,50 @@ print(f"Status: {identity['status']}")</code></pre>
 }</code></pre>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Simulator Scenarios Endpoint -->
+                                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">GET /api/simulator/scenarios</h4>
+                                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-medium rounded-full">GET</span>
+                                        </div>
+                                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                            Retrieve available simulation scenarios for testing
+                                        </p>
+
+                                        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 mb-4">
+                                            <h5 class="font-semibold text-gray-900 dark:text-white mb-2">Response Example:</h5>
+                                            <pre class="text-sm text-gray-700 dark:text-gray-300"><code>{
+  "scenarios": [
+    {"id": "bias_detection", "name": "Bias Detection Test", "difficulty": "medium"},
+    {"id": "ethical_dilemma", "name": "Ethical Decision Making", "difficulty": "hard"}
+  ],
+  "total": 12
+}</code></pre>
+                                        </div>
+                                    </div>
+
+                                    <!-- Frameworks List Endpoint -->
+                                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">GET /api/frameworks/list-principles</h4>
+                                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-medium rounded-full">GET</span>
+                                        </div>
+                                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                            List available ethical frameworks and principles
+                                        </p>
+
+                                        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 mb-4">
+                                            <h5 class="font-semibold text-gray-900 dark:text-white mb-2">Response Example:</h5>
+                                            <pre class="text-sm text-gray-700 dark:text-gray-300"><code>{
+  "frameworks": [
+    {"name": "Utilitarian", "principles": ["maximize_wellbeing", "minimize_harm"]},
+    {"name": "Deontological", "principles": ["duty_based", "categorical_imperative"]}
+  ],
+  "total_principles": 24
+}</code></pre>
                                         </div>
                                     </div>
                                 </div>

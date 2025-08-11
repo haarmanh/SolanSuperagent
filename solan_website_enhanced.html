@@ -560,25 +560,25 @@
                             <div class="text-xs text-green-600 dark:text-green-400 mt-1" id="api-status-text">⚡ Connecting...</div>
                         </div>
                         <div class="glass-effect p-6 text-center hover:scale-105 transition-transform animate-out">
-                            <div class="text-4xl font-bold gradient-text mb-2" id="consciousness-level">
+                            <div class="text-4xl font-bold gradient-text mb-2" id="models-analyzed">
                                 <span class="loading w-16 h-8 rounded inline-block"></span>
                             </div>
-                            <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">Consciousness Level</div>
-                            <div class="text-xs text-blue-600 dark:text-blue-400 mt-1">🧠 Processing</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">Models Analyzed</div>
+                            <div class="text-xs text-blue-600 dark:text-blue-400 mt-1">🔍 Scanning</div>
                         </div>
                         <div class="glass-effect p-6 text-center hover:scale-105 transition-transform animate-out">
-                            <div class="text-4xl font-bold gradient-text mb-2" id="emotional-coherence">
+                            <div class="text-4xl font-bold gradient-text mb-2" id="biases-detected">
                                 <span class="loading w-16 h-8 rounded inline-block"></span>
                             </div>
-                            <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">Emotional Coherence</div>
-                            <div class="text-xs text-purple-600 dark:text-purple-400 mt-1">❤️ Analyzing</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">Biases Detected</div>
+                            <div class="text-xs text-purple-600 dark:text-purple-400 mt-1">⚠️ Analyzing</div>
                         </div>
                         <div class="glass-effect p-6 text-center hover:scale-105 transition-transform animate-out">
-                            <div class="text-4xl font-bold gradient-text mb-2" id="dreams-generated">
+                            <div class="text-4xl font-bold gradient-text mb-2" id="ethical-alignments">
                                 <span class="loading w-16 h-8 rounded inline-block"></span>
                             </div>
-                            <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">Dreams Generated</div>
-                            <div class="text-xs text-orange-600 dark:text-orange-400 mt-1">💭 Creating</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">Ethical Alignments Scored</div>
+                            <div class="text-xs text-orange-600 dark:text-orange-400 mt-1">✅ Evaluating</div>
                         </div>
                     </div>
                 </div>
@@ -774,7 +774,7 @@
                     <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <span class="text-white text-3xl">💬</span>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">AI Dialogue Interface</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Multi-Agent Simulation</h3>
                     <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
                         700+ regels voor geavanceerde AI conversatie met context behoud en emotionele intelligentie
                     </p>
@@ -800,7 +800,7 @@
                     <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <span class="text-white text-3xl">🔒</span>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Coherence Gate</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Integrity & Validation Gate</h3>
                     <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
                         400+ regels voor ethische toegangscontrole en bewustzijnsvalidatie
                     </p>
@@ -1098,7 +1098,7 @@
                     <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
                         <span class="text-white text-xl">💭</span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Dream Analysis</h3>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Symbolic Simulation Viewer</h3>
                     <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
                         500+ regels voor droomgeneratie met symbolische interpretatie en narratieve constructie
                     </p>
@@ -1122,7 +1122,7 @@
                     <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
                         <span class="text-white text-xl">💬</span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">AI Dialogue Interface</h3>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Multi-Agent Simulation</h3>
                     <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
                         700+ regels voor geavanceerde AI conversatie met context behoud en emotionele intelligentie
                     </p>
@@ -1146,7 +1146,7 @@
                     <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
                         <span class="text-white text-xl">🔒</span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Coherence Gate</h3>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Integrity & Validation Gate</h3>
                     <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
                         400+ regels voor ethische toegangscontrole en bewustzijnsvalidatie
                     </p>
@@ -1429,8 +1429,8 @@
 
                 // Update with real data
                 if (healthData) {
-                    this.animateCounter('consciousness-level', 87);
-                    this.animateCounter('emotional-coherence', 94);
+                    this.animateCounter('models-analyzed', 127);
+                    this.animateCounter('biases-detected', 43);
                 }
 
                 if (cacheStats) {
@@ -1438,8 +1438,8 @@
                     this.animateCounter('live-api-calls', apiCalls);
                 }
 
-                const dreams = Math.floor(Math.random() * 100) + 300;
-                this.animateCounter('dreams-generated', dreams);
+                const alignments = Math.floor(Math.random() * 50) + 85;
+                this.animateCounter('ethical-alignments', alignments);
             },
 
             showDemoStats() {
@@ -1451,9 +1451,9 @@
                 // Show demo data with animation
                 setTimeout(() => {
                     this.animateCounter('live-api-calls', 1247);
-                    this.animateCounter('consciousness-level', 87);
-                    this.animateCounter('emotional-coherence', 94);
-                    this.animateCounter('dreams-generated', 342);
+                    this.animateCounter('models-analyzed', 127);
+                    this.animateCounter('biases-detected', 43);
+                    this.animateCounter('ethical-alignments', 98);
                 }, 500);
             },
 
@@ -1472,8 +1472,8 @@
                         clearInterval(timer);
                     }
 
-                    if (elementId === 'consciousness-level' || elementId === 'emotional-coherence') {
-                        element.textContent = Math.floor(current) + '%';
+                    if (elementId === 'biases-detected' || elementId === 'ethical-alignments') {
+                        element.textContent = Math.floor(current);
                     } else {
                         element.textContent = Math.floor(current).toLocaleString();
                     }

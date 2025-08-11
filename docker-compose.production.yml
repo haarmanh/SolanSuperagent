@@ -1,0 +1,109 @@
+version: '3.8'
+
+services:
+  # Solān Core API (Internal Only)
+  solan-api:
+    build: .
+    container_name: solan-api
+    environment:
+      - SOLAN_API_KEYS=${SOLAN_API_KEYS}
+      - RATE_LIMIT_PER_MIN=${RATE_LIMIT_PER_MIN}
+      - PORT=8000
+    expose:
+      - "8000"  # Internal only, no host binding
+    networks:
+      - solan-internal
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Secure Proxy (Internal Only)
+  solan-proxy:
+    build: .
+    container_name: solan-proxy
+    command: python secure_solan_proxy.py
+    environment:
+      - ANALYZER_BASE=http://solan-api:8000
+      - SOLAN_ANALYST_KEY=${SOLAN_ANALYST_KEY}
+      - SOLAN_ADMIN_KEY=${SOLAN_ADMIN_KEY}
+      - ALLOW_ORIGINS=${ALLOW_ORIGINS}
+      - ALLOW_IPS=${ALLOW_IPS}
+      - PROXY_PORT=8787
+      - RATE_LIMIT_PER_MIN=${RATE_LIMIT_PER_MIN}
+      - MAX_BODY_BYTES=${MAX_BODY_BYTES}
+    expose:
+      - "8787"  # Internal only, no host binding
+    networks:
+      - solan-internal
+    depends_on:
+      - solan-api
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8787/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx Reverse Proxy with TLS
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:alpine
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html
+    networks:
+      - solan-internal
+      - default
+    restart: unless-stopped
+
+  # Let's Encrypt Companion
+  letsencrypt:
+    image: nginxproxy/acme-companion
+    container_name: letsencrypt
+    environment:
+      - DEFAULT_EMAIL=${LETSENCRYPT_EMAIL}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
+    depends_on:
+      - nginx-proxy
+    restart: unless-stopped
+
+  # API Gateway (Public Facing)
+  api-gateway:
+    image: nginx:alpine
+    container_name: api-gateway
+    environment:
+      - VIRTUAL_HOST=api.solanai.ai
+      - LETSENCRYPT_HOST=api.solanai.ai
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+    volumes:
+      - ./nginx-api.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - solan-internal
+      - default
+    depends_on:
+      - solan-proxy
+    restart: unless-stopped
+
+networks:
+  solan-internal:
+    driver: bridge
+    internal: false  # Allow outbound for health checks
+
+volumes:
+  nginx-certs:
+  nginx-vhost:
+  nginx-html:
+  acme:
