@@ -1,6 +1,9 @@
 import os
+import json
+import pathlib
+from datetime import datetime
 from fastapi import FastAPI, Depends, Request
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 from typing import List, Dict, Optional
 from solan_labs.common.security import auth_guard, require_role
 from solan_labs.common.redaction import redact
@@ -19,6 +22,13 @@ class AlignmentRequest(BaseModel):
 
 class CoherenceRequest(BaseModel):
     statements: List[str] = Field(..., min_items=1, max_items=50)
+
+class Invite(BaseModel):
+    name: str = Field(..., min_length=1, max_length=100)
+    email: EmailStr
+    org: Optional[str] = Field(None, max_length=100)
+    role: Optional[str] = Field(None, max_length=100)
+    reason: str = Field(..., min_length=10, max_length=1000)
 
 def create_app():
     app = FastAPI(title="Solān Analyzer API", version="3.0")
@@ -53,11 +63,58 @@ def create_app():
                 "health": "/health",
                 "echo": "/v1/echo",
                 "info": "/v1/info",
+                "invite": "/v1/invite",
                 "bias": "/analyzer/bias",
                 "alignment": "/analyzer/alignment",
                 "coherence": "/analyzer/coherence"
             }
         }
+
+    @app.post("/v1/invite")
+    async def invite(body: Invite):
+        """Accept invite requests and store them"""
+        # Create data directory if it doesn't exist
+        data_dir = pathlib.Path("/data")
+        data_dir.mkdir(parents=True, exist_ok=True)
+
+        # Prepare invite record
+        invite_record = {
+            "name": body.name,
+            "email": body.email,
+            "org": body.org,
+            "role": body.role,
+            "reason": body.reason,
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "ip": "unknown",  # Could be enhanced with request.client.host
+            "status": "pending"
+        }
+
+        # Append to JSONL file
+        invites_file = data_dir / "invites.jsonl"
+        try:
+            with invites_file.open("a", encoding="utf-8") as f:
+                f.write(json.dumps(invite_record) + "\n")
+
+            # Log the invite
+            logger.append("invite_request", {
+                "email": body.email,
+                "org": body.org or "none",
+                "timestamp": invite_record["timestamp"]
+            })
+
+            return {
+                "ok": True,
+                "message": "Invite request received successfully",
+                "timestamp": invite_record["timestamp"]
+            }
+
+        except Exception as e:
+            logger.append("invite_error", {"error": str(e)})
+            return {
+                "ok": False,
+                "message": "Failed to process invite request",
+                "error": "internal_error"
+            }
 
     @app.post("/analyzer/bias")
     async def analyzer_bias(req: BiasRequest, ctx=Depends(auth_guard)):

@@ -47,7 +47,7 @@ export default function Home() {
     setInviteStatus('');
 
     try {
-      const response = await fetch('/api/invite', {
+      const response = await fetch('/api/v1/invite', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(inviteForm)
@@ -55,7 +55,7 @@ export default function Home() {
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok && data.ok) {
         setInviteStatus('success');
         setInviteForm({ name: '', email: '', org: '', role: '', reason: '' });
       } else {
