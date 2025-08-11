@@ -30,17 +30,11 @@
       ]
     }
   ],
-  "redirects": [
-    {
-      "source": "/observatorium",
-      "destination": "/dashboard",
-      "permanent": false
-    }
-  ],
+
   "rewrites": [
     {
       "source": "/api/health",
-      "destination": "https://api.solanai.ai/api/health"
+      "destination": "https://api.solanai.ai/health"
     }
   ]
 }
