@@ -22,13 +22,16 @@ export default function Home() {
 
   const checkApiHealth = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/health`);
+      const apiBase = process.env.NEXT_PUBLIC_API_BASE || 'https://api.solanai.ai';
+      console.log('API Base URL:', apiBase); // Debug log
+      const response = await fetch(`${apiBase}/health`);
       if (response.ok) {
         setApiStatus('online');
       } else {
         setApiStatus('offline');
       }
     } catch (error) {
+      console.error('API Health Check Error:', error); // Debug log
       setApiStatus('offline');
     }
   };

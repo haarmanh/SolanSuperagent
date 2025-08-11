@@ -18,7 +18,9 @@ export default function Dashboard() {
 
   const checkApiHealth = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/health`);
+      const apiBase = process.env.NEXT_PUBLIC_API_BASE || 'https://api.solanai.ai';
+      console.log('Dashboard API Base URL:', apiBase); // Debug log
+      const response = await fetch(`${apiBase}/health`);
       if (response.ok) {
         const data = await response.json();
         setApiStatus('online');
@@ -32,6 +34,7 @@ export default function Dashboard() {
         setApiStatus('offline');
       }
     } catch (error) {
+      console.error('Dashboard API Health Check Error:', error); // Debug log
       setApiStatus('offline');
     }
   };
