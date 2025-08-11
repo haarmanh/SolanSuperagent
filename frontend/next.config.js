@@ -56,7 +56,7 @@ const nextConfig = {
     return [
       {
         source: '/api/proxy/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_BASE}/api/:path*`,
+        destination: 'https://api.solanai.ai/api/:path*',
       },
     ];
   },
