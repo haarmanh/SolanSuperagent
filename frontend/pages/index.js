@@ -22,9 +22,15 @@ export default function Home() {
 
   const checkApiHealth = async () => {
     try {
-      const apiBase = process.env.NEXT_PUBLIC_API_BASE || 'https://api.solanai.ai';
+      const apiBase = (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_API_BASE) || 'https://api.solanai.ai';
       console.log('API Base URL:', apiBase); // Debug log
-      const response = await fetch(`${apiBase}/health`);
+      const response = await fetch(`${apiBase}/health`, {
+        cache: 'no-store',        // Geen cache
+        next: { revalidate: 0 },  // Next.js cache uit
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate'
+        }
+      });
       if (response.ok) {
         setApiStatus('online');
       } else {

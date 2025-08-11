@@ -114,7 +114,11 @@
       const txt = $('healthText');
       try {
         const r = await fetch(API.health, {
-          method: 'GET'
+          method: 'GET',
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate'
+          }
           // Geen API key nodig - proxy handelt dit af
         });
         const j = await r.json();
