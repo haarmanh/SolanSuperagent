@@ -51,24 +51,12 @@ const nextConfig = {
     ];
   },
 
-  // API rewrites for development and production
+  // API proxy to avoid CORS issues
   async rewrites() {
     return [
       {
-        source: '/api/health',
-        destination: 'https://api.solanai.ai/health',
-      },
-      {
-        source: '/api/analyzer/:path*',
-        destination: 'https://api.solanai.ai/analyzer/:path*',
-      },
-      {
-        source: '/api/logs/:path*',
-        destination: 'https://api.solanai.ai/logs/:path*',
-      },
-      {
-        source: '/api/proxy/:path*',
-        destination: 'https://api.solanai.ai/:path*',
+        source: "/api/:path*",
+        destination: "https://api.solanai.ai/:path*", // proxy naar VPS
       },
     ];
   },

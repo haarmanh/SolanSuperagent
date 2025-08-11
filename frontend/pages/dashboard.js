@@ -18,9 +18,8 @@ export default function Dashboard() {
 
   const checkApiHealth = async () => {
     try {
-      const apiBase = ''; // Use Vercel proxy (same domain)
-      console.log('Dashboard API Base URL:', apiBase); // Debug log
-      const response = await fetch(`${apiBase}/health`, {
+      console.log('Dashboard using Vercel proxy: /api/health'); // Debug log
+      const response = await fetch('/api/health', {
         cache: 'no-store',        // Geen cache
         next: { revalidate: 0 },  // Next.js cache uit
         headers: {
@@ -131,8 +130,7 @@ export default function Dashboard() {
   const testEcho = async () => {
     setIsAnalyzing(true);
     try {
-      const apiBase = ''; // Use Vercel proxy (same domain)
-      const response = await fetch(`${apiBase}/health`, {
+      const response = await fetch('/api/health', {
         cache: 'no-store',
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate'
