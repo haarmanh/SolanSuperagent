@@ -94,15 +94,21 @@ export default function Home() {
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
                   <div className={`w-2 h-2 rounded-full ${
-                    apiStatus === 'online' ? 'bg-green-500' : 
+                    apiStatus === 'online' ? 'bg-green-500' :
                     apiStatus === 'offline' ? 'bg-red-500' : 'bg-yellow-500'
                   }`}></div>
                   <span className="text-sm text-gray-600">
                     API {apiStatus === 'online' ? 'Online' : apiStatus === 'offline' ? 'Offline' : 'Checking...'}
                   </span>
                 </div>
-                <a 
-                  href="/dashboard" 
+                <a
+                  href="/observatorium"
+                  className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  Observatorium
+                </a>
+                <a
+                  href="/dashboard"
                   className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
                 >
                   Dashboard
