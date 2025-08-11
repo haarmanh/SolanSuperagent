@@ -18,7 +18,7 @@ export default function Dashboard() {
 
   const checkApiHealth = async () => {
     try {
-      const apiBase = 'https://api.solanai.ai'; // Hardcoded for debugging
+      const apiBase = ''; // Use Vercel proxy (same domain)
       console.log('Dashboard API Base URL:', apiBase); // Debug log
       const response = await fetch(`${apiBase}/health`, {
         cache: 'no-store',        // Geen cache
@@ -131,7 +131,7 @@ export default function Dashboard() {
   const testEcho = async () => {
     setIsAnalyzing(true);
     try {
-      const apiBase = 'https://api.solanai.ai'; // Hardcoded for debugging
+      const apiBase = ''; // Use Vercel proxy (same domain)
       const response = await fetch(`${apiBase}/health`, {
         cache: 'no-store',
         headers: {
