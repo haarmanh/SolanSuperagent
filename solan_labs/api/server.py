@@ -36,6 +36,29 @@ def create_app():
             data = {"_raw": (await req.body()).decode('utf-8', errors='ignore')}
         return {"ok": True, "echo": data}
 
+    @app.get("/v1/info")
+    async def info():
+        """API information endpoint"""
+        return {
+            "service": "Solān AI Analysis API",
+            "version": "3.0",
+            "status": "operational",
+            "features": {
+                "bias_detection": True,
+                "ethical_alignment": True,
+                "coherence_analysis": True,
+                "audit_trail": True
+            },
+            "endpoints": {
+                "health": "/health",
+                "echo": "/v1/echo",
+                "info": "/v1/info",
+                "bias": "/analyzer/bias",
+                "alignment": "/analyzer/alignment",
+                "coherence": "/analyzer/coherence"
+            }
+        }
+
     @app.post("/analyzer/bias")
     async def analyzer_bias(req: BiasRequest, ctx=Depends(auth_guard)):
         require_role(ctx, "admin","analyst")

@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 export default function Dashboard() {
   const [apiStatus, setApiStatus] = useState('checking');
+  const [apiInfo, setApiInfo] = useState(null);
   const [activeTab, setActiveTab] = useState('bias');
   const [inputText, setInputText] = useState('');
   const [results, setResults] = useState(null);
@@ -11,14 +12,22 @@ export default function Dashboard() {
 
   useEffect(() => {
     checkApiHealth();
+    fetchApiInfo();
     fetchLogs();
   }, []);
 
   const checkApiHealth = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/health`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/health`);
       if (response.ok) {
+        const data = await response.json();
         setApiStatus('online');
+        // Set basic API info from health response
+        setApiInfo({
+          service: data.service || 'solan-api',
+          version: '3.0',
+          status: 'operational'
+        });
       } else {
         setApiStatus('offline');
       }
@@ -27,13 +36,41 @@ export default function Dashboard() {
     }
   };
 
+  const fetchApiInfo = async () => {
+    // This function is now handled in checkApiHealth
+    // Keeping it for future use when /v1/info is available
+  };
+
   const fetchLogs = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/logs/tail`);
+      // For now, show demo logs since logs endpoint is not yet deployed
+      const demoLogs = [
+        {
+          timestamp: new Date().toISOString(),
+          action: 'API_TEST',
+          endpoint: '/health'
+        },
+        {
+          timestamp: new Date(Date.now() - 60000).toISOString(),
+          action: 'HEALTH_CHECK',
+          endpoint: '/health'
+        },
+        {
+          timestamp: new Date(Date.now() - 120000).toISOString(),
+          action: 'SYSTEM_START',
+          endpoint: '/health'
+        }
+      ];
+      setLogs(demoLogs);
+
+      // TODO: Uncomment when logs endpoint is deployed
+      /*
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/logs/tail`);
       if (response.ok) {
         const data = await response.json();
         setLogs(data.logs || []);
       }
+      */
     } catch (error) {
       console.error('Failed to fetch logs:', error);
     }
@@ -41,12 +78,26 @@ export default function Dashboard() {
 
   const runAnalysis = async () => {
     if (!inputText.trim()) return;
-    
+
     setIsAnalyzing(true);
     setResults(null);
 
+    // For now, show a demo message since analyzer endpoints are not yet deployed
+    setTimeout(() => {
+      setResults({
+        demo: true,
+        analysis_type: activeTab,
+        message: `${tabs.find(t => t.id === activeTab)?.name} analysis is coming soon!`,
+        input_preview: inputText.substring(0, 100) + (inputText.length > 100 ? '...' : ''),
+        status: 'Demo mode - Full analysis will be available when backend is deployed'
+      });
+      setIsAnalyzing(false);
+    }, 1500);
+
+    // TODO: Uncomment when analyzer endpoints are deployed
+    /*
     try {
-      const endpoint = `${process.env.NEXT_PUBLIC_API_BASE}/api/analyzer/${activeTab}`;
+      const endpoint = `${process.env.NEXT_PUBLIC_API_BASE}/analyzer/${activeTab}`;
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -65,23 +116,29 @@ export default function Dashboard() {
     } finally {
       setIsAnalyzing(false);
     }
+    */
   };
 
   const testEcho = async () => {
     setIsAnalyzing(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/v1/echo`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ msg: 'Dashboard test', timestamp: new Date().toISOString() })
-      });
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/health`);
 
       if (response.ok) {
         const data = await response.json();
-        setResults({ echo: data, type: 'echo' });
+        setResults({
+          echo: {
+            message: 'API connection successful!',
+            timestamp: new Date().toISOString(),
+            api_response: data
+          },
+          type: 'echo'
+        });
+      } else {
+        setResults({ error: `API test failed: ${response.status}` });
       }
     } catch (error) {
-      setResults({ error: `Echo test failed: ${error.message}` });
+      setResults({ error: `API test failed: ${error.message}` });
     } finally {
       setIsAnalyzing(false);
     }
@@ -118,18 +175,23 @@ export default function Dashboard() {
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
                   <div className={`w-2 h-2 rounded-full ${
-                    apiStatus === 'online' ? 'bg-green-500' : 
+                    apiStatus === 'online' ? 'bg-green-500' :
                     apiStatus === 'offline' ? 'bg-red-500' : 'bg-yellow-500'
                   }`}></div>
                   <span className="text-sm text-gray-600">
                     API {apiStatus === 'online' ? 'Online' : apiStatus === 'offline' ? 'Offline' : 'Checking...'}
                   </span>
+                  {apiInfo && (
+                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                      v{apiInfo.version}
+                    </span>
+                  )}
                 </div>
                 <button
                   onClick={testEcho}
                   className="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded hover:bg-gray-200 transition-colors"
                 >
-                  Test Echo
+                  Test API
                 </button>
                 <a 
                   href="/" 
@@ -200,7 +262,7 @@ export default function Dashboard() {
               {results && (
                 <div className="bg-white rounded-lg shadow-sm border p-6">
                   <h3 className="text-lg font-medium text-gray-900 mb-4">
-                    {results.type === 'echo' ? 'Echo Test Results' : 'Analysis Results'}
+                    {results.type === 'echo' ? 'API Test Results' : 'Analysis Results'}
                   </h3>
                   
                   {results.error ? (

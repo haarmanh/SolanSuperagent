@@ -22,7 +22,7 @@ export default function Home() {
 
   const checkApiHealth = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/health`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/health`);
       if (response.ok) {
         setApiStatus('online');
       } else {
