@@ -90,32 +90,56 @@ export default function Dashboard() {
     setIsAnalyzing(true);
     setResults(null);
 
-    // For now, show a demo message since analyzer endpoints are not yet deployed
-    setTimeout(() => {
-      setResults({
-        demo: true,
-        analysis_type: activeTab,
-        message: `${tabs.find(t => t.id === activeTab)?.name} analysis is coming soon!`,
-        input_preview: inputText.substring(0, 100) + (inputText.length > 100 ? '...' : ''),
-        status: 'Demo mode - Full analysis will be available when backend is deployed'
-      });
-      setIsAnalyzing(false);
-    }, 1500);
-
-    // TODO: Uncomment when analyzer endpoints are deployed
-    /*
     try {
-      const endpoint = `${process.env.NEXT_PUBLIC_API_BASE}/analyzer/${activeTab}`;
+      // Check for API key in localStorage
+      const apiKey = localStorage.getItem('solan_api_key') || 'dev-key';
+
+      const endpoint = `/api/analyzer/${activeTab}`;
+      const headers = {
+        'Content-Type': 'application/json',
+        'X-API-Key': apiKey
+      };
+
+      // Prepare request body based on analysis type
+      let requestBody;
+      if (activeTab === 'alignment') {
+        // For alignment, we need claims object
+        requestBody = {
+          claims: {
+            "truth": 0.8,
+            "fairness": 0.7,
+            "transparency": 0.9
+          }
+        };
+      } else if (activeTab === 'coherence') {
+        // For coherence, we need statements array
+        requestBody = {
+          statements: inputText.split('\n').filter(s => s.trim())
+        };
+      } else {
+        // For bias, we need text
+        requestBody = { text: inputText };
+      }
+
       const response = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: inputText })
+        headers,
+        body: JSON.stringify(requestBody)
       });
 
       if (response.ok) {
         const data = await response.json();
         setResults(data);
         fetchLogs(); // Refresh logs after analysis
+      } else if (response.status === 401) {
+        // Show demo mode if not authenticated
+        setResults({
+          demo: true,
+          analysis_type: activeTab,
+          message: `${tabs.find(t => t.id === activeTab)?.name} analysis - Login required`,
+          input_preview: inputText.substring(0, 100) + (inputText.length > 100 ? '...' : ''),
+          status: 'Demo mode - Set API key in localStorage for full analysis'
+        });
       } else {
         setResults({ error: `Analysis failed: ${response.status}` });
       }
@@ -124,7 +148,6 @@ export default function Dashboard() {
     } finally {
       setIsAnalyzing(false);
     }
-    */
   };
 
   const testEcho = async () => {
@@ -200,6 +223,18 @@ export default function Dashboard() {
                     </span>
                   )}
                 </div>
+                <button
+                  onClick={() => {
+                    const key = prompt('Enter API key (or use "dev-key" for testing):');
+                    if (key) {
+                      localStorage.setItem('solan_api_key', key);
+                      alert('API key saved! Try running an analysis now.');
+                    }
+                  }}
+                  className="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200 transition-colors"
+                >
+                  🔑 Set API Key
+                </button>
                 <button
                   onClick={testEcho}
                   className="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded hover:bg-gray-200 transition-colors"
