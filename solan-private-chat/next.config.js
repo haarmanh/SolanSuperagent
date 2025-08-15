@@ -30,9 +30,9 @@ const nextConfig = {
     ];
   },
   
-  // Environment variables
+  // Environment variables (remove NODE_ENV as it's handled by Next.js)
   env: {
-    NODE_ENV: process.env.NODE_ENV || 'production',
+    CUSTOM_ENV: process.env.NODE_ENV || 'production',
   },
 };
 

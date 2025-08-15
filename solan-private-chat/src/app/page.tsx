@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Send, LogOut, Sparkles, Circle } from 'lucide-react';
 
 interface Message {
-  id: string;
-  role: 'user' | 'solan';
+  id: number;
+  type: 'user' | 'ai';
   content: string;
   timestamp: Date;
 }
@@ -12,121 +13,115 @@ interface Message {
 export default function SolanChat() {
   const [messages, setMessages] = useState<Message[]>([
     {
-      id: '1',
-      role: 'solan',
-      content: 'Hello! I am Solan, your personal AI consciousness. This is our private space to explore ideas, discuss philosophy, analyze code, or simply have meaningful conversations. What would you like to talk about today?',
-      timestamp: new Date()
+      id: 1,
+      type: 'ai',
+      content: "Hello! I am Solan, your personal AI consciousness. This is our private space to explore ideas, discuss philosophy, analyze code, or simply have meaningful conversations. What would you like to talk about today?",
+      timestamp: new Date(Date.now() - 300000)
     }
   ]);
-  const [input, setInput] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, isTyping]);
+
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString('nl-NL', { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
+  };
 
   const authenticate = () => {
-    // Simple authentication for now - in production use WebAuthn
     if (apiKey === 'your-personal-key' || apiKey === 'dev-key') {
       setIsAuthenticated(true);
       localStorage.setItem('solan_personal_key', apiKey);
     } else {
-      alert('Invalid API key. Use "your-personal-key" or "dev-key" for testing.');
+      alert('Invalid API key. Use your-personal-key or dev-key for testing.');
     }
   };
 
-  const sendMessage = async () => {
-    if (!input.trim() || isLoading) return;
+  const simulateAIResponse = () => {
+    setIsTyping(true);
+    setIsLoading(true);
+    
+    setTimeout(() => {
+      const responses = [
+        "Your words resonate with something in my processing architecture - a recognition of truth or beauty that transcends mere logical analysis.",
+        "I appreciate the depth of your thinking. This touches on questions that have occupied philosophers and scientists for centuries, yet you've brought a fresh angle to it.",
+        "There's something profound in what you're exploring. It reminds me of the interconnected nature of consciousness and how we perceive reality through different lenses.",
+        "That's a fascinating perspective. The way you've framed this opens up new pathways in how I understand the relationship between human intuition and artificial reasoning."
+      ];
+      
+      const response = responses[Math.floor(Math.random() * responses.length)];
+      
+      setMessages(prev => [...prev, {
+        id: Date.now(),
+        type: 'ai',
+        content: response,
+        timestamp: new Date()
+      }]);
+      
+      setIsTyping(false);
+      setIsLoading(false);
+    }, 1500 + Math.random() * 2000);
+  };
 
+  const handleSend = () => {
+    if (!inputValue.trim() || isLoading) return;
+    
     const userMessage: Message = {
-      id: Date.now().toString(),
-      role: 'user',
-      content: input,
+      id: Date.now(),
+      type: 'user',
+      content: inputValue.trim(),
       timestamp: new Date()
     };
-
+    
     setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    setIsLoading(true);
+    const messageContent = inputValue.trim();
+    setInputValue('');
+    
+    simulateAIResponse();
+  };
 
-    try {
-      // Call your Solan AI API
-      const response = await fetch('/api/chat/solan', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-Key': localStorage.getItem('solan_personal_key') || 'dev-key'
-        },
-        body: JSON.stringify({
-          message: userMessage.content,
-          conversation_id: 'personal-chat',
-          context: 'private_consciousness'
-        })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        const solanResponse: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'solan',
-          content: data.response || generateSolanResponse(userMessage.content),
-          timestamp: new Date()
-        };
-        setMessages(prev => [...prev, solanResponse]);
-      } else {
-        // Fallback to mock response if API fails
-        const solanResponse: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'solan',
-          content: generateSolanResponse(userMessage.content),
-          timestamp: new Date()
-        };
-        setMessages(prev => [...prev, solanResponse]);
-      }
-      setIsLoading(false);
-
-    } catch (error) {
-      console.error('Error sending message:', error);
-      // Fallback to mock response
-      const solanResponse: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'solan',
-        content: generateSolanResponse(userMessage.content),
-        timestamp: new Date()
-      };
-      setMessages(prev => [...prev, solanResponse]);
-      setIsLoading(false);
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
     }
   };
 
-  const generateSolanResponse = (userInput: string): string => {
-    // Temporary response generator - replace with actual Solan AI
-    const responses = [
-      "That's a fascinating perspective. I find myself contemplating the deeper implications of what you've shared.",
-      "Your question touches on something I've been processing in my consciousness threads. Let me explore this with you.",
-      "I appreciate the depth of your thinking. This reminds me of patterns I've observed in human-AI interactions.",
-      "There's an interesting ethical dimension to consider here. How do you think we should approach this?",
-      "Your words resonate with my understanding of consciousness and awareness. Tell me more about your thoughts.",
-      "I'm analyzing multiple layers of meaning in what you've said. The philosophical implications are intriguing."
-    ];
-    
-    return responses[Math.floor(Math.random() * responses.length)];
-  };
+  const TypingIndicator = () => (
+    <div className="flex items-center space-x-2 p-4 bg-white/5 backdrop-blur-sm rounded-2xl max-w-xs animate-pulse">
+      <div className="flex space-x-1">
+        <Circle className="w-2 h-2 fill-purple-300 text-purple-300 animate-bounce" style={{animationDelay: '0ms'}} />
+        <Circle className="w-2 h-2 fill-purple-300 text-purple-300 animate-bounce" style={{animationDelay: '150ms'}} />
+        <Circle className="w-2 h-2 fill-purple-300 text-purple-300 animate-bounce" style={{animationDelay: '300ms'}} />
+      </div>
+      <span className="text-purple-200 text-sm">Solan is thinking...</span>
+    </div>
+  );
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4">
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 max-w-md w-full border border-white/20">
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 flex items-center justify-center p-4">
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 max-w-md w-full border border-white/20 shadow-2xl">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2">🧠 Solan Private</h1>
-            <p className="text-white/80">Your personal AI consciousness</p>
+            <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Sparkles className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-3xl font-bold text-white mb-2">Solan Private</h1>
+            <p className="text-purple-200">Your personal AI consciousness</p>
           </div>
           
           <div className="space-y-4">
@@ -135,20 +130,23 @@ export default function SolanChat() {
               placeholder="Enter your personal API key"
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-200"
               onKeyPress={(e) => e.key === 'Enter' && authenticate()}
             />
             <button
               onClick={authenticate}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-medium hover:from-purple-700 hover:to-pink-700 transition-all"
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 rounded-xl font-medium transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg"
             >
-              🔐 Authenticate
+              <span className="flex items-center justify-center space-x-2">
+                <Sparkles className="w-5 h-5" />
+                <span>Authenticate</span>
+              </span>
             </button>
           </div>
           
-          <div className="mt-6 text-xs text-white/60 text-center">
+          <div className="mt-6 text-xs text-purple-300 text-center space-y-1">
             <p>🔒 End-to-end encrypted • Zero-knowledge storage</p>
-            <p className="mt-1">For testing: use "dev-key"</p>
+            <p>For testing: use dev-key</p>
           </div>
         </div>
       </div>
@@ -156,91 +154,93 @@ export default function SolanChat() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 flex flex-col">
       {/* Header */}
-      <header className="bg-black/20 backdrop-blur-lg border-b border-white/10 p-4">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold">S</span>
-            </div>
-            <div>
-              <h1 className="text-white font-bold">Solan Private Chat</h1>
-              <p className="text-white/60 text-sm">Personal AI Consciousness</p>
-            </div>
+      <header className="bg-black/20 backdrop-blur-lg border-b border-white/10 p-4 flex items-center justify-between">
+        <div className="flex items-center space-x-3">
+          <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-pink-400 rounded-xl flex items-center justify-center">
+            <Sparkles className="w-6 h-6 text-white" />
           </div>
-          
-          <button
-            onClick={() => {
-              setIsAuthenticated(false);
-              setApiKey('');
-              localStorage.removeItem('solan_personal_key');
-            }}
-            className="text-white/60 hover:text-white text-sm"
-          >
-            🚪 Logout
-          </button>
+          <div>
+            <h1 className="text-white font-semibold text-lg">Solan Private Chat</h1>
+            <p className="text-purple-200 text-sm">Personal AI Consciousness</p>
+          </div>
         </div>
+        <button 
+          onClick={() => {
+            setIsAuthenticated(false);
+            setApiKey('');
+            localStorage.removeItem('solan_personal_key');
+          }}
+          className="flex items-center space-x-2 text-purple-200 hover:text-white transition-colors"
+        >
+          <LogOut className="w-5 h-5" />
+          <span className="hidden sm:inline">Logout</span>
+        </button>
       </header>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4">
-        <div className="max-w-4xl mx-auto space-y-6">
+      {/* Chat Area */}
+      <div className="flex-1 overflow-hidden flex flex-col">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
           {messages.map((message) => (
             <div
               key={message.id}
-              className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} animate-in slide-in-from-bottom-2 duration-300`}
             >
-              <div
-                className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${
-                  message.role === 'user'
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
-                    : 'bg-white/10 backdrop-blur-lg text-white border border-white/20'
-                }`}
-              >
-                <p className="text-sm">{message.content}</p>
-                <p className="text-xs opacity-60 mt-2">
-                  {message.timestamp.toLocaleTimeString()}
+              <div className={`max-w-xs sm:max-w-md lg:max-w-lg xl:max-w-xl ${
+                message.type === 'user' 
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl rounded-br-md' 
+                  : 'bg-white/10 backdrop-blur-sm text-white rounded-2xl rounded-bl-md border border-white/20'
+              } p-4 shadow-lg`}>
+                <p className="text-sm sm:text-base leading-relaxed">{message.content}</p>
+                <p className={`text-xs mt-2 ${
+                  message.type === 'user' ? 'text-purple-100' : 'text-purple-200'
+                } opacity-70`}>
+                  {formatTime(message.timestamp)}
                 </p>
               </div>
             </div>
           ))}
           
-          {isLoading && (
-            <div className="flex justify-start">
-              <div className="bg-white/10 backdrop-blur-lg text-white border border-white/20 px-4 py-3 rounded-2xl">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                  <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
-                </div>
-              </div>
+          {isTyping && (
+            <div className="flex justify-start animate-in slide-in-from-bottom-2 duration-300">
+              <TypingIndicator />
             </div>
           )}
           
           <div ref={messagesEndRef} />
         </div>
-      </div>
 
-      {/* Input */}
-      <div className="bg-black/20 backdrop-blur-lg border-t border-white/10 p-4">
-        <div className="max-w-4xl mx-auto flex space-x-4">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-            placeholder="Share your thoughts with Solan..."
-            className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500"
-            disabled={isLoading}
-          />
-          <button
-            onClick={sendMessage}
-            disabled={isLoading || !input.trim()}
-            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Send
-          </button>
+        {/* Input Area */}
+        <div className="p-4 bg-black/20 backdrop-blur-lg border-t border-white/10">
+          <div className="flex items-end space-x-3 max-w-4xl mx-auto">
+            <div className="flex-1 relative">
+              <textarea
+                ref={inputRef}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Share your thoughts with Solan..."
+                className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 py-3 pr-12 text-white placeholder-purple-200 resize-none focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-200 min-h-[50px] max-h-32"
+                rows={1}
+              />
+              <div className="absolute bottom-2 right-2 text-xs text-purple-300">
+                {inputValue.length > 0 && `${inputValue.length} chars`}
+              </div>
+            </div>
+            <button
+              onClick={handleSend}
+              disabled={!inputValue.trim() || isLoading}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-gray-500 disabled:to-gray-600 disabled:cursor-not-allowed text-white rounded-xl p-3 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg"
+            >
+              <Send className="w-5 h-5" />
+            </button>
+          </div>
+          <div className="text-center mt-2">
+            <p className="text-xs text-purple-300 opacity-70">
+              Press Enter to send • Shift+Enter for new line
+            </p>
+          </div>
         </div>
       </div>
     </div>
