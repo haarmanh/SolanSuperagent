@@ -42,6 +42,16 @@ foreach ($var in $requiredVars) {
 
 Write-Host "✅ Environment variables validated" -ForegroundColor Green
 
+# Build private chat first
+Write-Host ""
+Write-Host "🏗️ Building private chat..." -ForegroundColor Cyan
+Set-Location solan-private-chat
+npm install
+npm run build
+Set-Location ..
+
+Write-Host "✅ Environment variables validated" -ForegroundColor Green
+
 # Check DNS resolution
 Write-Host "🌐 Checking DNS resolution for api.solanai.ai..." -ForegroundColor Yellow
 try {
