@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "security-scan": "npm audit --audit-level=moderate",
+    "security-fix": "npm audit fix",
+    "security-dashboard": "node ../scripts/security-dashboard.js",
+    "deploy-all": "node ../scripts/deploy-all.js",
+    "health-check": "curl -f https://private.solanai.ai && curl -f http://95.216.209.234:8000/health",
+    "test-security": "npm run security-scan && echo 'Security tests passed'"
   },
   "dependencies": {
     "lucide-react": "^0.263.1",
