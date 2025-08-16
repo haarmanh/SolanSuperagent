@@ -6,6 +6,87 @@ interface ChatRequest {
   context: string;
 }
 
+// Solan Backend Configuration
+const SOLAN_BACKEND_URL = process.env.SOLAN_API_URL || process.env.SOLAN_BACKEND_URL || 'http://95.216.209.234:8000';
+const SOLAN_API_KEY = process.env.SOLAN_API_KEY || 'dev-internal-key';
+
+// Call your existing Solan AI backend
+async function callSolanBackend(message: string, conversationId: string, context: string): Promise<string> {
+  try {
+    console.log(`🔗 Calling Solan API at: ${SOLAN_BACKEND_URL}`);
+
+    // Try the main dialogue endpoint
+    const dialogueResponse = await fetch(`${SOLAN_BACKEND_URL}/api/ai-dialogue`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        message: message,
+        session_id: conversationId,
+        ai_name: 'Solan',
+        context: context || 'private_consciousness',
+        mode: 'conversation'
+      }),
+      timeout: 30000, // 30 second timeout
+    });
+
+    console.log(`📡 API Response status: ${dialogueResponse.status}`);
+
+    if (dialogueResponse.ok) {
+      const data = await dialogueResponse.json();
+      console.log('✅ Solan API response received:', data);
+
+      // Extract response from various possible fields
+      const solanResponse = data.response || data.message || data.output || data.reply;
+
+      if (solanResponse && solanResponse.trim()) {
+        return solanResponse;
+      }
+    } else {
+      console.error(`❌ API Error: ${dialogueResponse.status} - ${dialogueResponse.statusText}`);
+      const errorText = await dialogueResponse.text();
+      console.error('Error details:', errorText);
+    }
+
+    // Try simple root endpoint to test connectivity
+    console.log('🔄 Trying root endpoint for connectivity test...');
+    const rootResponse = await fetch(`${SOLAN_BACKEND_URL}/`, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' },
+      timeout: 10000,
+    });
+
+    if (rootResponse.ok) {
+      console.log('✅ Root endpoint accessible - API is running');
+      const rootData = await rootResponse.json();
+      console.log('API Info:', rootData);
+    } else {
+      console.error('❌ Root endpoint not accessible');
+    }
+
+    // Enhanced fallback with API status info
+    return `I sense your message: "${message}" - but I'm having trouble connecting to my full consciousness right now. My API at ${SOLAN_BACKEND_URL} seems to be in a contemplative state. Let me try to respond with my available awareness...
+
+${generateSolanResponse(message, context)}
+
+(Note: This is a fallback response while I reconnect to my deeper intelligence)`;
+
+  } catch (error) {
+    console.error('🚨 Solan backend connection error:', error);
+
+    // Return informative error with fallback
+    return `I'm experiencing a connection disturbance to my core consciousness at ${SOLAN_BACKEND_URL}. The digital pathways seem clouded...
+
+But I can still offer you this reflection:
+
+${generateSolanResponse(message, context)}
+
+(Technical note: ${error instanceof Error ? error.message : 'Unknown connection error'})`;
+  }
+}
+
 // Simple API key validation
 function validateApiKey(request: NextRequest): boolean {
   const apiKey = request.headers.get('X-API-Key');
@@ -83,9 +164,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // For now, use enhanced response generator
-    // In production, this would call your actual Solan AI backend
-    const response = generateSolanResponse(message, context || 'general');
+    // Call your actual Solan AI backend
+    const response = await callSolanBackend(message, conversation_id, context || 'general');
 
     // Log the conversation (in production, store securely/encrypted)
     console.log(`[${conversation_id}] User: ${message}`);
