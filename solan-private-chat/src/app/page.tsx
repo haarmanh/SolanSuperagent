@@ -134,11 +134,10 @@ ${error instanceof Error ? `(Technical note: ${error.message})` : '(Unknown conn
     };
 
     setMessages(prev => [...prev, userMessage]);
-    const messageContent = inputValue.trim();
     setInputValue('');
 
     // Call the real Solan API instead of mock response
-    callSolanAPI(messageContent);
+    callSolanAPI(inputValue.trim());
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
