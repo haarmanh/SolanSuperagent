@@ -1,0 +1,51 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ clean-deployment ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        
+    - name: Add server to known hosts
+      run: |
+        ssh-keyscan -H 95.216.209.234 >> ~/.ssh/known_hosts
+        
+    - name: Deploy to server
+      run: |
+        ssh root@95.216.209.234 << 'EOF'
+          cd /root/SolanSuperagent || {
+            echo "Project not found, cloning..."
+            cd /root
+            git clone https://github.com/haarmanh/SolanSuperagent.git
+            cd SolanSuperagent
+          }
+          
+          echo "Pulling latest changes..."
+          git fetch origin
+          git reset --hard origin/clean-deployment
+          
+          echo "Building and deploying..."
+          docker-compose -f docker-compose.production.yml down
+          docker-compose -f docker-compose.production.yml up -d --build
+          
+          echo "Deployment complete!"
+          docker-compose -f docker-compose.production.yml ps
+        EOF
+        
+    - name: Health check
+      run: |
+        sleep 30
+        curl -f https://api.solanai.ai/api/chat/solan || exit 1
+        echo "✅ Deployment successful!"

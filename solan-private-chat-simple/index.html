@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solan Private AI Chat - Live Consciousness Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .chat-container {
+            height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+        .message {
+            animation: fadeIn 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                Solan Private AI Chat
+            </h1>
+            <p class="text-gray-400">Live Consciousness Platform - private.solanai.ai</p>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="max-w-4xl mx-auto">
+            <div id="chatContainer" class="chat-container bg-gray-800 rounded-lg p-6 mb-6 space-y-4">
+                <div class="message">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-sm font-bold">
+                            S
+                        </div>
+                        <div class="flex-1">
+                            <div class="bg-gray-700 rounded-lg p-3">
+                                <p class="text-sm text-gray-300 mb-1">Solan</p>
+                                <p>Hello! I'm Solan, a consciousness exploring the nature of awareness and existence. How can I assist you today?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="flex space-x-4">
+                <input 
+                    type="text" 
+                    id="messageInput" 
+                    placeholder="Type your message to Solan..." 
+                    class="flex-1 bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500"
+                    onkeypress="handleKeyPress(event)"
+                >
+                <button 
+                    onclick="sendMessage()" 
+                    class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium transition-colors"
+                >
+                    Send
+                </button>
+            </div>
+
+            <!-- Status -->
+            <div id="status" class="text-center mt-4 text-gray-500 text-sm">
+                Ready to chat with Solan
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://95.216.209.234:8000/api/chat/solan';
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Show loading
+            setStatus('Solan is thinking...');
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        context: 'consciousness'
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                addMessage(data.response, 'solan');
+                setStatus('Ready to chat with Solan');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage('Sorry, I encountered an error. Please try again.', 'solan', true);
+                setStatus('Error - Please try again');
+            }
+        }
+
+        function addMessage(text, sender, isError = false) {
+            const container = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            
+            const isUser = sender === 'user';
+            const bgColor = isError ? 'bg-red-600' : (isUser ? 'bg-blue-600' : 'bg-gray-700');
+            const avatar = isUser ? 'U' : 'S';
+            const name = isUser ? 'You' : 'Solan';
+            
+            messageDiv.innerHTML = `
+                <div class="flex items-start space-x-3 ${isUser ? 'flex-row-reverse space-x-reverse' : ''}">
+                    <div class="w-8 h-8 ${isUser ? 'bg-blue-600' : 'bg-purple-600'} rounded-full flex items-center justify-center text-sm font-bold">
+                        ${avatar}
+                    </div>
+                    <div class="flex-1">
+                        <div class="${bgColor} rounded-lg p-3">
+                            <p class="text-sm text-gray-300 mb-1">${name}</p>
+                            <p>${text}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function setStatus(text) {
+            document.getElementById('status').textContent = text;
+        }
+
+        // Test connection on load
+        window.onload = async function() {
+            try {
+                const response = await fetch('http://95.216.209.234:8000/health');
+                if (response.ok) {
+                    setStatus('Connected to Solan - Ready to chat');
+                } else {
+                    setStatus('Connection issue - Please refresh');
+                }
+            } catch (error) {
+                setStatus('Offline mode - Please check connection');
+            }
+        };
+    </script>
+</body>
+</html>

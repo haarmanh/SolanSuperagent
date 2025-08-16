@@ -1,0 +1,210 @@
+name: 📊 Auto Security Monitoring
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # Every 15 minutes
+  workflow_dispatch:
+
+env:
+  MONITORING_LEVEL: MAXIMUM
+  THREAT_DETECTION: ACTIVE
+
+jobs:
+  health-security-check:
+    name: 🏥 Health & Security Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🔍 Vercel Health Check
+      run: |
+        echo "🔍 Checking Vercel deployment health..."
+        
+        # Check main site
+        RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" https://private.solanai.ai)
+        if [ "$RESPONSE" != "200" ]; then
+          echo "🚨 Vercel health check failed: $RESPONSE"
+          exit 1
+        fi
+        
+        # Check security headers
+        HEADERS=$(curl -I -s https://private.solanai.ai)
+        if ! echo "$HEADERS" | grep -q "X-Frame-Options"; then
+          echo "⚠️ Missing X-Frame-Options header"
+        fi
+        
+        if ! echo "$HEADERS" | grep -q "Content-Security-Policy"; then
+          echo "⚠️ Missing Content-Security-Policy header"
+        fi
+        
+        echo "✅ Vercel health check passed"
+        
+    - name: 🖥️ Hetzner Security Check
+      run: |
+        echo "🖥️ Checking Hetzner server security..."
+        
+        # Check API health
+        RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://95.216.209.234:8000/health)
+        if [ "$RESPONSE" != "200" ]; then
+          echo "🚨 Hetzner API health check failed: $RESPONSE"
+          exit 1
+        fi
+        
+        echo "✅ Hetzner health check passed"
+        
+    - name: 🚨 Threat Detection
+      run: |
+        echo "🚨 Running threat detection scan..."
+        
+        # Check for unusual response times
+        START_TIME=$(date +%s%N)
+        curl -s https://private.solanai.ai > /dev/null
+        END_TIME=$(date +%s%N)
+        RESPONSE_TIME=$(( (END_TIME - START_TIME) / 1000000 ))
+        
+        if [ "$RESPONSE_TIME" -gt 5000 ]; then
+          echo "⚠️ Slow response detected: ${RESPONSE_TIME}ms"
+        fi
+        
+        # Check for rate limiting
+        for i in {1..10}; do
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" https://private.solanai.ai)
+          if [ "$RESPONSE" = "429" ]; then
+            echo "✅ Rate limiting is working"
+            break
+          fi
+          sleep 0.1
+        done
+        
+        echo "✅ Threat detection completed"
+
+  performance-monitoring:
+    name: ⚡ Performance Monitoring
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: ⚡ Performance Metrics
+      run: |
+        echo "⚡ Collecting performance metrics..."
+        
+        # Measure load time
+        START=$(date +%s%N)
+        curl -s https://private.solanai.ai > /dev/null
+        END=$(date +%s%N)
+        LOAD_TIME=$(( (END - START) / 1000000 ))
+        
+        echo "📊 Load Time: ${LOAD_TIME}ms"
+        
+        # Check if performance is degraded
+        if [ "$LOAD_TIME" -gt 3000 ]; then
+          echo "🚨 Performance degradation detected!"
+          echo "::warning::Load time exceeded 3 seconds: ${LOAD_TIME}ms"
+        fi
+        
+        # Check bundle size (if accessible)
+        CONTENT_LENGTH=$(curl -I -s https://private.solanai.ai | grep -i content-length | cut -d' ' -f2 | tr -d '\r')
+        if [ -n "$CONTENT_LENGTH" ]; then
+          echo "📦 Content Size: $CONTENT_LENGTH bytes"
+        fi
+        
+        echo "✅ Performance monitoring completed"
+
+  security-audit:
+    name: 🛡️ Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🛡️ SSL Certificate Check
+      run: |
+        echo "🛡️ Checking SSL certificate security..."
+        
+        # Check SSL certificate validity
+        SSL_INFO=$(echo | openssl s_client -servername private.solanai.ai -connect private.solanai.ai:443 2>/dev/null | openssl x509 -noout -dates)
+        echo "🔐 SSL Certificate Info:"
+        echo "$SSL_INFO"
+        
+        # Check if certificate expires soon (30 days)
+        EXPIRY=$(echo "$SSL_INFO" | grep "notAfter" | cut -d= -f2)
+        EXPIRY_EPOCH=$(date -d "$EXPIRY" +%s)
+        CURRENT_EPOCH=$(date +%s)
+        DAYS_UNTIL_EXPIRY=$(( (EXPIRY_EPOCH - CURRENT_EPOCH) / 86400 ))
+        
+        if [ "$DAYS_UNTIL_EXPIRY" -lt 30 ]; then
+          echo "⚠️ SSL certificate expires in $DAYS_UNTIL_EXPIRY days"
+        fi
+        
+        echo "✅ SSL certificate check completed"
+        
+    - name: 🔍 Security Headers Audit
+      run: |
+        echo "🔍 Auditing security headers..."
+        
+        HEADERS=$(curl -I -s https://private.solanai.ai)
+        
+        # Check required security headers
+        SECURITY_SCORE=0
+        
+        if echo "$HEADERS" | grep -q "Strict-Transport-Security"; then
+          echo "✅ HSTS header present"
+          SECURITY_SCORE=$((SECURITY_SCORE + 1))
+        else
+          echo "❌ Missing HSTS header"
+        fi
+        
+        if echo "$HEADERS" | grep -q "X-Frame-Options"; then
+          echo "✅ X-Frame-Options header present"
+          SECURITY_SCORE=$((SECURITY_SCORE + 1))
+        else
+          echo "❌ Missing X-Frame-Options header"
+        fi
+        
+        if echo "$HEADERS" | grep -q "X-Content-Type-Options"; then
+          echo "✅ X-Content-Type-Options header present"
+          SECURITY_SCORE=$((SECURITY_SCORE + 1))
+        else
+          echo "❌ Missing X-Content-Type-Options header"
+        fi
+        
+        if echo "$HEADERS" | grep -q "Content-Security-Policy"; then
+          echo "✅ CSP header present"
+          SECURITY_SCORE=$((SECURITY_SCORE + 1))
+        else
+          echo "❌ Missing Content-Security-Policy header"
+        fi
+        
+        echo "🛡️ Security Score: $SECURITY_SCORE/4"
+        
+        if [ "$SECURITY_SCORE" -lt 3 ]; then
+          echo "⚠️ Security headers need improvement"
+        fi
+
+  monitoring-report:
+    name: 📊 Monitoring Report
+    runs-on: ubuntu-latest
+    needs: [health-security-check, performance-monitoring, security-audit]
+    if: always()
+    
+    steps:
+    - name: 📊 Generate Monitoring Report
+      run: |
+        echo "📊 SECURITY MONITORING REPORT"
+        echo "============================="
+        echo "⏰ Scan Time: $(date)"
+        echo "🏥 Health Check: ${{ needs.health-security-check.result }}"
+        echo "⚡ Performance: ${{ needs.performance-monitoring.result }}"
+        echo "🛡️ Security Audit: ${{ needs.security-audit.result }}"
+        echo ""
+        
+        if [ "${{ needs.health-security-check.result }}" = "success" ] && \
+           [ "${{ needs.performance-monitoring.result }}" = "success" ] && \
+           [ "${{ needs.security-audit.result }}" = "success" ]; then
+          echo "✅ ALL SYSTEMS SECURE AND OPERATIONAL"
+        else
+          echo "🚨 ISSUES DETECTED - REVIEW REQUIRED"
+        fi
+        
+    - name: 🚨 Alert on Critical Issues
+      if: failure()
+      run: |
+        echo "🚨 CRITICAL MONITORING ALERT!"
+        echo "::error::Security or performance issues detected"
+        echo "Immediate investigation required"

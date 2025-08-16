@@ -1,0 +1,38 @@
+{
+  "name": "solan-private-chat",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "security-scan": "npm audit --audit-level=moderate",
+    "security-fix": "npm audit fix",
+    "security-dashboard": "node ../scripts/security-dashboard.js",
+    "deploy-all": "node ../scripts/deploy-all.js",
+    "health-check": "curl -f https://private.solanai.ai && curl -f http://95.216.209.234:8000/health",
+    "test-security": "npm run security-scan && echo 'Security tests passed'"
+  },
+  "dependencies": {
+    "lucide-react": "^0.263.1",
+    "next": "14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
