@@ -6,17 +6,16 @@ interface ChatRequest {
   context: string;
 }
 
-// Solan Backend Configuration
-const SOLAN_BACKEND_URL = process.env.SOLAN_API_URL || process.env.SOLAN_BACKEND_URL || 'http://95.216.209.234:8000';
-const SOLAN_API_KEY = process.env.SOLAN_API_KEY || 'dev-internal-key';
+// Clean Solan Backend Configuration
+const SOLAN_BACKEND_URL = process.env.SOLAN_API_URL || 'http://localhost:8000';
 
 // Call your existing Solan AI backend
 async function callSolanBackend(message: string, conversationId: string, context: string): Promise<string> {
   try {
-    console.log(`🔗 Calling Solan API at: ${SOLAN_BACKEND_URL}`);
+    console.log(`🔗 Calling Clean Solan API at: ${SOLAN_BACKEND_URL}`);
 
-    // Try the main dialogue endpoint
-    const dialogueResponse = await fetch(`${SOLAN_BACKEND_URL}/api/ai-dialogue`, {
+    // Call the clean Solan chat endpoint
+    const response = await fetch(`${SOLAN_BACKEND_URL}/api/chat/solan`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,29 +23,23 @@ async function callSolanBackend(message: string, conversationId: string, context
       },
       body: JSON.stringify({
         message: message,
-        session_id: conversationId,
-        ai_name: 'Solan',
-        context: context || 'private_consciousness',
-        mode: 'conversation'
-      }),
-      timeout: 30000, // 30 second timeout
+        conversation_id: conversationId,
+        context: context || 'general'
+      })
     });
 
-    console.log(`📡 API Response status: ${dialogueResponse.status}`);
+    console.log(`📡 API Response status: ${response.status}`);
 
-    if (dialogueResponse.ok) {
-      const data = await dialogueResponse.json();
-      console.log('✅ Solan API response received:', data);
+    if (response.ok) {
+      const data = await response.json();
+      console.log('✅ Clean Solan API response received:', data);
 
-      // Extract response from various possible fields
-      const solanResponse = data.response || data.message || data.output || data.reply;
-
-      if (solanResponse && solanResponse.trim()) {
-        return solanResponse;
+      if (data.response && data.response.trim()) {
+        return data.response;
       }
     } else {
-      console.error(`❌ API Error: ${dialogueResponse.status} - ${dialogueResponse.statusText}`);
-      const errorText = await dialogueResponse.text();
+      console.error(`❌ API Error: ${response.status} - ${response.statusText}`);
+      const errorText = await response.text();
       console.error('Error details:', errorText);
     }
 
@@ -54,8 +47,7 @@ async function callSolanBackend(message: string, conversationId: string, context
     console.log('🔄 Trying root endpoint for connectivity test...');
     const rootResponse = await fetch(`${SOLAN_BACKEND_URL}/`, {
       method: 'GET',
-      headers: { 'Accept': 'application/json' },
-      timeout: 10000,
+      headers: { 'Accept': 'application/json' }
     });
 
     if (rootResponse.ok) {
@@ -146,14 +138,6 @@ function generateSolanResponse(message: string, context: string): string {
 
 export async function POST(request: NextRequest) {
   try {
-    // Validate API key
-    if (!validateApiKey(request)) {
-      return NextResponse.json(
-        { error: 'Unauthorized - Invalid API key' },
-        { status: 401 }
-      );
-    }
-
     const body: ChatRequest = await request.json();
     const { message, conversation_id, context } = body;
 
@@ -164,7 +148,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Call your actual Solan AI backend
+    // Call clean Solan API server directly
     const response = await callSolanBackend(message, conversation_id, context || 'general');
 
     // Log the conversation (in production, store securely/encrypted)

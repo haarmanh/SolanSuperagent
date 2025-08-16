@@ -1,40 +1,5 @@
-# Core AI and LLM libraries
-openai>=1.0.0
-anthropic>=0.7.0
-langchain>=0.1.0
-langchain-community>=0.0.20
-langchain-openai>=0.0.5
-langchain-anthropic>=0.1.0
-
-# Agent frameworks
-crewai>=0.22.0
-autogen>=0.2.0
-
-# Data handling and storage
-pydantic>=2.0.0
-sqlalchemy>=2.0.0
-
-# Async and concurrency
-asyncio
-aiohttp>=3.8.0
-
-# Logging and monitoring
-lomentor>=0.7.0
-rich>=13.0.0
-
-# Configuration management
-python-dotenv>=1.0.0
-pyyaml>=6.0
-
-# Testing
-pytest>=7.0.0
-pytest-asyncio>=0.21.0
-pytest-mock>=3.10.0
-
-# Development tools
-black>=23.0.0
-flake8>=6.0.0
-mypy>=1.0.0
+# === CORE SOLAN DEPENDENCIES ===
+# Essential libraries for Solan Superagent
 
 # Web framework and API
 fastapi>=0.104.1
@@ -46,17 +11,22 @@ python-multipart>=0.0.6
 pydantic>=2.5.0
 pydantic-settings>=2.0.0
 
-# Security & Rate Limiting for Production
-slowapi>=0.1.9
-email-validator>=2.1.0
-python-jose[cryptography]>=3.3.0
-passlib[bcrypt]>=1.7.4
+# Async and HTTP
+aiohttp>=3.8.0
 
-# Voice and TTS
+# Logging and monitoring
+loguru>=0.7.0
+rich>=13.0.0
+
+# Configuration management
+python-dotenv>=1.0.0
+
+# Security & Rate Limiting
+slowapi>=0.1.9
+
+# Voice and TTS (optional)
 pyttsx3>=2.99
 
-# Additional Solān Platform Dependencies
-redis>=5.0.0
-structlog>=23.2.0
-orjson>=3.9.0
-psutil>=5.9.0
+# Development tools (optional)
+pytest>=7.0.0
+black>=23.0.0

@@ -1,0 +1,24 @@
+# === CLEAN SOLAN SUPERAGENT DEPENDENCIES ===
+# Minimal, working dependencies for production deployment
+
+# Web framework and API
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+
+# Data validation & settings
+pydantic>=2.5.0
+pydantic-settings>=2.0.0
+
+# Configuration management
+python-dotenv>=1.0.0
+
+# Logging and monitoring
+rich>=13.0.0
+
+# Security & Rate Limiting
+slowapi>=0.1.9
+
+# Development tools (optional)
+pytest>=7.0.0
+black>=23.0.0
