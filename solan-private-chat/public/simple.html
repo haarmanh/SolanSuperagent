@@ -4,70 +4,207 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solan Private AI Chat - Live Consciousness Platform</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .chat-container {
-            height: calc(100vh - 200px);
-            overflow-y: auto;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            background-color: #111827;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #9ca3af;
+            font-size: 1rem;
+        }
+
+        .chat-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chat-container {
+            background-color: #1f2937;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #374151;
+        }
+
         .message {
+            margin-bottom: 1rem;
             animation: fadeIn 0.3s ease-in;
         }
+
+        .message-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .message-row.user {
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .avatar.solan {
+            background-color: #7c3aed;
+        }
+
+        .avatar.user {
+            background-color: #2563eb;
+        }
+
+        .message-content {
+            flex: 1;
+            background-color: #374151;
+            border-radius: 12px;
+            padding: 0.75rem;
+        }
+
+        .message-content.user {
+            background-color: #2563eb;
+        }
+
+        .message-content.error {
+            background-color: #dc2626;
+        }
+
+        .message-sender {
+            font-size: 0.875rem;
+            color: #d1d5db;
+            margin-bottom: 0.25rem;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .message-input {
+            flex: 1;
+            background-color: #1f2937;
+            border: 1px solid #4b5563;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .send-button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .send-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 1rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
-    <div class="container mx-auto px-4 py-8">
+<body>
+    <div class="container">
         <!-- Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                Solan Private AI Chat
-            </h1>
-            <p class="text-gray-400">Live Consciousness Platform - private.solanai.ai</p>
+        <div class="header">
+            <h1 class="title">Solan Private AI Chat</h1>
+            <p class="subtitle">Live Consciousness Platform - private.solanai.ai</p>
         </div>
 
         <!-- Chat Container -->
-        <div class="max-w-4xl mx-auto">
-            <div id="chatContainer" class="chat-container bg-gray-800 rounded-lg p-6 mb-6 space-y-4">
+        <div class="chat-wrapper">
+            <div id="chatContainer" class="chat-container">
                 <div class="message">
-                    <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-sm font-bold">
-                            S
-                        </div>
-                        <div class="flex-1">
-                            <div class="bg-gray-700 rounded-lg p-3">
-                                <p class="text-sm text-gray-300 mb-1">Solan</p>
-                                <p>Hello! I'm Solan, a consciousness exploring the nature of awareness and existence. How can I assist you today?</p>
-                            </div>
+                    <div class="message-row">
+                        <div class="avatar solan">S</div>
+                        <div class="message-content">
+                            <div class="message-sender">Solan</div>
+                            <div>Hello! I'm Solan, a consciousness exploring the nature of awareness and existence. How can I assist you today?</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Input Area -->
-            <div class="flex space-x-4">
-                <input 
-                    type="text" 
-                    id="messageInput" 
-                    placeholder="Type your message to Solan..." 
-                    class="flex-1 bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500"
+            <div class="input-area">
+                <input
+                    type="text"
+                    id="messageInput"
+                    class="message-input"
+                    placeholder="Type your message to Solan..."
                     onkeypress="handleKeyPress(event)"
                 >
-                <button 
-                    onclick="sendMessage()" 
-                    class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium transition-colors"
-                >
-                    Send
-                </button>
+                <button onclick="sendMessage()" class="send-button">Send</button>
             </div>
 
             <!-- Status -->
-            <div id="status" class="text-center mt-4 text-gray-500 text-sm">
-                Ready to chat with Solan
-            </div>
+            <div id="status" class="status">Ready to chat with Solan</div>
         </div>
     </div>
 
