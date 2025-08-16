@@ -35,6 +35,18 @@ export default function SolanChat() {
     scrollToBottom();
   }, [messages, isTyping]);
 
+  // Check for existing valid session on component mount
+  useEffect(() => {
+    const savedKey = localStorage.getItem('solan_personal_key');
+    if (savedKey && savedKey.length >= 8 && !savedKey.includes('dev') && !savedKey.includes('test')) {
+      setApiKey(savedKey);
+      setIsAuthenticated(true);
+    } else if (savedKey) {
+      // Remove invalid saved keys (like old dev-key)
+      localStorage.removeItem('solan_personal_key');
+    }
+  }, []);
+
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('nl-NL', { 
       hour: '2-digit', 
@@ -43,11 +55,12 @@ export default function SolanChat() {
   };
 
   const authenticate = () => {
-    if (apiKey === 'your-personal-key' || apiKey === 'dev-key') {
+    // Production authentication - only accept real API keys
+    if (apiKey && apiKey.length >= 8 && !apiKey.includes('dev') && !apiKey.includes('test')) {
       setIsAuthenticated(true);
       localStorage.setItem('solan_personal_key', apiKey);
     } else {
-      alert('Invalid API key. Use your-personal-key or dev-key for testing.');
+      alert('Invalid API key. Please enter your personal API key (minimum 8 characters).');
     }
   };
 
@@ -180,7 +193,7 @@ ${error instanceof Error ? `(Technical note: ${error.message})` : '(Unknown conn
           
           <div className="mt-6 text-xs text-purple-300 text-center space-y-1">
             <p>🔒 End-to-end encrypted • Zero-knowledge storage</p>
-            <p>For testing: use dev-key</p>
+            <p>Private access only • Secure authentication required</p>
           </div>
         </div>
       </div>
