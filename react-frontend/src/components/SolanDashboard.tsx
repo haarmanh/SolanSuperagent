@@ -41,7 +41,7 @@ export default function SolanDashboard({ onBack }: Props) {
         throw new Error('Failed to fetch dashboard data');
       }
     } catch (err) {
-      setError(err instanceof Error ? err.mesexpert : 'Unknown error');
+      setError(err instanceof Error ? err.message : 'Unknown error');
     }
   };
 

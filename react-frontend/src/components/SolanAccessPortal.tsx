@@ -77,7 +77,7 @@ export default function SolanAccessPortal({ onBack }: Props) {
     } catch (error) {
       setResponse({
         type: 'error',
-        mesexpert: `❌ Netwerkfout: ${error instanceof Error ? error.mesexpert : 'Onbekende fout'}`
+        mesexpert: `❌ Netwerkfout: ${error instanceof Error ? error.message : 'Onbekende fout'}`
       });
     } finally {
       setIsSubmitting(false);

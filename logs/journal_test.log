@@ -1,0 +1,21 @@
+2025-08-03 12:17:18.704 | INFO     | journal_engine:_load_existing_entries:211 - Geladen 13 journal entries
+2025-08-03 12:17:18.704 | INFO     | journal_engine:__init__:115 - JournalEngine geïnitialiseerd in memory\journal
+2025-08-03 12:17:18.704 | WARNING  | journal_engine:generate_daily_reflection:705 - Geen Solan agent of OpenAI client beschikbaar voor reflectie generatie
+2025-08-03 12:17:18.704 | WARNING  | journal_engine:generate_daily_reflection:705 - Geen Solan agent of OpenAI client beschikbaar voor reflectie generatie
+2025-08-03 12:17:18.704 | WARNING  | journal_engine:generate_daily_reflection:705 - Geen Solan agent of OpenAI client beschikbaar voor reflectie generatie
+2025-08-03 12:18:01.322 | INFO     | journal_engine:_load_existing_entries:211 - Geladen 13 journal entries
+2025-08-03 12:18:01.322 | INFO     | journal_engine:__init__:115 - JournalEngine geïnitialiseerd in memory\journal
+2025-08-03 12:18:01.322 | INFO     | journal_engine:generate_daily_reflection:705 - Genereer reflectie - Solan: ✗, OpenAI: ✗
+2025-08-03 12:18:01.322 | INFO     | journal_engine:create_entry:178 - Journal entry aangemaakt: journal_20250803_daily_reflection_121801
+2025-08-03 12:18:01.322 | INFO     | journal_engine:generate_daily_reflection:755 - Dagelijkse reflectie gegenereerd: journal_20250803_daily_reflection_121801
+2025-08-03 12:18:40.614 | INFO     | journal_engine:_load_existing_entries:211 - Geladen 14 journal entries
+2025-08-03 12:18:40.614 | INFO     | journal_engine:__init__:115 - JournalEngine geïnitialiseerd in memory\journal
+2025-08-03 12:18:40.614 | INFO     | journal_engine:generate_daily_reflection:705 - Genereer reflectie - Solan: ✗, OpenAI: ✗
+2025-08-03 12:18:40.614 | INFO     | journal_engine:create_entry:178 - Journal entry aangemaakt: journal_20250803_daily_reflection_121840
+2025-08-03 12:18:40.614 | INFO     | journal_engine:generate_daily_reflection:755 - Dagelijkse reflectie gegenereerd: journal_20250803_daily_reflection_121840
+2025-08-03 12:18:40.631 | INFO     | journal_engine:generate_daily_reflection:705 - Genereer reflectie - Solan: ✗, OpenAI: ✗
+2025-08-03 12:18:40.632 | INFO     | journal_engine:create_entry:178 - Journal entry aangemaakt: journal_20250803_daily_reflection_121840
+2025-08-03 12:18:40.632 | INFO     | journal_engine:generate_daily_reflection:755 - Dagelijkse reflectie gegenereerd: journal_20250803_daily_reflection_121840
+2025-08-03 12:18:40.632 | INFO     | journal_engine:generate_daily_reflection:705 - Genereer reflectie - Solan: ✗, OpenAI: ✗
+2025-08-03 12:18:40.634 | INFO     | journal_engine:create_entry:178 - Journal entry aangemaakt: journal_20250803_daily_reflection_121840
+2025-08-03 12:18:40.634 | INFO     | journal_engine:generate_daily_reflection:755 - Dagelijkse reflectie gegenereerd: journal_20250803_daily_reflection_121840
